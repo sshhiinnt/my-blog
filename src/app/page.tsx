@@ -18,7 +18,7 @@ export default function Home() {
             <nav className="img-container">
                 <Link href="">
                     <Image
-                        src="images\tozan.jpg"
+                        src="/images/tozan.jpg"
                         alt="登山"
                         width={4000}
                         height={3000}
@@ -27,7 +27,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="images\tran.jpg"
+                        src="/images/tran.jpg"
                         alt="トレイルランニング"
                         width={1200}
                         height={800}
@@ -36,7 +36,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="images\climb.jpg"
+                        src="/images/climb.jpg"
                         alt="クライミング"
                         width={4000}
                         height={3000}
@@ -45,7 +45,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="images\gear.jpg"
+                        src="/images/gear.jpg"
                         alt="装備について"
                         width={4000}
                         height={3000}
@@ -54,7 +54,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="images\twee.jpg"
+                        src="/images\twee.jpg"
                         alt="つぶやき"
                         width={4000}
                         height={3000}
@@ -64,9 +64,16 @@ export default function Home() {
             </nav>
 
             <main>
-                <article>
-                    <h2>最近の記事</h2>
-                </article>
+
+                <h2>新着記事</h2>
+                <ul>
+                    {posts.map(post => (
+                        <li key={post._id}>
+                            <a href="{`/posts/${post._id}`}">{post.title}</a>
+                        </li>
+                    ))}
+                </ul>
+
                 <aside>
                     <h3>カテゴリー</h3>
                     <ul>

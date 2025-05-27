@@ -2,6 +2,7 @@ import { RocknRoll_One , Shippori_Mincho_B1 } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
 import "./styles/style.css";
+import Header from "components/header";
 
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${RocknRoll.className} ${Shippori.className}`}>
+        <Header />
         {children}
       </body>
     </html>

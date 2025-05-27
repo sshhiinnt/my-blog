@@ -1,5 +1,8 @@
+
 import Link from "next/link";
 import Image from "next/image";
+import NewArt from "components/newArticlecomp";
+
 
 
 export const metadata = {
@@ -8,6 +11,7 @@ export const metadata = {
 }
 
 export default function Home() {
+    
     return (
         <>
             <header>
@@ -54,7 +58,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="/images\twee.jpg"
+                        src="\images\twee.jpg"
                         alt="つぶやき"
                         width={4000}
                         height={3000}
@@ -65,14 +69,7 @@ export default function Home() {
 
             <main>
 
-                <h2>新着記事</h2>
-                <ul>
-                    {posts.map(post => (
-                        <li key={post._id}>
-                            <a href="{`/posts/${post._id}`}">{post.title}</a>
-                        </li>
-                    ))}
-                </ul>
+                <NewArt />
 
                 <aside>
                     <h3>カテゴリー</h3>

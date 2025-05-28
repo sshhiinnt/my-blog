@@ -58,7 +58,7 @@ export default function Home() {
                 </Link>
                 <Link href="">
                     <Image
-                        src="\images\twee.jpg"
+                        src="/images/twee.jpg"
                         alt="つぶやき"
                         width={4000}
                         height={3000}

@@ -1,10 +1,13 @@
-import mongoose from "mongoose";
+import { Mongoose } from "mongoose";
+
+interface Cached {
+    conn: Mongoose | null;
+    promise: Promise<Mongoose> | null;
+}
+
 
 declare global {
-    var mongoose: {
-        conn: typeof mongoose | null;
-        promise: Promise<typeof mongoose> | null;
-    } | undefined;
+    var mongoose: Cached | undefined;
 }
 
 export { };

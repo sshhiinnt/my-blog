@@ -1,8 +1,9 @@
-import { RocknRoll_One , Shippori_Mincho_B1 } from "next/font/google"
+// import { RocknRoll_One, Shippori_Mincho_B1 } from "next/font/google"
 import type { Metadata } from "next";
 import "./globals.css";
 import "./styles/style.css";
-import Header from "components/header";
+import Header from "components/headerComp";
+import Footer from "components/footerComp";
 
 
 export const metadata: Metadata = {
@@ -11,17 +12,17 @@ export const metadata: Metadata = {
   applicationName: "YAMAORI"
 };
 
-const RocknRoll = RocknRoll_One({
-  weight: ["400"],
-  display: "swap",
-  subsets: ["latin",],
-});
+// const RocknRoll = RocknRoll_One({
+//   weight: ["400"],
+//   display: "swap",
+//   subsets: ["latin",],
+// });
 
-const Shippori = Shippori_Mincho_B1({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap"
-});
+// const Shippori = Shippori_Mincho_B1({
+//   subsets: ["latin"],
+//   weight: ["400", "700"],
+//   display: "swap"
+// });
 
 export default function RootLayout({
   children,
@@ -30,9 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${RocknRoll.className} ${Shippori.className}`}>
+      <body>
         <Header />
+        <main>
         {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

@@ -20,6 +20,9 @@ const Aside = () => {
             try {
                 const res = await fetch("/api/categories");
                 const data = await res.json();
+
+                console.log("categories fetched:", data);
+
                 setCategories(data);
             } catch (err) {
                 console.error("カテゴリー取得失敗:", err);
@@ -40,6 +43,11 @@ const Aside = () => {
     }
 
     const groupAndSortCategories = (categories: Category[]) => {
+        if (!Array.isArray(categories)) {
+            console.log("カテゴリーデータが配列ではありません:", categories);
+            return {};
+        }
+
         const grouped = categories.reduce<Record<string, Category[]>>((acc, cat) => {
             acc[cat.group] = acc[cat.group] || [];
             acc[cat.group].push(cat);
@@ -79,7 +87,7 @@ const Aside = () => {
                             </div>
                             <ul>
                                 {cats.map((cat) => (
-                                    <li>
+                                    <li key={cat._id}>
                                         <a
                                             href={`/categories/${cat.slug}`}>
                                             {cat.name}

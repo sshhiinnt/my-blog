@@ -1,14 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { connect } from "@/lib/mongodb";
 import Category from "models/category";
+import { NextResponse } from "next/server";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
     try {
         await connect();
-        const categories = Category.find().sort({ name: 1 });
-        res.status(200).json(categories);
-    }catch(error){
-        res.status(500).json({error:"Failed to fetch categories"});
+        const categories = await Category.find({}).sort({ name: 1 });
+        return NextResponse.json(categories, { status: 200 });
+    } catch (error) {
+        console.error
+        return NextResponse.json({ error: "Failed to fetch categories" }, { status: 500 });
     }
 }
 

@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { connect } from "@/lib/mongodb";
 import User from "../../../../../models/user"
-import { computeFromManifest } from "next/dist/build/utils";
 import { compare } from "bcryptjs";
 
 

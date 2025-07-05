@@ -21,37 +21,38 @@ export default function LoginPage() {
         if (res?.error) {
             alert("ログインに失敗しました");
         } else {
-            router.push("/admin");
+            router.push("/admin/new");
         }
     };
 
     return (
         <div>
             <h1>ログイン</h1>
-            <form onSubmit={handleLogin} className=""></form>
-            <input
-                type="text"
-                placeholder="ユーザー名"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className=""
-                required
-            />
+            <form onSubmit={handleLogin} className="">
+                <input
+                    type="text"
+                    placeholder="ユーザー名"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className=""
+                    required
+                />
 
-            <input
-                type="passwprd"
-                placeholder="パスワード"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className=""
-                required
-            />
+                <input
+                    type="password"
+                    placeholder="パスワード"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className=""
+                    required
+                />
 
-            <button
-                type="submit"
-                className=""
-            >ログイン
-            </button>
+                <button
+                    type="submit"
+                    className=""
+                >ログイン
+                </button>
+            </form>
         </div>
     )
 

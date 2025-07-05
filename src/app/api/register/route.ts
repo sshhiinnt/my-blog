@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import User from "../../../../models/user";
 import bcrypt from "bcryptjs";
-import mongoose from "mongoose";
 import { connect } from "@/lib/mongodb";
 
 export async function POST(req: Request) {

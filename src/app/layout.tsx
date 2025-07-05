@@ -1,9 +1,22 @@
-// import { RocknRoll_One, Shippori_Mincho_B1 } from "next/font/google"
 import type { Metadata } from "next";
+import { Noto_Sans_Display } from "next/font/google"
+import { RocknRoll_One } from "next/font/google"
 import "./globals.css";
-import "./styles/style.css";
 import Header from "components/headerComp";
 import Footer from "components/footerComp";
+import { Providers } from "./provider";
+
+const notoSansDisplay = Noto_Sans_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font--notoSansDisplay",
+});
+
+const RocknRollOne = RocknRoll_One({
+  subsets: ["latin"],
+  weight: ["400",],
+  variable: "--font--RocknRollOne",
+});
 
 
 export const metadata: Metadata = {
@@ -12,31 +25,21 @@ export const metadata: Metadata = {
   applicationName: "YAMAORI"
 };
 
-// const RocknRoll = RocknRoll_One({
-//   weight: ["400"],
-//   display: "swap",
-//   subsets: ["latin",],
-// });
-
-// const Shippori = Shippori_Mincho_B1({
-//   subsets: ["latin"],
-//   weight: ["400", "700"],
-//   display: "swap"
-// });
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
       <body>
-        <Header />
-        <main>
-        {children}
-        </main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

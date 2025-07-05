@@ -1,28 +1,29 @@
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import { connect } from "./mongodb";
+import clientPromise from "./forAuthMongodb";
 import GitHubProvider from "next-auth/providers/github";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = async () => {
-    const mongoose = await connect();
+export const authOptions: AuthOptions = {
+    adapter: MongoDBAdapter(clientPromise),
+    providers: [
+        GitHubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+        })
+    ],
 
-    const client = (mongoose.connection.getClient
-        ? mongoose.connection.getClient()
-        : mongoose.connection.db) as any;
-    return {
-
-        adapter: MongoDBAdapter(client),
-        providers: [
-            GitHubProvider({
-                clientId: process.env.GITHUB_CLIENT_ID!,
-                clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-            })
-        ],
-
-        session: {
-            strategy: "database",
+    session: {
+        strategy: "database",
+    },
+    pages: {
+        signIn: "/admin/login",
+    },
+    callbacks: {
+        async session({ session, user }) {
+            if (session.user) {
+                session.user.role = (user as any).role || "user";
+            }
+            return session;
         },
-        pages: {
-            signIn: "/sdmin/login",
-        },
-    };
+    },
 };

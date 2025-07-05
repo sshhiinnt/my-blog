@@ -1,4 +1,15 @@
 import mongoose from "mongoose";
+// import { Mongoose } from "mongoose";
+
+
+// ターミナルからts-nodeで直接スクリプトを動かすときはここで明示的に型定義する。
+// declare global {
+//   var mongoose: {
+//     conn: Mongoose | null;
+//     promise: Promise<Mongoose> | null;
+//   } | undefined;
+// }
+
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 if (!MONGODB_URI) {

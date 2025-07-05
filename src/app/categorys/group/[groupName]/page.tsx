@@ -1,0 +1,64 @@
+import { connect } from "@/lib/mongodb";
+import Category from "models/category";
+import Post from "models/post";
+import { notFound } from "next/navigation";
+
+interface Props {
+    params: { groupName: string }
+}
+
+export default async function CategoryPage({ params }: Props) {
+    await connect();
+
+    const groupName = decodeURIComponent(params.groupName);
+
+    const categories = await Category.find({ group: groupName }).lean();
+    if (categories.length === 0) {
+        return notFound();
+    }
+
+    const groupedPosts: { [key: string]: any[] } = {};
+
+    for (const category of categories) {
+        const posts = await Post.find({ categorySlug: category.slug })
+            .sort({ createAt: -1 })
+            .lean();
+        groupedPosts[category.name] = posts;
+    }
+
+    return (
+        <div>
+            <h1>{groupName}</h1>
+            {categories.map(category => (
+                <div key={category._id}>
+                    <h2>{category.name}</h2>
+                    <ul>
+                        {groupedPosts[category.name].length === 0 ? (
+                            <li>記事がありません。</li>
+                        ) : (
+                            groupedPosts[category.name].map(post => (
+                                <li key={post._id}>
+                                    <a href={`/posts/${post.slug}`}>
+                                        {post.title}
+                                    </a>
+                                </li>
+                            ))
+                        )}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export async function generateStaticParams() {
+    await connect();
+    const categories = await Category.find().lean();
+    const uniqueGroups = Array.from(new Set(categories.map(cat => cat.group)));
+
+    return uniqueGroups.map(groupName => ({
+        groupName: encodeURIComponent(groupName),
+    }));
+
+
+}

@@ -1,7 +1,6 @@
 
-import Link from "next/link";
-import Image from "next/image";
-import NewArt from "components/newArticlecomp";
+import TopImage from "components/topImage";
+import NewArticle from "components/newArticle";
 import Aside from "components/aside";
 
 
@@ -12,50 +11,19 @@ export const metadata = {
 }
 
 export default function Home() {
-    
+
     return (
-        <>
-            <nav className="img-container">
-                <Link href="">
-                    <Image src="/images/tozan.jpg" alt="登山" width={4000} height={3000}
-                        className="imglink"
-                    /><span>山登り</span>
-                </Link>
-                <Link href="">
-                    <Image src="/images/tran.jpg" alt="トレイルランニング" width={1200} height={800}
-                        className="imglink"
-                    /><span>トレイルランニング</span>
-                </Link>
-                <Link href="">
-                    <Image src="/images/climb.jpg" alt="クライミング" width={4000} height={3000}
-                        className="imglink"
-                    /><span>クライミング</span>
-                </Link>
-                <Link href="">
-                    <Image src="/images/gear.jpg" alt="装備について" width={4000} height={3000}
-                        className="imglink"
-                    /><span>装備</span>
-                </Link>
-                <Link href="">
-                    <Image src="/images/twee.jpg" alt="つぶやき" width={4000} height={3000}
-                        className="imglink"
-                    /><span>つぶやき</span>
-                </Link>
-            </nav>
-            <main>
-                <NewArt />
+        <div>
+            <TopImage />
+            <main className="flex bg-secondary">
+                <article className="flex-1">
+                    <NewArticle page={1} showPagination={false} />
+                </article>
+                <aside className="">
                 <Aside />
+                </aside>
             </main>
-            {/* <footer>
-                <nav className="profiel">
-                    <a href="C:\Users\Administrator\Desktop\yamaori\text.html\plof.html">-筆者について</a>
-                    <a href="C:\Users\Administrator\Desktop\yamaori\text.html\contact.html">-お問い合わせはこちら</a>
-                </nav>
+        </div>
 
-
-                <p>-山で遊んでおります-</p>
-
-            </footer> */}
-        </>
-    );
+    )
 }

@@ -1,7 +1,8 @@
 'use client';
 
+import { NextResponse } from "next/server";
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
 
 
 type Category = {
@@ -24,8 +25,9 @@ const Aside = () => {
                 console.log("categories fetched:", data);
 
                 setCategories(data);
-            } catch (err) {
-                console.error("カテゴリー取得失敗:", err);
+            } catch (error) {
+                console.error(error);
+                return NextResponse.json({ error: "カテゴリー取得失敗" }, { status: 500 });
             } finally {
                 setLoading(false);
             }
@@ -36,10 +38,10 @@ const Aside = () => {
 
     const categoryOder: Record<string, string[]> = {
         "登山記録": ["登山記録", "山登り", "沢登り", "雪山登山"],
-        "トレイルランニング": ["大会レポート", "トレイルランナーの日常"],
+        "トレイルランニング": ["トレイルランニング", "大会レポート", "トレイルランニング用品"],
         "クライミング": ["フリークライミング", "ボルダー", "アイスクライミング"],
-        "装備": ["登山靴・バックパック・テント泊装備", "その他登山用品", "トレイルランニング用品", "クライミングシューズ・ギア"],
-        "monologue": ["monologue"],
+        "道具・装備": ["靴・ザック", "その他登山用品", "クライミングシューズ・ギア"],
+        "ひとりごと": ["ひとりごと"],
     }
 
     const groupAndSortCategories = (categories: Category[]) => {
@@ -74,34 +76,46 @@ const Aside = () => {
     const grouped = groupAndSortCategories(categories);
 
     return (
-        <aside>
-            <h3>カテゴリー</h3>
-            {loading ? (
-                <p>読み込み中……</p>
-            ) : (
-                <div>
-                    {Object.entries(grouped).map(([group, cats]) => (
-                        <div key={group}>
-                            <div>
-                                {group}
+        <aside className="hidden md:block bg-secondary w-64 p-4">
+            <div className="bg-accentry mt-4 rounded-3xl">
+                <h3 className="font-noto font-bold text-3xl text-center">Category</h3>
+                {loading ? (
+                    <p>読み込み中……</p>
+                ) : (
+                    <div className="p-4">
+                        {Object.entries(grouped).map(([group, cats]) => (
+                            <div key={group}>
+                                <div className="text-lg font-bold">
+                                    {group}
+                                </div>
+                                <ul>
+                                    {cats.map((cat) => (
+                                        <li key={cat._id}>
+                                            <a
+                                                href={`/categories/${cat.slug}`}>
+                                                {cat.name}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                            <ul>
-                                {cats.map((cat) => (
-                                    <li key={cat._id}>
-                                        <a
-                                            href={`/categories/${cat.slug}`}>
-                                            {cat.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            )
-            }
-
-
+                        ))}
+                    </div>
+                )
+                }
+            </div>
+            <div className="bg-white rounded-3xl my-12 p-4">
+                <h3 className="font-noto font-bold text-3xl text-center">Profiel</h3>
+                <Image
+                    src={"/images/plof.jpg"}
+                    alt="プロフィール写真"
+                    width={2108} height={2107}
+                    className="size-20 rounded-full justify-self-center"
+                />
+                <p className="text-center font-bold text-lg">といち</p>
+                <p>山歩き、トレイルランニング、クライミングと、とにかく山遊びが大好きです。</p>
+                <p>このサイトでは山遊びの記録を日記的に発信します。</p>
+            </div>
         </aside >
     )
 

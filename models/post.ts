@@ -4,6 +4,11 @@ export interface IPost extends Document {
     title: String,
     content: String,
     createdAt: Date;
+    category: {
+        group: string;
+        name: string;
+        slug: string;
+    }
 }
 
 const PostSchema: Schema = new Schema<IPost>(
@@ -16,16 +21,21 @@ const PostSchema: Schema = new Schema<IPost>(
             type: String,
             required: true,
         },
+        category: {
+            group: { type: String, required: true },
+            name: { type: String, required: true },
+            slug: { type: String, required: true, }
+        },
         createdAt: {
             type: Date,
             default: Date.now,
         },
     },
     {
-        collection:"posts",
+        collection: "posts",
     }
 );
 
-    const Post = models.Post || model<IPost>("Post",PostSchema);
+const Post = models.Post || model<IPost>("Post", PostSchema);
 
-    export default Post;
+export default Post;

@@ -25,7 +25,6 @@ const CategorySchema: Schema = new Schema<ICategory>({
     group: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
     },
 }, { timestamps: true });

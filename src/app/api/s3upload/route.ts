@@ -14,7 +14,7 @@ const s3 = new S3Client({
 
 
 export async function GET(req: Request) {
-    const session = await getServerSession(await authOptions());
+    const session = await getServerSession(authOptions);
 
     if (!session || session.user?.role !== "admin") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

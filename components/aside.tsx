@@ -1,8 +1,8 @@
 'use client';
 
-import { NextResponse } from "next/server";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 
 type Category = {
@@ -27,7 +27,6 @@ const Aside = () => {
                 setCategories(data);
             } catch (error) {
                 console.error(error);
-                return NextResponse.json({ error: "カテゴリー取得失敗" }, { status: 500 });
             } finally {
                 setLoading(false);
             }
@@ -36,7 +35,7 @@ const Aside = () => {
         fetchCategories();
     }, []);
 
-    const categoryOder: Record<string, string[]> = {
+    const categoryOrder: Record<string, string[]> = {
         "登山記録": ["登山記録", "山登り", "沢登り", "雪山登山"],
         "トレイルランニング": ["トレイルランニング", "大会レポート", "トレイルランニング用品"],
         "クライミング": ["フリークライミング", "ボルダー", "アイスクライミング"],
@@ -57,7 +56,7 @@ const Aside = () => {
         }, {});
 
         for (const group in grouped) {
-            const CategoriesList = categoryOder[group] || [];
+            const CategoriesList = categoryOrder[group] || [];
 
             grouped[group].sort((a, b) => {
                 const aIndex = CategoriesList.indexOf(a.name);
@@ -91,10 +90,10 @@ const Aside = () => {
                                 <ul>
                                     {cats.map((cat) => (
                                         <li key={cat._id}>
-                                            <a
-                                                href={`/categories/${cat.slug}`}>
+                                            <Link
+                                                href={`/categories/${encodeURIComponent(cat.group)}/${encodeURIComponent(cat.slug)}`}>
                                                 {cat.name}
-                                            </a>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>

@@ -1,8 +1,8 @@
 import mongoose, { Schema, Document, models, model } from "mongoose";
 
 export interface IPost extends Document {
-    title: String,
-    content: String,
+    title: string,
+    content: string,
     createdAt: Date;
     category: {
         group: string;

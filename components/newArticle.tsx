@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import React from "react";
-import { error } from "console";
 
 type Post = {
     _id: string;
@@ -37,8 +36,8 @@ const NewArticle = async ({ page = 1, showPagination = true }: Props) => {
             posts = data.posts || [];
             total = data.total || 0;
         }
-    } catch {
-        console.error("Fetch error:", error);
+    } catch(err) {
+        console.error("Fetch error:", err);
     }
 
 

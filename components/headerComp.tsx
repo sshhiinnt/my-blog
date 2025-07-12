@@ -11,11 +11,11 @@ const Header = () => {
                 </h1>
             </header>
             <nav className="bg-secondary border-b-4 border-b-accentry flex justify-end space-x-4  pr-4 md:pr-8 lg:pr-16 w-full">
-                <Link href="/slug">▲登山記録</Link>
-                <Link href="/slug">▲トレイルランニング</Link>
-                <Link href="/slug">▲クライミング</Link>
-                <Link href="/slug">▲道具・装備</Link>
-                <Link href="/slug">▲つぶやき</Link>
+                <Link href={`/categories/${encodeURIComponent("登山記録")}`}>▲登山記録</Link>
+                <Link href={`/categories/${encodeURIComponent("トレイルランニング")}`}>▲トレイルランニング</Link>
+                <Link href={`/categories/${encodeURIComponent("クライミング")}`}>▲クライミング</Link>
+                <Link href={`/categories/${encodeURIComponent("道具・装備")}`}>▲道具・装備</Link>
+                <Link href={`/categories/${encodeURIComponent("ひとりごと")}`}>▲ひとりごと</Link>
             </nav>
         </>
     )

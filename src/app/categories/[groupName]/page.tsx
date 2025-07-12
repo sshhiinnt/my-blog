@@ -1,16 +1,19 @@
 import { connect } from "@/lib/mongodb";
 import Category from "models/category";
 import Post from "models/post";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface Props {
     params: { groupName: string }
 }
 
+
 export default async function CategoryPage({ params }: Props) {
+    const groupName = decodeURIComponent(params.groupName);
+
     await connect();
 
-    const groupName = decodeURIComponent(params.groupName);
 
     const categories = await Category.find({ group: groupName }).lean();
     if (categories.length === 0) {
@@ -30,7 +33,7 @@ export default async function CategoryPage({ params }: Props) {
         <div>
             <h1>{groupName}</h1>
             {categories.map(category => (
-                <div key={category._id}>
+                <div key={String(category._id)}>
                     <h2>{category.name}</h2>
                     <ul>
                         {groupedPosts[category.name].length === 0 ? (
@@ -38,9 +41,9 @@ export default async function CategoryPage({ params }: Props) {
                         ) : (
                             groupedPosts[category.name].map(post => (
                                 <li key={post._id}>
-                                    <a href={`/posts/${post.slug}`}>
+                                    <Link href={`/posts/${post.slug}`}>
                                         {post.title}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))
                         )}
@@ -62,3 +65,5 @@ export async function generateStaticParams() {
 
 
 }
+
+

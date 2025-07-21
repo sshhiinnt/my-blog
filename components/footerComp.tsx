@@ -14,11 +14,11 @@ const Footer = () => {
                 <nav>
                     <ul className="list-none py-4">
                         <p className="font-bold">カテゴリー</p>
-                        <li><Link href="/slug">登山記録</Link></li>
-                        <li><Link href="/slug">トレイルランニング</Link></li>
-                        <li><Link href="/slug">クライミング</Link></li>
-                        <li><Link href="/slug">道具・装備</Link></li>
-                        <li><Link href="/slug">つぶやき</Link></li>
+                        <li><Link href={`/categories/${encodeURIComponent("登山記録")}`}>登山記録</Link></li>
+                        <li><Link href={`/categories/${encodeURIComponent("トレイルランニング")}`}>トレイルランニング</Link></li>
+                        <li><Link href={`/categories/${encodeURIComponent("クライミング")}`}>クライミング</Link></li>
+                        <li><Link href={`/categories/${encodeURIComponent("道具・装備")}`}>道具・装備</Link></li>
+                        <li><Link href={`/categories/${encodeURIComponent("ひとりごと")}`}>ひとりごと</Link></li>
                     </ul>
                 </nav>
                 <nav className="flex flex-col font-bold py-4">

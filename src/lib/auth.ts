@@ -2,6 +2,9 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "./forAuthMongodb";
 import GitHubProvider from "next-auth/providers/github";
 import { AuthOptions } from "next-auth";
+import { getServerSession } from "next-auth";
+
+
 
 export const authOptions: AuthOptions = {
     adapter: MongoDBAdapter(clientPromise),
@@ -27,3 +30,7 @@ export const authOptions: AuthOptions = {
         },
     },
 };
+
+export function auth() {
+    return getServerSession(authOptions);
+}

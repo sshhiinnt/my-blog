@@ -1,4 +1,5 @@
 import { connect } from "@/lib/mongodb";
+import Aside from "components/aside";
 import Category from "models/category";
 import Post from "models/post";
 import Link from "next/link";
@@ -30,26 +31,29 @@ export default async function CategoryPage({ params }: Props) {
     }
 
     return (
-        <div>
-            <h1>{groupName}</h1>
-            {categories.map(category => (
-                <div key={String(category._id)}>
-                    <h2>{category.name}</h2>
-                    <ul>
-                        {groupedPosts[category.name].length === 0 ? (
-                            <li>記事がありません。</li>
-                        ) : (
-                            groupedPosts[category.name].map(post => (
-                                <li key={post._id}>
-                                    <Link href={`/posts/${post.slug}`}>
-                                        {post.title}
-                                    </Link>
-                                </li>
-                            ))
-                        )}
-                    </ul>
-                </div>
-            ))}
+        <div className="flex justify-center bg-secondary">
+            <main className="max-w-4xl w-full my-4">
+                <h1 className="bg-accentry font-bold rounded-3xl">{groupName}</h1>
+                {categories.map(category => (
+                    <div key={String(category._id)}>
+                        <h2>{category.name}</h2>
+                        <ul>
+                            {groupedPosts[category.name].length === 0 ? (
+                                <li>記事がありません。</li>
+                            ) : (
+                                groupedPosts[category.name].map(post => (
+                                    <li key={post._id} className="bg-accentry rounded-3xl">
+                                        <Link href={`/posts/${post.slug}`}>
+                                            {post.title}
+                                        </Link>
+                                    </li>
+                                ))
+                            )}
+                        </ul>
+                    </div>
+                ))}
+            </main>
+            <Aside />
         </div>
     );
 }

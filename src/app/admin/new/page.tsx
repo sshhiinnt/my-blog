@@ -67,7 +67,9 @@ export default function NewPostPage() {
 
         for (const file of images) {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/s3upload?filename=${encodeURIComponent(file.name)}&filetypes=${encodeURIComponent(file.type)}`);
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/s3upload?filename=${encodeURIComponent(file.name)}&filetypes=${encodeURIComponent(file.type)}`, {
+                    credentials: "include",
+                });
                 if (!res.ok) {
                     console.error("署名付きUrl取得失敗");
                     continue;

@@ -4,6 +4,7 @@ import Category from "models/category";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CategoryType } from "types/category";
+import Aside from "components/aside";
 
 interface Props {
     params: { groupName: string, categorySlug: string }
@@ -31,20 +32,23 @@ export default async function categorySlugPage({ params }: Props) {
         .sort({ createdAt: -1 }).lean();
 
     return (
-        <div>
-            <h1>{category.name}</h1>
-            {posts.length === 0 ? (
-            <p>記事がありません</p>
-            ):(
-            <ul>
-                {posts.map((post) => (
-                    <li key={String(post._id)}>
-                        <Link href={`posts/${post.slug}`}>{post.title}</Link>
-                        <span>{new Date(post.createdAt).toLocaleString()}</span>
-                    </li>
-                ))}
-            </ul>
-            )}
+        <div className="flex bg-secondary">
+            <main className="max-w-3xl w-full md:">
+                <h1>{category.name}</h1>
+                {posts.length === 0 ? (
+                    <p>記事がありません</p>
+                ) : (
+                    <ul>
+                        {posts.map((post) => (
+                            <li key={String(post._id)}>
+                                <Link href={`posts/${post.slug}`}>{post.title}</Link>
+                                <span>{new Date(post.createdAt).toLocaleString()}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </main>
+            <Aside />
         </div>
     )
 

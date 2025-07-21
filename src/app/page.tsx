@@ -19,7 +19,7 @@ export default function Home() {
                 <article className="flex-1">
                     <NewArticle page={1} showPagination={false} />
                 </article>
-                <aside className="">
+                <aside>
                 <Aside />
                 </aside>
             </main>

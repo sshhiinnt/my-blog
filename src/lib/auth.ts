@@ -3,6 +3,7 @@ import clientPromise from "./forAuthMongodb";
 import GitHubProvider from "next-auth/providers/github";
 import { AuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
+import { NextRequest} from "next/server";
 
 
 
@@ -31,6 +32,6 @@ export const authOptions: AuthOptions = {
     },
 };
 
-export function auth() {
-    return getServerSession(authOptions);
+export async function auth() {
+    return await getServerSession(authOptions);
 }

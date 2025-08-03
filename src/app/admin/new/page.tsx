@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { resolve } from "path";
+import { rejects } from "assert";
+// import CRC32 from "crc-32";
 
 type Category = {
     _id: string;
@@ -61,41 +64,68 @@ export default function NewPostPage() {
     }
 
 
+
     const handleImageUpload = async () => {
+        console.log("handleImageUpload called");
         setUploading(true);
         const uploadedUrls: string[] = [];
 
-        for (const file of images) {
-            try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/s3upload?filename=${encodeURIComponent(file.name)}&filetypes=${encodeURIComponent(file.type)}`, {
-                    credentials: "include",
-                });
-                if (!res.ok) {
-                    console.error("署名付きUrl取得失敗");
-                    continue;
-                }
-
-                const { url } = await res.json();
-
-                const uploadRes = await fetch(url, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": file.type,
-                    },
-                    body: file,
-                });
-
-                if (uploadRes.ok) {
-                    const publicUrl = `https://${process.env.NEXT_PUBLIC_BASE_URL_AWS_BUCKET_NAME}.s3.amazonaws.com/${encodeURIComponent(file.name)}`;
-                    uploadedUrls.push(publicUrl);
-                } else {
-                    console.error("アップロード失敗", file.name);
-                }
-
-            } catch (error) {
-                console.error("アップロードエラー:", error);
-            }
+        if (images.length === 0) {
+            setUploading(false);
+            return;
         }
+
+        const uploadPromisees = images.map(file => {
+            return new Promise<String | undefined>(async (resolve, reject) => {
+                try {
+                    const res = await fetch(
+                        `/api/s3upload?filename=${encodeURIComponent(file.name)}&filetype=${encodeURIComponent(file.type)}`,
+                        { credentials: "include" },
+                    );
+                    if (!res.ok) {
+                        const errorText = await res.text();
+                        throw new Error(`署名付きURL取得失敗:${res.status}-${errorText}`);
+                    }
+
+                    console.log("Uploading file:", file.name, "type:", file.type);
+
+
+                    const { url, fields } = await res.json();
+
+                    const formData = new FormData();
+                    Object.keys(fields).forEach(key => {
+                        formData.append(key, fields[key]);
+                    });
+                    formData.append("file", file);
+
+                    const uploadRes = await fetch(url, {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    console.log("FormData entries:");
+                    console.log([...formData.entries()]);
+
+                    if (uploadRes.ok) {
+                        const publicUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${encodeURIComponent(file.name)}`
+                        uploadedUrls.push(publicUrl);
+                        resolve(publicUrl);
+                    } else {
+                        const errorText = await uploadRes.text();
+                        throw new Error(`アップロード失敗:${file.name},ステータス${uploadRes.status},レスポンス${errorText}`);
+                    }
+                } catch (error) {
+                    console.error("アップロードエラー:", error);
+                    reject(error);
+                }
+            });
+        });
+        try {
+            await Promise.all(uploadPromisees);
+        } catch (error) {
+            console.error("一部または全てのファイルのアップロードに失敗しました:", error);
+        }
+
         if (uploadedUrls.length) {
             const markdown = uploadedUrls.map(url => `[画像](${url})`).join("\n\n");
             setContent(prev => prev + "\n\n" + markdown);
@@ -104,7 +134,6 @@ export default function NewPostPage() {
         setUploading(false);
         setImages([]);
     };
-
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -137,7 +166,6 @@ export default function NewPostPage() {
             alert("エラーが発生しました");
         }
     };
-
 
 
     return (
@@ -225,5 +253,4 @@ export default function NewPostPage() {
             </form>
         </div >
     );
-}
-
+};

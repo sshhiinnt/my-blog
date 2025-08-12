@@ -6,9 +6,12 @@ type Post = {
     _id: string;
     title: string;
     content: string;
+    slug: string;
+    thumbnailUrl: string;
     category: {
         name: string,
         slug: string,
+        group: string,
     }
     createdAt: string;
 };
@@ -36,7 +39,7 @@ const NewArticle = async ({ page = 1, showPagination = true }: Props) => {
             posts = data.posts || [];
             total = data.total || 0;
         }
-    } catch(err) {
+    } catch (err) {
         console.error("Fetch error:", err);
     }
 
@@ -50,18 +53,28 @@ const NewArticle = async ({ page = 1, showPagination = true }: Props) => {
     }
 
     return (
-        <main className="bg-secondary flex-1">
-            <h2 className="font-bold text-3xl text-center mt-4">New Blog</h2>
-            <ul className="justify-center">
+        <main className="bg-secondary max-w-4xl w-full">
+            <h2 className="font-bold text-3xl text-center my-4">新着記事</h2>
+            <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="bg-accentry flex-wrap">
-                        <Link href={`/category/${post.category.slug}`} className="text-lg">{post.category.name}</Link>
-                        <span className="text-lg">{new Date(post.createdAt).toLocaleString()}</span>
-                        <h3 className="w-full">{post.title}</h3>
+                    <li key={post._id} className="flex bg-accentry rounded-3xl w-64 my-4">
                         <div>
-                            <ReactMarkdown>
-                                {post.content.slice(0, 300) + "......"}
-                            </ReactMarkdown>
+                            {post.thumbnailUrl && (
+                                <img src={post.thumbnailUrl}
+                                    alt={post.title}
+                                    className="w-36 h-24 object-cover rounded m-4"
+                                />
+                            )}
+                        </div>
+                        <div className="flex-wrap p-4">
+                            <p className="text-sm text-gray-500">カテゴリー:<Link href={`/categories/${post.category.slug}`}>{post.category.name}</Link></p>
+                            <span className="text-sm text-gray-500">投稿:{new Date(post.createdAt).toLocaleString()}</span>
+                            <h3 className="text-lg font-bold"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+                            <div>
+                                <ReactMarkdown>
+                                    {post.content.slice(0, 50) + "......"}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     </li>
 
@@ -69,19 +82,21 @@ const NewArticle = async ({ page = 1, showPagination = true }: Props) => {
 
             </ul>
 
-            {showPagination && (
-                <div className="flex justify-between mx-auto container">
-                    {page > 1 ? (
-                        <Link href={`/posts?page=${page - 1}`}>前へ</Link>
-                    ) : <div />}
+            {
+                showPagination && (
+                    <div className="flex justify-between mx-auto container">
+                        {page > 1 ? (
+                            <Link href={`/posts?page=${page - 1}`}>前へ</Link>
+                        ) : <div />}
 
-                    {page < totalPages ? (
-                        <Link href={`/posts?page=${page + 1}`}>次へ</Link>
-                    ) : <div />}
+                        {page < totalPages ? (
+                            <Link href={`/posts?page=${page + 1}`}>次へ</Link>
+                        ) : <div />}
 
-                </div>
+                    </div>
 
-            )}
+                )
+            }
 
         </main >
     )

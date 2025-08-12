@@ -4,6 +4,8 @@ import Category from "models/category";
 import Post from "models/post";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+
 
 interface Props {
     params: { groupName: string }
@@ -24,8 +26,8 @@ export default async function CategoryPage({ params }: Props) {
     const groupedPosts: { [key: string]: any[] } = {};
 
     for (const category of categories) {
-        const posts = await Post.find({ categorySlug: category.slug })
-            .sort({ createAt: -1 })
+        const posts = await Post.find({ "category.slug": category.slug })
+            .sort({ createdAt: -1 })
             .lean();
         groupedPosts[category.name] = posts;
     }
@@ -33,19 +35,33 @@ export default async function CategoryPage({ params }: Props) {
     return (
         <div className="flex justify-center bg-secondary">
             <main className="max-w-4xl w-full my-4">
-                <h1 className="bg-accentry font-bold rounded-3xl">{groupName}</h1>
+                <h1 className="text-center text-3xl font-bold rounded-3xl">{groupName}</h1>
                 {categories.map(category => (
                     <div key={String(category._id)}>
-                        <h2>{category.name}</h2>
                         <ul>
                             {groupedPosts[category.name].length === 0 ? (
                                 <li>記事がありません。</li>
                             ) : (
                                 groupedPosts[category.name].map(post => (
-                                    <li key={post._id} className="bg-accentry rounded-3xl">
-                                        <Link href={`/posts/${post.slug}`}>
-                                            {post.title}
-                                        </Link>
+                                    <li key={post._id} className="flex bg-accentry rounded-3xl my-4">
+                                        <div>
+                                            {post.thumbnailUrl && (
+                                                <img src={post.thumbnailUrl}
+                                                    alt={post.title}
+                                                    className="w-36 h-24 object-cover rounded m-4"
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="flex-wrap p-4">
+                                            <p className="text-sm text-gray-500">カテゴリー:<Link href={`/categories/${post.category.name}`}>{post.category.name}</Link></p>
+                                            <span className="text-sm text-gray-500">投稿:{new Date(post.createdAt).toLocaleString()}</span>
+                                            <h3 className="text-lg font-bold"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+                                            <div>
+                                                <ReactMarkdown>
+                                                    {post.content.slice(0, 50) + "......"}
+                                                </ReactMarkdown>
+                                            </div>
+                                        </div>
                                     </li>
                                 ))
                             )}

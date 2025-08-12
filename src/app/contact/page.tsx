@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export const metadate = {
     title: "お問い合わせ",
-    description: "YAMAORI筆者へのお問い合わせページです。記事のご不明点や何かご依頼がある場合はこちらのページを利用してください",
+    description: "YAMAORI管理人へのお問い合わせページです。記事のご不明点やご依頼がある場合はこちらのページを利用してください",
 };
 
 
@@ -86,7 +86,7 @@ export default function Contact() {
                     <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="bg-secondary rounded-3xl font-bold text-xl px-2"
+                        className="bg-secondary rounded-3xl font-bold text-xl px-2 border border-black"
                     >
                         {status === "loading" ? "送信中……" : "送信"}
                     </button>

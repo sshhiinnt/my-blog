@@ -21,6 +21,7 @@ export async function POST(req: Request) {
             replyTo: email,
             text: `名前:${name}\nメール:${email}\n${message}`,
         });
+        console.log("Resend send result:", data);
 
         return NextResponse.json({ success: true, data });
     } catch (error) {

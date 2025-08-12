@@ -23,19 +23,22 @@ export default async function postPage({ params }: Props) {
     const category = await Category.findOne({ slug: post.category.slug })
 
     return (
-        <div className="flex bg-secondary">
-            <div className="max-w-3xl w-full">
-                <h1>{post.title}</h1>
-                <p>
-                    投稿日：{new Date(post.createdAt).toLocaleString()}{""}
-                    {category && `カテゴリー：${category.name}`}
-                </p>
-                <article>
+        <div className="flex justify-center bg-secondary">
+            <div className="max-w-4xl w-full bg-white">
+                <div className="text-right text-gray-500">
+                    <p>
+                        投稿日：{new Date(post.createdAt).toLocaleString()}{""}
+                    </p>
+                    <p>
+                        {category && `カテゴリー：${category.name}`}
+                    </p>
+                </div>
+                <h1 className="text-3xl font-bold text-center">{post.title}</h1>
+                <article className="prose prose-lg dark:prose-invert mx-auto p-4">
                     <ReactMarkdown>{post.content}</ReactMarkdown>
                 </article>
-                <Aside />
             </div>
-
+            <Aside />
         </div>
     )
 }

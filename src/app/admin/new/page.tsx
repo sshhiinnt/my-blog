@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { resolve } from "path";
-import { rejects } from "assert";
-// import CRC32 from "crc-32";
 
 type Category = {
     _id: string;
@@ -40,6 +37,7 @@ export default function NewPostPage() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [previewMode, setPreviewMode] = useState(false);
     const [uploading, setUploading] = useState(false);
+    const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
 
 
     useEffect(() => {
@@ -127,8 +125,12 @@ export default function NewPostPage() {
         }
 
         if (uploadedUrls.length) {
-            const markdown = uploadedUrls.map(url => `[画像](${url})`).join("\n\n");
+            const markdown = uploadedUrls.map(url => `![画像](${url})`).join("\n\n");
             setContent(prev => prev + "\n\n" + markdown);
+
+            setThumbnailUrl(uploadedUrls[0]);
+
+            console.log(uploadedUrls[0]);
         }
 
         setUploading(false);
@@ -143,18 +145,20 @@ export default function NewPostPage() {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("content", content);
-        formData.append("category", parsedCategory.name);
-        formData.append("categorySlug", parsedCategory.slug);
-        formData.append("group", parsedCategory.group);
+        formData.append("category", JSON.stringify(parsedCategory));
+        formData.append("slug", parsedCategory.slug);
         images.forEach((img) => {
             formData.append("images", img);
         });
+        if (thumbnailUrl) {
+            formData.append("thumbnailUrl", thumbnailUrl);
+        }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, {
             method: "POST",
             body: formData,
         });
-        console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`)
+        console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/post`)
 
         if (res.ok) {
             alert("投稿が作成されました");
@@ -162,6 +166,7 @@ export default function NewPostPage() {
             setContent("");
             setCategory("");
             setImages([]);
+            setThumbnailUrl(null);
         } else {
             alert("エラーが発生しました");
         }

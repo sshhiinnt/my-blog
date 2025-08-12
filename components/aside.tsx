@@ -77,7 +77,7 @@ const Aside = () => {
     return (
         <aside className="hidden md:block bg-secondary w-64 p-4">
             <div className="bg-accentry mt-4 rounded-3xl">
-                <h3 className="font-noto font-bold text-3xl text-center">Category</h3>
+                <h3 className="font-noto text-2xl text-center font-bold pt-4">Category</h3>
                 {loading ? (
                     <p>読み込み中……</p>
                 ) : (
@@ -104,14 +104,13 @@ const Aside = () => {
                 }
             </div>
             <div className="bg-white rounded-3xl my-12 p-4">
-                <h3 className="font-noto font-bold text-3xl text-center">Profiel</h3>
+                <h3 className="font-noto text-2xl text-center font-bold">Profile</h3>
                 <Image
                     src={"/images/plof.jpg"}
                     alt="プロフィール写真"
                     width={2108} height={2107}
-                    className="size-20 rounded-full justify-self-center"
+                    className="size-20 rounded-full justify-self-center mb-4"
                 />
-                <p className="text-center font-bold text-lg">といち</p>
                 <p>山歩き、トレイルランニング、クライミングと、とにかく山遊びが大好きです。</p>
                 <p>このサイトでは山遊びの記録を日記的に発信します。</p>
             </div>

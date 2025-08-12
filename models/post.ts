@@ -4,6 +4,8 @@ export interface IPost extends Document {
     title: string,
     content: string,
     createdAt: Date;
+    slug: string;
+    thumbnailUrl:string;
     category: {
         group: string;
         name: string;
@@ -20,6 +22,14 @@ const PostSchema: Schema = new Schema<IPost>(
         content: {
             type: String,
             required: true,
+        },
+        slug: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        thumbnailUrl: {
+            type: String,
         },
         category: {
             group: { type: String, required: true },

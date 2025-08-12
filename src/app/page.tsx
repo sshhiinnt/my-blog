@@ -15,12 +15,12 @@ export default function Home() {
     return (
         <div>
             <TopImage />
-            <main className="flex bg-secondary">
-                <article className="flex-1">
+            <main className="flex justify-center bg-secondary">
+                <article className="max-w-4xl w-full">
                     <NewArticle page={1} showPagination={false} />
                 </article>
                 <aside>
-                <Aside />
+                    <Aside />
                 </aside>
             </main>
         </div>

@@ -28,10 +28,25 @@ if (!cached) {
 export async function connect() {
     if (cached.conn) return cached.conn;
 
-    if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI);
+    if (mongoose.connection.readyState === 1) {
+        console.log("Already connected to MongoDB.")
+        return mongoose;
     }
 
-    cached.conn = await cached.promise;
+    if (!cached.promise) {
+        console.log("Conecting to MongoDB");
+        cached.promise = mongoose.connect(MONGODB_URI, { bufferCommands: false });
+    }
+
+    try {
+        cached.conn = await cached.promise;
+        console.log("MongoDB connected");
+    } catch (err) {
+        cached.promise = null;
+        console.error("MongoDB connection error:", err);
+        throw err;
+    }
+
     return cached.conn;
+
 }

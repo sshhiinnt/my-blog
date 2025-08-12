@@ -17,6 +17,10 @@ const MessageSchema: Schema = new Schema<IMessage>(
             type: String,
             required: true,
         },
+        message: {
+            type: String,
+            required: true,
+        },
         createdAt: {
             type: Date,
             default: Date.now,
@@ -27,6 +31,6 @@ const MessageSchema: Schema = new Schema<IMessage>(
     }
 );
 
-const Message = models.Post || model<IMessage>("Post", MessageSchema);
+const Message = models.Message || model<IMessage>("Message", MessageSchema);
 
 export default Message;

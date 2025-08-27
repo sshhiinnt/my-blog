@@ -3,9 +3,10 @@ import { connect } from "@/lib/mongodb";
 import Post from "../../../models/post";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import z from "zod";
+import z, { optional } from "zod";
 import { IncomingForm } from "formidable";
-import { slugify } from "@/lib/slugify";
+import { generateSlug } from "@/lib/slugify";
+
 
 export const config = {
     api: {
@@ -15,6 +16,7 @@ export const config = {
 
 const postSchema = z.object({
     title: z.string().min(1),
+    description: z.string().min(1),
     content: z.string().min(1),
     slug: z.string().min(1),
     thumbnailUrl: z.string().url().optional(),
@@ -23,6 +25,15 @@ const postSchema = z.object({
         slug: z.string().min(1),
         group: z.string().min(1),
     }),
+    images: z.array(
+        z.object({
+            url: z.string().url(),
+            width: z.number(),
+            height: z.number(),
+        })
+    ).default([]),
+    climbDate: z.string().optional(),
+    area: z.string().optional(),
 });
 
 
@@ -48,31 +59,56 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         try {
             const title = fields.title?.toString() || "";
+            const description = fields.description?.toString() || "";
             const content = fields.content?.toString() || "";
             const parsedCategory = JSON.parse(fields.category?.toString() || "{}");
             const thumbnailUrl = fields.thumbnailUrl?.toString();
-            const slug = slugify(title);
+            const slug = await generateSlug(title);
+            const climbDateStr = fields.climbDate?.toString();
+            const climbDate = climbDateStr ? new Date(climbDateStr) : undefined;
+            const areaStr = fields.area?.toString();
+            const areaValue = areaStr && areaStr.trim() !== "" ? areaStr : null;
 
-            console.log("thumbnailUrl:", thumbnailUrl);
+            let images: Array<{ url: string, width: number, height: number }> = [];
+            if (fields.images) {
+                const rawImages = Array.isArray(fields.images) ? fields.images : [fields.images];
+
+                images = rawImages
+                    .map(imgStr => {
+                        if (typeof imgStr === "string") {
+                            try {
+                                return JSON.parse(imgStr) as Array<{ url: string, width: number, height: number }>;
+                            } catch (e) {
+                                console.error("JSON parse error for image:", imgStr, e);
+                                return [];
+                            }
+                        }
+                        return [];
+                    })
+                    .flat();
+            }
+
+            console.log("API で受け取った images:", fields.images);
 
 
             const validated = postSchema.parse({
                 title,
                 content,
                 slug,
+                description,
                 thumbnailUrl: thumbnailUrl && thumbnailUrl.trim() !== "" ? thumbnailUrl : undefined,
                 category: {
                     name: parsedCategory.name || "",
                     slug: parsedCategory.slug || "",
                     group: parsedCategory.group || "",
                 },
+                images,
+                climbDate,
+                area: areaValue,
             });
 
             await connect();
 
-            if (files.image) {
-                console.log("アップロードされたファイル:", files.image);
-            }
 
             const post = await Post.create(validated);
 

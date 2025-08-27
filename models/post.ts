@@ -4,8 +4,17 @@ export interface IPost extends Document {
     title: string,
     content: string,
     createdAt: Date;
+    updatedAt: Date;
     slug: string;
-    thumbnailUrl:string;
+    description?: string;
+    area?: string;
+    climbDate?: Date;
+    images?: Array<{
+        url: string;
+        width: number;
+        height: number;
+    }>,
+    thumbnailUrl: string;
     category: {
         group: string;
         name: string;
@@ -28,6 +37,20 @@ const PostSchema: Schema = new Schema<IPost>(
             required: true,
             unique: true,
         },
+        description: {
+            type: String,
+        },
+        area: {
+            type: String,
+        },
+        climbDate: {
+            type: Date,
+        },
+        images: [{
+            url: { type: String, required: true },
+            width: { type: Number, required: true },
+            height: { type: Number, required: true },
+        }],
         thumbnailUrl: {
             type: String,
         },
@@ -37,6 +60,10 @@ const PostSchema: Schema = new Schema<IPost>(
             slug: { type: String, required: true, }
         },
         createdAt: {
+            type: Date,
+            default: Date.now,
+        },
+        updatedAt: {
             type: Date,
             default: Date.now,
         },

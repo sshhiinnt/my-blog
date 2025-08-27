@@ -75,13 +75,13 @@ const Aside = () => {
     const grouped = groupAndSortCategories(categories);
 
     return (
-        <aside className="hidden md:block bg-secondary w-64 p-4">
+        <aside className="hidden md:block bg-secondary w-72 p-4 ml-16">
             <div className="bg-accentry mt-4 rounded-3xl">
                 <h3 className="font-noto text-2xl text-center font-bold pt-4">Category</h3>
                 {loading ? (
                     <p>読み込み中……</p>
                 ) : (
-                    <div className="p-4">
+                    <div className="px-8 py-4">
                         {Object.entries(grouped).map(([group, cats]) => (
                             <div key={group}>
                                 <div className="text-lg font-bold">
@@ -89,10 +89,10 @@ const Aside = () => {
                                 </div>
                                 <ul>
                                     {cats.map((cat) => (
-                                        <li key={cat._id}>
+                                        <li key={cat._id} className="hover:opacity-70">
                                             <Link
                                                 href={`/categories/${encodeURIComponent(cat.group)}/${encodeURIComponent(cat.slug)}`}>
-                                                {cat.name}
+                                                ・{cat.name}
                                             </Link>
                                         </li>
                                     ))}
@@ -106,11 +106,12 @@ const Aside = () => {
             <div className="bg-white rounded-3xl my-12 p-4">
                 <h3 className="font-noto text-2xl text-center font-bold">Profile</h3>
                 <Image
-                    src={"/images/plof.jpg"}
+                    src={"/images/plof.JPG"}
                     alt="プロフィール写真"
                     width={2108} height={2107}
-                    className="size-20 rounded-full justify-self-center mb-4"
+                    className="size-20 rounded-full justify-self-center mb-1"
                 />
+                <p className="font-bold text-2xl text-center mb-1">YAMAORI管理人</p>
                 <p>山歩き、トレイルランニング、クライミングと、とにかく山遊びが大好きです。</p>
                 <p>このサイトでは山遊びの記録を日記的に発信します。</p>
             </div>

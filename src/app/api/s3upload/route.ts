@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { S3Client, PutObjectCommand, S3 } from "@aws-sdk/client-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
-// import { getSignedUrl, S3RequestPresigner } from "@aws-sdk/s3-request-presigner";
-// import { HttpRequest } from "@smithy/protocol-http";
-// import { Hash } from "@smithy/hash-node";
-// import { Sha256 } from "@aws-crypto/sha256-js";
-// import { formatUrl } from "@aws-sdk/util-format-url";
+
 
 console.log("Loading api/s3upload.ts - Version:2 20250802_kusottaremeV2");
 
@@ -47,7 +43,6 @@ export async function GET(req: NextRequest) {
     const filetype = searchParams.get("filetype");
     console.log("Requested filetype:", filetype);
 
-    // const filesize = searchParams.get("filesize");
 
     if (!filename || !filetype) {
         return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
@@ -70,10 +65,6 @@ export async function GET(req: NextRequest) {
                 acl: "public-read",
             },
         });
-
-        console.log("fields:", fields);
-        console.log("filetype:", filetype);
-        console.log("filename:", filename);
 
 
 

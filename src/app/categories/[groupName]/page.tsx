@@ -5,6 +5,7 @@ import Post from "models/post";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import { WebPageSchema } from "components/structuredData";
 
 
 interface Props {
@@ -33,45 +34,54 @@ export default async function CategoryPage({ params }: Props) {
     }
 
     return (
-        <div className="flex justify-center bg-secondary">
-            <main className="max-w-4xl w-full my-4">
-                <h1 className="text-center text-3xl font-bold rounded-3xl">{groupName}</h1>
-                {categories.map(category => (
-                    <div key={String(category._id)}>
-                        <ul>
-                            {groupedPosts[category.name].length === 0 ? (
-                                <li>記事がありません。</li>
-                            ) : (
-                                groupedPosts[category.name].map(post => (
-                                    <li key={post._id} className="flex bg-accentry rounded-3xl my-4">
-                                        <div>
-                                            {post.thumbnailUrl && (
-                                                <img src={post.thumbnailUrl}
-                                                    alt={post.title}
-                                                    className="w-36 h-24 object-cover rounded m-4"
-                                                />
-                                            )}
-                                        </div>
-                                        <div className="flex-wrap p-4">
-                                            <p className="text-sm text-gray-500">カテゴリー:<Link href={`/categories/${post.category.name}`}>{post.category.name}</Link></p>
-                                            <span className="text-sm text-gray-500">投稿:{new Date(post.createdAt).toLocaleString()}</span>
-                                            <h3 className="text-lg font-bold"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+        <>
+            <WebPageSchema
+                url={`https://yamaori.jp/categories/${groupName}`}
+                name={`YAMAORIブログの${groupName}カテゴリ記事一覧`}
+                description={`YAMAORIブログの${groupName}に属する記事一覧ページです`}
+                lastReviewed="2025-08-27T11:00:00Z"
+                authorName="都市慎太郎"
+            />
+            <div className="flex justify-center bg-secondary">
+                <main className="max-w-4xl w-full my-4">
+                    <h1 className="text-center text-3xl font-bold rounded-3xl">{groupName}</h1>
+                    {categories.map(category => (
+                        <div key={String(category._id)}>
+                            <ul>
+                                {groupedPosts[category.name].length === 0 ? (
+                                    <li>このカテゴリーに記事はまだありません（近日投稿予定）</li>
+                                ) : (
+                                    groupedPosts[category.name].map(post => (
+                                        <li key={post._id} className="flex bg-accentry rounded-3xl my-4">
                                             <div>
-                                                <ReactMarkdown>
-                                                    {post.content.slice(0, 50) + "......"}
-                                                </ReactMarkdown>
+                                                {post.thumbnailUrl && (
+                                                    <img src={post.thumbnailUrl}
+                                                        alt={post.title}
+                                                        className="w-36 h-24 object-cover rounded m-4"
+                                                    />
+                                                )}
                                             </div>
-                                        </div>
-                                    </li>
-                                ))
-                            )}
-                        </ul>
-                    </div>
-                ))}
-            </main>
-            <Aside />
-        </div>
-    );
+                                            <div className="flex-wrap p-4">
+                                                <p className="text-sm text-gray-500">カテゴリー:<Link href={`/categories/${post.category.name}`}>{post.category.name}</Link></p>
+                                                <span className="text-sm text-gray-500">投稿:{new Date(post.createdAt).toLocaleString()}</span>
+                                                <h3 className="text-lg font-bold"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+                                                <div>
+                                                    <ReactMarkdown>
+                                                        {post.content.slice(0, 50) + "......"}
+                                                    </ReactMarkdown>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))
+                                )}
+                            </ul>
+                        </div>
+                    ))}
+                </main>
+                <Aside />
+            </div>
+        </>
+    )
 }
 
 export async function generateStaticParams() {

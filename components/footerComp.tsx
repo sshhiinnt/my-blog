@@ -8,8 +8,8 @@ const Footer = () => {
         <footer className="bg-brand text-white">
             <div className=" flex justify-between mx-auto container">
                 <div className="self-center">
-                    <div className="font-bold text-3xl text-center">YAMAORI</div>
-                    <div className="font-Rockn font-bold">山で遊んでおります</div>
+                    <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>
+                    <div className="font-Rockn font-bold">山で遊ばせてもらっております</div>
                 </div>
                 <nav>
                     <ul className="list-none py-4">
@@ -24,7 +24,7 @@ const Footer = () => {
                 <nav className="flex flex-col font-bold py-4">
                     <Link href={"/contact"}>-お問い合わせはこちら</Link>
                     <Link href={"/profile"}>-筆者について</Link>
-                    <Link href={"/contact"}>-サイト運営について</Link>
+                    <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
                 </nav>
             </div>
             <p className="text-center py-4">©　2025　山で遊んでおります　YAMAORI</p>

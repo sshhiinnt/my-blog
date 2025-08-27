@@ -6,6 +6,7 @@ import Header from "components/headerComp";
 import Footer from "components/footerComp";
 import { Providers } from "./provider";
 
+
 const notoSansDisplay = Noto_Sans_Display({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -21,7 +22,7 @@ const RocknRollOne = RocknRoll_One({
 
 
 export const metadata: Metadata = {
-  title: "山で遊んでおります",
+  title: "山で遊ばせてもらっております",
   description: "このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。",
   applicationName: "YAMAORI"
 };
@@ -32,16 +33,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
-      <body>
-        <Providers>
-          <Header />
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+      <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+        <body>
+          <Providers>
+            <Header />
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </Providers>
+        </body>
+      </html>
   );
 }

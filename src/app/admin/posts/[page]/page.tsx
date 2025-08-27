@@ -17,11 +17,19 @@ type Post = {
         group: string,
     }
     createdAt: string;
+    updatedAt: string;
+    climbDate: string | null;
+    area: string
 };
 
-const POST_PER_PAGE = 16;
+type Props = {
+    params: {
+        page?: string,
+    },
+};
 
-export default function AdminPostPage() {
+
+export default function AdminPostPage({ params }: Props) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -34,26 +42,32 @@ export default function AdminPostPage() {
         }
     }, [status, session, router]);
 
+    const currentPage = Number(params.page) || 1;
+    const pageSize = 8;
 
 
     const [posts, setPosts] = useState<Post[]>([]);
+    const [totalPage, setTotalPage] = useState(1);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+
 
     useEffect(() => {
-        async function fetchPost() {
-            const res = await fetch("/api/posts");
-            if (!res.ok) {
-                console.log("記事の取得に失敗しました");
+        async function fetchPosts() {
+            setLoading(true);
+            try {
+                const res = await fetch(`/api/posts?page=${currentPage}&pageSize=${pageSize}`);
+                if (!res.ok) throw new Error("記事取得失敗");
+                const data = await res.json();
+                setPosts(data.posts);
+                setTotalPage(Math.ceil(data.total / pageSize));
+            } catch (err) {
+                console.error(err);
+            } finally {
                 setLoading(false);
-                return;
             }
-            const data = await res.json();
-            setPosts(data.posts);
-            setLoading(false);
         }
-        fetchPost()
-    }, [])
+        fetchPosts();
+    }, [currentPage]);
 
     const handleDelete = async (slug: string) => {
         const confirmed = window.confirm("本当に削除しますか？");
@@ -78,19 +92,7 @@ export default function AdminPostPage() {
         return <p>Loading......</p>;
     }
 
-    const totalPage = Math.ceil(posts.length / POST_PER_PAGE);
-    const currentPosts = posts.slice(
-        (currentPage - 1) * POST_PER_PAGE,
-        currentPage * POST_PER_PAGE,
-    );
-
-    const handlePrevious = () => {
-        setCurrentPage((prev) => Math.max(prev - 1, 1));
-    };
-
-    const handleNext = () => {
-        setCurrentPage((prev) => Math.min(prev + 1, totalPage));
-    };
+    const goPage = (page: number) => router.push(`/admin/posts/${page.toString()}`);
 
     return (
         <div className="flex flex-col justify-center bg-secondary">
@@ -100,11 +102,11 @@ export default function AdminPostPage() {
             ) : (
                 <>
                     <ul>
-                        {currentPosts.map((post => (
+                        {posts.map((post => (
                             <li key={post._id} className="bg-accentry rounded-3xl m-4 p-4 max-w-4xl mx-auto">
                                 <div className="flex justify-between items-center">
                                     <div className="flex flex-col">
-                                        <Link href={`/admin/posts/${post.slug}/edit`}>{post.title}</Link>
+                                        <Link href={`/admin/post-edit/${post.slug}/edit`}>{post.title}</Link>
                                         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
                                     </div>
                                     <button
@@ -120,23 +122,20 @@ export default function AdminPostPage() {
 
                     <div className="flex justify-center items-center gap-4 mt-4">
                         <button
-                            onClick={handlePrevious}
+                            onClick={() => goPage(currentPage - 1)}
                             disabled={currentPage === 1}
                             className="p-4 border rounded-3xl"
                         >
                             前へ
                         </button>
-                        <span>
-                            {currentPage}/{totalPage}
-                        </span>
+                        <span>{currentPage}/{totalPage}</span>
                         <button
-                            onClick={handleNext}
+                            onClick={() => goPage(currentPage + 1)}
                             disabled={currentPage === totalPage}
                             className="p-4 border rounded-3xl"
                         >
                             次へ
                         </button>
-
                     </div>
                 </>
 

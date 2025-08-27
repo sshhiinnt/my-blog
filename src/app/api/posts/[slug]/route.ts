@@ -35,7 +35,10 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
             {
                 title: body.title,
                 content: body.content,
+                thumbnailUrl: body.thumbnailUrl,
                 category: category,
+                climbDate: body.climbDate || null,
+                area: body.area || "",
                 updatedAt: new Date(),
             },
             { new: true }

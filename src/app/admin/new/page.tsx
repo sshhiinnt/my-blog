@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import rehypeRaw from "rehype-raw";
+
 
 type Category = {
     _id: string;
@@ -12,6 +14,11 @@ type Category = {
     group: string;
 };
 
+type UploadedImage = {
+    url: string;
+    width: number;
+    height: number;
+};
 
 export default function NewPostPage() {
     const { data: session, status } = useSession();
@@ -31,6 +38,7 @@ export default function NewPostPage() {
 
 
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("");
     const [images, setImages] = useState<File[]>([]);
@@ -38,6 +46,9 @@ export default function NewPostPage() {
     const [previewMode, setPreviewMode] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
+    const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([]);
+    const [area, setArea] = useState("");
+    const [climbDate, setClimbDate] = useState<Date | null>(null);
 
 
     useEffect(() => {
@@ -66,15 +77,16 @@ export default function NewPostPage() {
     const handleImageUpload = async () => {
         console.log("handleImageUpload called");
         setUploading(true);
-        const uploadedUrls: string[] = [];
 
         if (images.length === 0) {
             setUploading(false);
             return;
         }
 
+        const newUploadedImages: UploadedImage[] = []
+
         const uploadPromisees = images.map(file => {
-            return new Promise<String | undefined>(async (resolve, reject) => {
+            return new Promise<string | undefined>(async (resolve, reject) => {
                 try {
                     const res = await fetch(
                         `/api/s3upload?filename=${encodeURIComponent(file.name)}&filetype=${encodeURIComponent(file.type)}`,
@@ -106,8 +118,22 @@ export default function NewPostPage() {
 
                     if (uploadRes.ok) {
                         const publicUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${encodeURIComponent(file.name)}`
-                        uploadedUrls.push(publicUrl);
+
+                        const imgDimentions = await new Promise<{ width: number, height: number }>((resImg, rejImg) => {
+                            const img = new Image();
+                            img.src = publicUrl;
+                            img.onload = () => resImg({ width: img.width, height: img.height });
+                            img.onerror = () => rejImg(new Error("画像読み込み失敗"));
+                        });
+
+                        newUploadedImages.push({
+                            url: publicUrl,
+                            width: imgDimentions.width,
+                            height: imgDimentions.height,
+                        });
+
                         resolve(publicUrl);
+
                     } else {
                         const errorText = await uploadRes.text();
                         throw new Error(`アップロード失敗:${file.name},ステータス${uploadRes.status},レスポンス${errorText}`);
@@ -124,13 +150,16 @@ export default function NewPostPage() {
             console.error("一部または全てのファイルのアップロードに失敗しました:", error);
         }
 
-        if (uploadedUrls.length) {
-            const markdown = uploadedUrls.map(url => `![画像](${url})`).join("\n\n");
+        if (newUploadedImages.length) {
+
+            setUploadedImages(prev => [...prev, ...newUploadedImages]);
+            const markdown = newUploadedImages
+                .map(img => `![画像](${img.url})<!-- ${img.width}*${img.height} -->`)
+                .join("\n\n");
             setContent(prev => prev + "\n\n" + markdown);
 
-            setThumbnailUrl(uploadedUrls[0]);
+            setThumbnailUrl(newUploadedImages[0].url);
 
-            console.log(uploadedUrls[0]);
         }
 
         setUploading(false);
@@ -147,9 +176,10 @@ export default function NewPostPage() {
         formData.append("content", content);
         formData.append("category", JSON.stringify(parsedCategory));
         formData.append("slug", parsedCategory.slug);
-        images.forEach((img) => {
-            formData.append("images", img);
-        });
+        formData.append("description", description);
+        formData.append("images", JSON.stringify(uploadedImages));
+        formData.append("climbDate", climbDate ? climbDate.toISOString().split("T")[0] : "");
+        formData.append("area", area ?? "");
         if (thumbnailUrl) {
             formData.append("thumbnailUrl", thumbnailUrl);
         }
@@ -160,13 +190,19 @@ export default function NewPostPage() {
         });
         console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/post`)
 
+        console.log(uploadedImages)
+
         if (res.ok) {
             alert("投稿が作成されました");
             setTitle("");
+            setDescription("")
             setContent("");
             setCategory("");
             setImages([]);
             setThumbnailUrl(null);
+            setUploadedImages([]);
+            setArea("");
+            setClimbDate(null);
         } else {
             alert("エラーが発生しました");
         }
@@ -188,6 +224,37 @@ export default function NewPostPage() {
                         required
                         className="w-60 border-solid"
                     />
+                    <p>記事の概要（必須）</p>
+                    <input type="text"
+                        placeholder="記事の概要"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        className="w-96 border-solid" />
+                    <p>エリア</p>
+                    <select
+                        value={area}
+                        onChange={(e) => setArea(e.target.value)}
+                        className="w-96 border-solid">
+                        <option value="">エリアを選択</option>
+                        <option value="九州">九州</option>
+                        <option value="四国">四国</option>
+                        <option value="中国地方">中国地方</option>
+                        <option value="近畿地方">近畿地方</option>
+                        <option value="中部地方">中部地方</option>
+                        <option value="北アルプス">北アルプス</option>
+                        <option value="中央アルプス">中央アルプス</option>
+                        <option value="南アルプス">南アルプス</option>
+                        <option value="関東">関東</option>
+                        <option value="東北">東北</option>
+                        <option value="北海道">北海道</option>
+
+                    </select>
+                    <p>日付（登った日）</p>
+                    <input type="date"
+                        value={climbDate ? climbDate.toISOString().split("T")[0] : ""}
+                        onChange={(e) => setClimbDate(e.target.value ? new Date(e.target.value) : null)}
+                        className="w-96 border-solid" />
                 </div>
 
                 <select
@@ -248,7 +315,7 @@ export default function NewPostPage() {
 
                 {previewMode && (
                     <article className="prose lg:prose-xl dark:prose-invert mx-auto p-4 border">
-                        <ReactMarkdown>{content}</ReactMarkdown>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
                     </article>
                 )}
 

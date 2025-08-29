@@ -3,12 +3,8 @@
 import Aside from "components/aside";
 import { useState } from "react";
 import { ContactPageSchema } from "components/structuredData";
+import Head from "next/head";
 
-
-export const metadata = {
-    title: "お問い合わせ",
-    description: "YAMAORI管理人へのお問い合わせページです。記事のご不明点やご依頼がある場合はこちらのページを利用してください",
-};
 
 
 export default function Contact() {
@@ -54,6 +50,13 @@ export default function Contact() {
 
     return (
         <>
+            <Head>
+                <title>お問い合わせ | YAMAORI</title>
+                <meta
+                    name="description"
+                    content="YAMAORI管理人へのお問い合わせページです。記事のご不明点やご依頼がある場合はこちらのページを利用してください"
+                />
+            </Head>
             <ContactPageSchema
                 url="https://yamaori.jp/contact"
                 name="YAMAORI管理人"

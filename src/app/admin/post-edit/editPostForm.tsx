@@ -28,7 +28,7 @@ type Props = {
     slug: string;
 }
 
-const EditPostPage = ({ slug }: Props) => {
+export default function EditPostPage ({ slug }: Props) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -213,4 +213,3 @@ const EditPostPage = ({ slug }: Props) => {
     );
 };
 
-export default EditPostPage;

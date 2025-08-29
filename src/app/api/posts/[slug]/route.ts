@@ -41,6 +41,7 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
                 climbDate: body.climbDate || null,
                 area: body.area || "",
                 updatedAt: new Date(),
+                description: body.description,
             },
             { new: true }
         );

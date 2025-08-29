@@ -24,6 +24,7 @@ export default function HeaderAreaDropDown() {
         { slug: "kanto", name: "関東", count: 0 },
         { slug: "tohoku", name: "東北", count: 0 },
         { slug: "hokkaido", name: "北海道", count: 0 },
+        { slug: "noarea", name: "未指定", count: 0 },
         ]);
     const [selectedArea, setSelectedArea] = useState<string>("");
 
@@ -58,10 +59,12 @@ export default function HeaderAreaDropDown() {
             <select
                 value={selectedArea}
                 onChange={handleChange}
-                className="bg-secondary">
+                className="bg-secondary hover:cursor-pointer">
                 <option value="">▲エリアを選択</option>
                 {areas.map(a => (
-                    <option key={a.slug} value={a.slug}>{a.name}</option>
+                    a.slug !== "noarea" && (
+                        <option key={a.slug} value={a.slug}>{a.name}</option>
+                    )
                 ))}
             </select>
         </div>

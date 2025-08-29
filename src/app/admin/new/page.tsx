@@ -248,7 +248,8 @@ export default function NewPostPage() {
                         <option value="関東">関東</option>
                         <option value="東北">東北</option>
                         <option value="北海道">北海道</option>
-
+                        <option value="未指定">未指定</option>
+                        
                     </select>
                     <p>日付（登った日）</p>
                     <input type="date"

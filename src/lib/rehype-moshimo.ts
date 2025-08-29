@@ -1,11 +1,18 @@
 import { visit } from "unist-util-visit";
+import type { Root, Element } from "hast";
 
 export default function rehypeMoshimo() {
-    return (tree: any) => {
-        visit(tree, "element", (node) => {
+    return (tree: Root) => {
+        visit(tree, "element", (node: Element) => {
             if (node.tagName === "span" && node.properties?.["data-moshimo"]) {
                 node.tagName = "span";
-                node.properties.className = (node.properties.className || []).concat("moshimo-link");
+                const className = node.properties.className ?? [];
+                const classArray = Array.isArray(className)
+                    ? className.filter(c => typeof c === "string" || typeof c === "number")
+                    : typeof className === "string" || typeof className === "number"
+                        ? [className]
+                        : [];
+                node.properties.className = [...classArray, "moshimo-link"];
             }
         });
     };

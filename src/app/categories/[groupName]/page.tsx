@@ -8,6 +8,30 @@ import ReactMarkdown from "react-markdown";
 import { WebPageSchema } from "components/structuredData";
 import Image from "next/image";
 
+interface Post {
+    _id: string,
+    title: string,
+    content: string,
+    createdAt: Date;
+    updatedAt: Date;
+    slug: string;
+    description?: string;
+    area?: string;
+    climbDate?: Date;
+    images?: Array<{
+        url: string;
+        width: number;
+        height: number;
+    }>,
+    thumbnailUrl: string;
+    category: {
+        group: string;
+        name: string;
+        slug: string;
+    },
+    moshimoProducts?: string[];
+}
+
 
 interface Props {
     params: { groupName: string }
@@ -25,12 +49,12 @@ export default async function CategoryPage({ params }: Props) {
         return notFound();
     }
 
-    const groupedPosts: { [key: string]: any[] } = {};
+    const groupedPosts: Record<string, Post[]> = {};
 
     for (const category of categories) {
         const posts = await Post.find({ "category.slug": category.slug })
             .sort({ createdAt: -1 })
-            .lean();
+            .lean() as unknown as Post[];
         groupedPosts[category.name] = posts;
     }
 
@@ -50,7 +74,7 @@ export default async function CategoryPage({ params }: Props) {
                         <div key={String(category._id)}>
                             <ul>
                                 {groupedPosts[category.name].length === 0 ? (
-                                    <li>このカテゴリーに記事はまだありません（近日投稿予定）</li>
+                                    <li>「{category.name}」カテゴリーに記事はまだありません（近日投稿予定）</li>
                                 ) : (
                                     groupedPosts[category.name].map(post => (
                                         <li key={post._id} className="flex bg-accentry rounded-3xl my-4">

@@ -42,7 +42,9 @@ export default function ArticleList({ posts, currentPage, totalPage }: Props) {
                             {post.thumbnailUrl && (
                                 <Image src={post.thumbnailUrl}
                                     alt={post.title}
-                                    className="w-36 h-24 object-cover rounded m-4"
+                                    width={144}
+                                    height={96}
+                                    className="object-cover rounded m-4"
                                 />
                             )}
                         </div>

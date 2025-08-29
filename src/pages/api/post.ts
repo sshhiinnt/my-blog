@@ -114,9 +114,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
             return res.status(201).json({ success: true, data: post });
-        } catch (error: any) {
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
             console.error("バリデーションまたはDBエラー", error);
-            return res.status(500).json({ success: false, error: error.message || "不明なエラー" });
+            return res.status(500).json({ success: false, error: message || "不明なエラー" });
         }
     });
 }

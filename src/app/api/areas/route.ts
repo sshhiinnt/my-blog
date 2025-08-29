@@ -9,8 +9,9 @@ export async function GET() {
     try {
         const areaWithPosts = await Post.aggregate([
             { $match: { area: { $ne: null } } },
-            { $group: { _id: "$areas", count: { $sum: 1 } } },
-            { $project: { slug: "$_id", count: 1, _id: 0 } },
+            { $unwind: "$area" },
+            { $group: { _id: "$area", count: { $sum: 1 } } },
+            { $project: { slug: "$_id", name: "$_id", count: 1, _id: 0 } },
         ]);
         console.log("area:", areaWithPosts)
         return NextResponse.json(areaWithPosts)

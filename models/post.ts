@@ -19,7 +19,8 @@ export interface IPost extends Document {
         group: string;
         name: string;
         slug: string;
-    }
+    },
+    moshimoProducts?: string[];
 }
 
 const PostSchema: Schema = new Schema<IPost>(
@@ -57,7 +58,7 @@ const PostSchema: Schema = new Schema<IPost>(
         category: {
             group: { type: String, required: true },
             name: { type: String, required: true },
-            slug: { type: String, required: true, }
+            slug: { type: String, required: true, },
         },
         createdAt: {
             type: Date,
@@ -67,7 +68,11 @@ const PostSchema: Schema = new Schema<IPost>(
             type: Date,
             default: Date.now,
         },
+        moshimoProducts: {
+            type: String,
+        },
     },
+
     {
         collection: "posts",
     }

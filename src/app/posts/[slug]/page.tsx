@@ -6,13 +6,21 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown"
 import Aside from "components/aside";
 import rehypeRaw from "rehype-raw";
-import MarkdownWithMoshimo from "components/markdownWithMoshimo";
+import rehypeMoshimo from "@/lib/rehype-moshimo";
 import { ArticleSchema } from "components/structuredData";
 import { Metadata } from "next";
 import Image from "next/image";
+import MoshimoLink from "components/moshimoLink";
+import { Element } from "hast";
+
 
 interface Props {
     params: { slug: string }
+}
+
+interface MoshimoSpanProps extends React.HTMLAttributes<HTMLSpanElement> {
+    "data-moshimo"?: string;
+    node?: Element;
 }
 
 const getPost = cache(async (slug: string) => {
@@ -33,6 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         description: post.description || "記事の説明が表示されます。",
     };
 }
+
 
 
 export default async function postPage({ params }: Props) {
@@ -70,22 +79,31 @@ export default async function postPage({ params }: Props) {
                     </div>
                     <h1 className="text-3xl font-bold text-center">{post.title}</h1>
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
-                        <ReactMarkdown rehypePlugins={[rehypeRaw]}
+                        <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]}
                             components={{
+                                span: ({ node, ...props }: MoshimoSpanProps) => {
+                                    const product = props["data-moshimo"];
+                                    if (product) {
+                                        return <MoshimoLink product={product} />;
+                                    }
+                                    return <span {...props} />
+                                },
                                 img: ({ src, alt }) => {
                                     if (typeof src !== "string") return null;
                                     const url = src?.startsWith("/uploads") ? `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${src.replace(/^\/uploads\//, "")}` : src;
                                     const imgMeta = post.images?.find(img =>
                                         typeof src === "string" && src.includes(img.url.split("/").pop() || ""));
-                                    return <Image src={url} alt={alt || ""} width={imgMeta?.width || 800} height={imgMeta?.height || 600} />;
+                                    return (<Image src={url} alt={alt || ""} width={imgMeta?.width || 800} height={imgMeta?.height || 600} />);
                                 },
                             }}
                         >{post.content}</ReactMarkdown>
+
                     </article>
+
 
                 </div>
                 <Aside />
-            </div>
+            </div >
         </>
     )
 }

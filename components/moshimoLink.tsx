@@ -1,33 +1,44 @@
+'use client'
+
+import rawproducts from "../src/data/moshimoProducts.json";
+import { MoshimoProducts } from "types/moshimo";
 import Image from "next/image";
 import Link from "next/link";
 
+const products = rawproducts as unknown as MoshimoProducts;
 
 type Props = {
-    amazon: string,
-    rakuten: string,
-    yahoo: string,
-    imageUrl?: string,
-    name?: string,
+    product: string;
 };
 
-export default function MoshimoLink({ amazon, rakuten, yahoo, imageUrl, name }: Props) {
+export default function MoshimoLink({ product }: Props) {
+    const data = products[product];
+    if (!data) {
+        return <div>商品情報が見つかりません:{product}</div>
+    }
+
     return (
-        <div>
-            {imageUrl && (
-                <Image src={imageUrl} alt={name || "商品画像"} />
-            )}
-            <div>
-                {name && <h3>{name}</h3>}
-                <div>
-                    {amazon && (
-                        <Link href={amazon} target="_blank" rel="noopener noreferrer">Amazon</Link>
-                    )}
-                    {rakuten && (
-                        <Link href={amazon} target="_blank" rel="noopener noreferrer">楽天</Link>
-                    )}
-                    {yahoo && (
-                        <Link href={amazon} target="_blank" rel="noopener noreferrer">Yahoo!</Link>
-                    )}
+        <div className="border rounded-2xl p-4 shadow-md my-6 bg-white not-prose">
+            <h3 className="font-bold text-2xl">{product}</h3>
+            <div className="flex gap-4">
+                <img
+                    src={data.imageUrl}
+                    alt={product}
+                    className=" w-72 h-auto object-cover rounded-lg"
+                />
+                <div className="flex flex-col gap-2">
+                    <div className="flex flex-col mx-auto gap-4">
+                        <a href={data.amazon} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-yellow-400 rounded-lg">
+                            Amazon
+                        </a>
+                        <a href={data.rakuten} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-red-500 text-white rounded-lg">
+                            楽天
+                        </a>
+                        <a href={data.yahoo} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-purple-600 text-white rounded-lg">
+                            Yahoo
+                        </a>
+                        <p className="text-sm mt-4">こちらのリンクからご購入いただけます<br />（アフィリエイトリンク）</p>
+                    </div>
                 </div>
             </div>
         </div>

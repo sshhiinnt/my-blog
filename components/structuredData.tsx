@@ -1,4 +1,3 @@
-import { requestToBodyStream } from "next/dist/server/body-streams";
 import Head from "next/head";
 
 
@@ -12,11 +11,6 @@ interface ArticleSchemaProps {
     authorName?: string,
 }
 
-interface OrganizationSchemaProps {
-    name: string,
-    url: string,
-    logoUrl: string,
-}
 
 interface WebPageSchemaProps {
     url: string;
@@ -54,7 +48,7 @@ export function ArticleSchema({
     dateModified,
     authorName = "都市慎太郎",
 }: ArticleSchemaProps) {
-    const schema: any = {
+    const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "Article",
         "mainEntityOfPage": url,
@@ -87,7 +81,7 @@ export function WebPageSchema({
     lastReviewed,
     authorName = "都市慎太郎",
 }: WebPageSchemaProps) {
-    const schema: any = {
+    const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": url,
@@ -127,7 +121,7 @@ export function ContactPageSchema({
     authorName = "都市慎太郎",
     contactEmail,
 }: ContactPageSchemaProps) {
-    const schema: any = {
+    const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "url": url,
@@ -171,7 +165,7 @@ export function ProfilePageSchema({
     authorName = "都市慎太郎",
     sameAs,
 }: ProfilePageSchemaProps) {
-    const schema: any = {
+    const schema: Record<string, unknown> = {
         "@context": "https://schema.org",
         "@type": "ProfilePage",
         "url": url,
@@ -182,7 +176,7 @@ export function ProfilePageSchema({
             "@type": "Organization",
             "name": "YAMAORI",
             "url": "https://yamaori.jp",
-            "logo:": {
+            "logo": {
                 "@type": "ImageObject",
                 "url": "https://yamaori.jp/images/yamaori_logo_png"
             },
@@ -200,7 +194,10 @@ export function ProfilePageSchema({
             }
         },
     };
-    if (sameAs?.length) schema.mainEntity.sameAs = sameAs;
+    if (description?.length) schema.description = description;
+    if (authorName?.length) schema.author = { "@type": "Person", "name": authorName };
+    if (sameAs?.length) schema.sameAs = sameAs;
+
 
     return (
         <Head>

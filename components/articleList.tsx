@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 type Post = {
     _id: string;
@@ -39,7 +40,7 @@ export default function ArticleList({ posts, currentPage, totalPage }: Props) {
                     <li key={post._id} className="flex bg-accentry rounded-3xl w-[750px] my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <img src={post.thumbnailUrl}
+                                <Image src={post.thumbnailUrl}
                                     alt={post.title}
                                     className="w-36 h-24 object-cover rounded m-4"
                                 />

@@ -3,7 +3,6 @@
 import rawproducts from "../src/data/moshimoProducts.json";
 import { MoshimoProducts } from "types/moshimo";
 import Image from "next/image";
-import Link from "next/link";
 
 const products = rawproducts as unknown as MoshimoProducts;
 
@@ -21,10 +20,13 @@ export default function MoshimoLink({ product }: Props) {
         <div className="border rounded-2xl p-4 shadow-md my-6 bg-white not-prose">
             <h3 className="font-bold text-2xl">{product}</h3>
             <div className="flex gap-4">
-                <img
+                <Image
                     src={data.imageUrl}
                     alt={product}
-                    className=" w-72 h-auto object-cover rounded-lg"
+                    width={288}
+                    height={0}
+                    style={{ height: "auto" }}
+                    className="object-cover rounded-lg"
                 />
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col mx-auto gap-4">

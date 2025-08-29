@@ -11,7 +11,6 @@ import { ArticleSchema } from "components/structuredData";
 import { Metadata } from "next";
 import Image from "next/image";
 import MoshimoLink from "components/moshimoLink";
-import { Element } from "hast";
 
 
 interface Props {
@@ -20,7 +19,6 @@ interface Props {
 
 interface MoshimoSpanProps extends React.HTMLAttributes<HTMLSpanElement> {
     "data-moshimo"?: string;
-    node?: Element;
 }
 
 const getPost = cache(async (slug: string) => {
@@ -81,7 +79,7 @@ export default async function postPage({ params }: Props) {
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
                         <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]}
                             components={{
-                                span: ({ node, ...props }: MoshimoSpanProps) => {
+                                span: ({ ...props }: MoshimoSpanProps) => {
                                     const product = props["data-moshimo"];
                                     if (product) {
                                         return <MoshimoLink product={product} />;

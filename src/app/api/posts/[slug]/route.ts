@@ -26,6 +26,7 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
             try {
                 category = JSON.parse(category)
             } catch (e) {
+                console.error("GET put Error:", e);
                 return NextResponse.json({ message: "Invalid category format" }, { status: 400 })
             }
         }

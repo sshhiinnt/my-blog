@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import React from "react";
+import Image from "next/image";
 
 type Post = {
     _id: string;
@@ -64,9 +65,12 @@ const NewArticle = async ({ page = 1 }: Props) => {
                     <li key={post._id} className="flex bg-accentry rounded-3xl w-[750px] my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <img src={post.thumbnailUrl}
+                                <Image
+                                    src={post.thumbnailUrl}
                                     alt={post.title}
-                                    className="w-36 h-24 object-cover rounded m-4"
+                                    width={144}
+                                    height={96}
+                                    className="object-cover rounded m-4"
                                 />
                             )}
                         </div>

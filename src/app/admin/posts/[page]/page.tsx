@@ -97,7 +97,9 @@ export default function AdminPostPage({ params }: Props) {
     return (
         <div className="flex flex-col justify-center bg-secondary">
             <h2 className="text-center font-bold mb-4">投稿記事一覧</h2>
-            {posts.length === 0 ? (
+            {loading ? (
+                <p>loading……</p>
+            ) : posts.length === 0 ? (
                 <p>記事がありません</p>
             ) : (
                 <>

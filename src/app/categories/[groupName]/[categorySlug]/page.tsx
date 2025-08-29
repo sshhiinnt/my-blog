@@ -7,6 +7,7 @@ import { CategoryType } from "types/category";
 import Aside from "components/aside";
 import ReactMarkdown from "react-markdown";
 import { WebPageSchema } from "components/structuredData";
+import Image from "next/image";
 
 
 interface Props {
@@ -54,9 +55,12 @@ export default async function categorySlugPage({ params }: Props) {
                                 <li key={String(post._id)} className="flex bg-accentry rounded-3xl m-4 y-4">
                                     <div>
                                         {post.thumbnailUrl && (
-                                            <img src={post.thumbnailUrl}
+                                            <Image
+                                                src={post.thumbnailUrl}
                                                 alt={post.title}
-                                                className="w-36 h-24 object-cover rounded m-4"
+                                                width={144}
+                                                height={96}
+                                                className="object-cover rounded m-4"
                                             />
                                         )}
                                     </div>

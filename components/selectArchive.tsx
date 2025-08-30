@@ -19,7 +19,7 @@ export default function HeaderArchiveDropDown() {
     useEffect(() => {
         const fetchArchives = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/archive`);
+                const res = await fetch("/api/archive");
                 if (!res.ok) throw new Error(`APIエラー${res.status}`);
                 const data = await res.json();
                 setArchives(data);

@@ -23,12 +23,13 @@ type Post = {
 };
 
 type Props = {
-    params: { page: string },
+    params: Promise<{ page: string }>,
 };
 
 
 export default async function ArticlePage({ params }: Props) {
-    const currentPage = Number(params.page) || 1;
+    const { page } = await params;
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
 
     await connect();

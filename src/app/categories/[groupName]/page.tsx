@@ -34,12 +34,14 @@ interface Post {
 
 
 interface Props {
-    params: { groupName: string }
+    params: Promise<{ groupName: string }>,
 }
 
 
 export default async function CategoryPage({ params }: Props) {
-    const groupName = decodeURIComponent(params.groupName);
+    const { groupName: groupNameStr } = await params;
+
+    const groupName = decodeURIComponent(groupNameStr);
 
     await connect();
 

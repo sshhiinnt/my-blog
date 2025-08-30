@@ -31,7 +31,7 @@ export default function HeaderAreaDropDown() {
     useEffect(() => {
         const fetchAreas = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/areas`);
+                const res = await fetch("/api/areas");
                 if (!res.ok) throw new Error(`APIエラー${res.status}`);
                 const data: Areas[] = await res.json();
                 setAreas(data);

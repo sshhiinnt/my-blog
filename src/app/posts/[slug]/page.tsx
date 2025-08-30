@@ -8,13 +8,12 @@ import Aside from "components/aside";
 import rehypeRaw from "rehype-raw";
 import rehypeMoshimo from "@/lib/rehype-moshimo";
 import { ArticleSchema } from "components/structuredData";
-import { Metadata } from "next";
 import Image from "next/image";
 import MoshimoLink from "components/moshimoLink";
 
 
 interface Props {
-    params: { slug: string }
+    params: Promise<{ slug: string }>,
 }
 
 interface MoshimoSpanProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -26,8 +25,9 @@ const getPost = cache(async (slug: string) => {
     return Post.findOne({ slug }).lean<IPost | null>();
 });
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const slug = decodeURIComponent(params.slug);
+export async function generateMetadata({ params }: Props) {
+    const { slug: slugStr } = await params;
+    const slug = decodeURIComponent(slugStr);
     const post = await getPost(slug);
 
     if (!post) {
@@ -43,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 
 export default async function postPage({ params }: Props) {
-    const slug = decodeURIComponent(params.slug);
+    const { slug: slugStr } = await params;
+    const slug = decodeURIComponent(slugStr);
     const post = await getPost(slug);
 
     if (!post) {

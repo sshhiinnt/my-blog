@@ -24,16 +24,18 @@ type Post = {
 };
 
 type Props = {
-    params: {
+    params: Promise<{
         year: string,
         month: string,
         page?: string,
-    },
+    }>,
 };
 export default async function ArchivePage({ params }: Props) {
-    const year = Number(params.year);
-    const month = Number(params.month);
-    const currentPage = Number(params.page) || 1;
+    const { year: yearStr, month: monthStr, page } = await params;
+
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
 
     await connect();

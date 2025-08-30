@@ -3,10 +3,17 @@ import Post from "models/post";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+type Props = {
+    params: Promise<{
+        slug: string;
+    }>
+};
+
+export async function GET(req: NextRequest, { params }: Props) {
+    const { slug } = await params;
     try {
         await connect();
-        const post = await Post.findOne({ slug: params.slug }).lean();
+        const post = await Post.findOne({ slug: slug }).lean();
         if (!post) {
             return NextResponse.json({ message: "Post not found" }, { status: 404 });
         }
@@ -16,7 +23,8 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
         return NextResponse.json({ message: "Internal server Error:", error }, { status: 500 });
     }
 }
-export async function PUT(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function PUT(req: NextRequest, { params }: Props) {
+    const { slug } = await params
     try {
         await connect();
         const body = await req.json();
@@ -32,7 +40,7 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
         }
 
         const updatedPost = await Post.findOneAndUpdate(
-            { slug: params.slug },
+            { slug: slug },
             {
                 title: body.title,
                 content: body.content,
@@ -57,11 +65,12 @@ export async function PUT(req: NextRequest, { params }: { params: { slug: string
 }
 
 
-export async function DELETE(req: NextRequest, { params }: { params: { slug: string } }) {
+export async function DELETE(req: NextRequest, { params }: Props) {
+    const { slug } = await params;
     try {
         await connect();
-        console.log("Deleting post with slug:", params.slug);
-        const result = await Post.findOneAndDelete({ slug: params.slug });
+        console.log("Deleting post with slug:", slug);
+        const result = await Post.findOneAndDelete({ slug: slug });
 
         if (!result) {
             return NextResponse.json({ message: "result not found" }, { status: 404 });

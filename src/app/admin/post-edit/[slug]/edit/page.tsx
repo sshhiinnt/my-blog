@@ -1,6 +1,13 @@
-import EditPostPage from "../../editPostForm";
+import EditPostPage from "./editPostForm";
+
+type Props = {
+    params: Promise<{
+        slug: string;
+    }>;
+};
 
 
-export default function EditPage({ params }: { params: { slug: string } }) {
-    return <EditPostPage slug={params.slug} />
+export default async function EditPage({ params }: Props) {
+    const {slug}= await params;
+    return <EditPostPage slug={slug} />
 }

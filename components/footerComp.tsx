@@ -23,7 +23,7 @@ const Footer = () => {
                 </nav>
                 <nav className="flex flex-col font-bold py-4">
                     <Link href={"/contact"}>-お問い合わせはこちら</Link>
-                    <Link href={"/profile"}>-筆者について</Link>
+                    <Link href={"/profile"}>-管理人とこのサイトについて</Link>
                     <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
                 </nav>
             </div>

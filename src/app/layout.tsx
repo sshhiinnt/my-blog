@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Noto_Sans_Display } from "next/font/google"
 import { RocknRoll_One } from "next/font/google"
 import "./globals.css";
@@ -21,10 +20,14 @@ const RocknRollOne = RocknRoll_One({
 
 
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "山で遊ばせてもらっております",
   description: "このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。",
-  applicationName: "YAMAORI"
+  applicationName: "YAMAORI",
+  icons:{
+    icon:"/favicon.ico",
+    apple:"/apple-touch-icon.png",
+  }
 };
 
 export default function RootLayout({
@@ -33,16 +36,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
-        <body>
-          <Providers>
-            <Header />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </Providers>
-        </body>
-      </html>
+    <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+      <body>
+        <Providers>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </Providers>
+      </body>
+    </html>
   );
 }

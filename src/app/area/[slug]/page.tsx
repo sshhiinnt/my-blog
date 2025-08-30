@@ -5,6 +5,7 @@ import Post from "models/post";
 import { ObjectId } from "mongoose";
 import { FilterQuery } from "mongoose";
 import { WebPageSchema } from "components/structuredData";
+import { createServerParamsForMetadata } from "next/dist/server/request/params";
 
 
 
@@ -26,10 +27,10 @@ type Post = {
 };
 
 type Props = {
-    params: {
+    params: Promise<{
         slug: string,
         page?: string,
-    },
+    }>,
 };
 
 const areaMap: Record<string, string> = {
@@ -47,14 +48,16 @@ const areaMap: Record<string, string> = {
 }
 
 export default async function AreaPage({ params }: Props) {
-    const slug = params.slug;
+    const { slug: slugStr, page } = await params;
+
+    const slug = slugStr;
     const area = areaMap[slug];
 
     if (!area) {
         return <p>存在しない地域です</p>
     }
 
-    const currentPage = Number(params.page) || 1;
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
 
 

@@ -21,12 +21,12 @@ type Post = {
     thumbnail: string;
     category: string;
     climbDate: string | null;
-    area: string,
+    area: string;
 };
 
 type Props = {
     slug: string;
-}
+};
 
 export default function EditPostPage ({ slug }: Props) {
     const { data: session, status } = useSession();

@@ -37,20 +37,21 @@ export default function ArticleList({ posts, currentPage, totalPage }: Props) {
             <h2 className="font-bold text-3xl text-center my-4">記事一覧</h2>
             <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="flex bg-accentry rounded-3xl w-[750px] my-4">
+                    <li key={post._id} className="flex bg-accentry rounded-3xl w-[750px] mx-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <Image src={post.thumbnailUrl}
-                                    alt={post.title}
-                                    width={144}
-                                    height={96}
-                                    className="object-cover rounded m-4"
-                                />
+                                <div className="w-[144px] h-[96px] m-4 relative">
+                                    <Image src={post.thumbnailUrl}
+                                        alt={post.title}
+                                        fill
+                                        className="object-cover rounded"
+                                    />
+                                </div>
                             )}
                         </div>
                         <div className="flex-wrap p-4">
                             <div className="flex-wrap gap-4">
-                                <p className="text-sm text-gray-500 hover:opacity-70">カテゴリー:<Link href={`/categories/${post.category.slug}`}>{post.category.name}</Link></p>
+                                <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.slug}`}>{post.category.name}</Link></p>
                                 <div className="flex">
                                     <p className="text-sm text-gray-500 mr-4">投稿日:{new Date(post.createdAt).toLocaleString()}</p>
                                     <p className="text-sm text-gray-500">更新日:{new Date(post.updatedAt).toLocaleString()}</p>

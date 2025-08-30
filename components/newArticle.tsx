@@ -73,7 +73,7 @@ const NewArticle = async ({ }: Props) => {
                         </div>
                         <div className="flex-wrap p-4">
                             <div className="flex-wrap gap-4">
-                                <p className="text-sm text-gray-500 hover:opacity-70">カテゴリー:<Link href={`/categories/${post.category.slug}`}>{post.category.name}</Link></p>
+                                <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.slug}`}>{post.category.name}</Link></p>
                                 <div className="flex">
                                     <p className="text-sm text-gray-500 mr-4 hidden md:block">投稿日:{new Date(post.createdAt).toLocaleString()}</p>
                                     <p className="text-sm text-gray-500 hidden md:block">更新日:{new Date(post.updatedAt).toLocaleString()}</p>

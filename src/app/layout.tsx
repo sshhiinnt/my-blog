@@ -24,9 +24,9 @@ export const metadata = {
   title: "山で遊ばせてもらっております",
   description: "このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。",
   applicationName: "YAMAORI",
-  icons:{
-    icon:"/favicon.ico",
-    apple:"/apple-touch-icon.png",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   }
 };
 
@@ -36,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
-      <body>
+    <html lang="ja" className={`dark ${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <Providers>
           <Header />
           <main>

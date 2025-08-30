@@ -83,9 +83,10 @@ export async function POST(req: NextRequest) {
 
 
         return NextResponse.json({ success: true, data: post }, { status: 201 });
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
         console.error("バリデーションまたはDBエラー", error);
-        return NextResponse.json({ error: error.message || "不明なエラー" }, { status: 500 });
+        return NextResponse.json({ error: message || "不明なエラー" }, { status: 500 });
     }
 }
 

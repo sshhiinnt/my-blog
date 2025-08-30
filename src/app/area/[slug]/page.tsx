@@ -5,7 +5,6 @@ import Post from "models/post";
 import { ObjectId } from "mongoose";
 import { FilterQuery } from "mongoose";
 import { WebPageSchema } from "components/structuredData";
-import { createServerParamsForMetadata } from "next/dist/server/request/params";
 
 
 

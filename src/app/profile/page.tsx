@@ -18,7 +18,7 @@ export default function Prof() {
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
-                <main className="bg-accentry max-w-4xl w-full rounded-3xl my-4 sm:mx-4">
+                <main className="bg-accentry max-w-4xl w-full rounded-3xl my-4 mx-4">
                     <h2 className="font-bold text-3xl text-center py-4">Profile</h2>
                     <div className=" flex flex-col items-center">
                         <Image

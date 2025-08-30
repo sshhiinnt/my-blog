@@ -6,7 +6,7 @@ import Link from "next/link";
 const Footer = () => {
     return (
         <footer className="bg-brand text-white">
-            <div className=" flex sm:gap-4 md:justify-between mx-auto container">
+            <div className=" flex mx-4 justify-between md:mx-auto container">
                 <div className="self-center hidden md:block">
                     <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>
                     <div className="font-Rockn font-bold">山で遊ばせてもらっております</div>

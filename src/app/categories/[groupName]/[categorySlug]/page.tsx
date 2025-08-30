@@ -97,7 +97,7 @@ export async function generateStaticParams() {
     const categories = await Category.find().lean();
 
     return categories.map(cat => ({
-        groupName: encodeURIComponent(cat.group),
-        categorySlug: encodeURIComponent(cat.slug),
+        groupName: cat.group,
+        categorySlug: cat.slug,
     }));
 }

@@ -120,7 +120,7 @@ export async function generateStaticParams() {
     const uniqueGroups = Array.from(new Set(categories.map(cat => cat.group)));
 
     return uniqueGroups.map(groupName => ({
-        groupName: encodeURIComponent(groupName),
+        groupName: groupName,
     }));
 
 

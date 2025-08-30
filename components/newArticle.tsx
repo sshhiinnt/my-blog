@@ -25,7 +25,7 @@ type Props = {
 };
 
 
-const NewArticle = async ({ page = 1 }: Props) => {
+const NewArticle = async ({ }: Props) => {
     let posts: Post[] = [];
 
     try {

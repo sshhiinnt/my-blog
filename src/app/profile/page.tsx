@@ -26,11 +26,7 @@ export default function Prof() {
                             width={2108} height={2107}
                             alt="YAMAORI筆者のプロフィール写真"
                             className="size-96 rounded-3xl" />
-                        <Image
-                            src="/images/yamaori_logo_origin.png"
-                            width={468} height={259}
-                            alt="山での活動中の写真"
-                            className="rounded-3xl my-4" />
+                        
                         <div className="pt-4 text-center">
                             <p className="text-lg font-bold">元登山用品店店員</p>
                             <p className="text-lg">四季を通して、山歩きやトレイルランニング、クライミング、沢登り等を楽しんでいます。</p>

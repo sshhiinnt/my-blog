@@ -13,7 +13,7 @@ import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 if (!MONGODB_URI) {
-    throw Error("MONGO_URI is not found");
+    throw Error("MONGODB_URI is not found");
 }
 if (!global.mongoose) {
     global.mongoose = { conn: null, promise: null };

@@ -11,15 +11,14 @@ import Image from "next/image";
 
 
 interface Props {
-    params: Promise<{ groupName: string, categorySlug: string }>,
+    params: { groupName: string, categorySlug: string },
 }
 
 
 export default async function categorySlugPage({ params }: Props) {
-    const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
 
-    const groupName = decodeURIComponent(groupNameStr);
-    const categorySlug = decodeURIComponent(categorySlugStr);
+    const groupName = decodeURIComponent(params.groupName);
+    const categorySlug = decodeURIComponent(params.categorySlug);
 
     await connect();
 

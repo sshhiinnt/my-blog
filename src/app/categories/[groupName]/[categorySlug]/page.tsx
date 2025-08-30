@@ -42,7 +42,7 @@ export default async function categorySlugPage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/categories/${groupName}/${categorySlug}`}
+                url={`https://yamaori.jp/categories/${groupNameStr}/${categorySlugStr}`}
                 name={`YAMAORIブログの${category.name}カテゴリ記事一覧`}
                 description={`YAMAORIブログの${category.name}に属する記事一覧ページです`}
                 lastReviewed="2025-08-27T11:00:00Z"
@@ -96,7 +96,7 @@ export async function generateStaticParams() {
 
     const categories = await Category.find().lean();
 
-    return categories.map((cat) => ({
+    return categories.map(cat => ({
         groupName: encodeURIComponent(cat.group),
         categorySlug: encodeURIComponent(cat.slug),
     }));

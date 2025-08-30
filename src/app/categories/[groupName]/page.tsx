@@ -63,7 +63,7 @@ export default async function CategoryPage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/categories/${groupName}`}
+                url={`https://yamaori.jp/categories/${groupNameStr}`}
                 name={`YAMAORIブログの${groupName}カテゴリ記事一覧`}
                 description={`YAMAORIブログの${groupName}に属する記事一覧ページです`}
                 lastReviewed="2025-08-27T11:00:00Z"

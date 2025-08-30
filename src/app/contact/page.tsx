@@ -54,7 +54,7 @@ export default function Contact() {
                 <title>お問い合わせ | YAMAORI</title>
                 <meta
                     name="description"
-                    content="YAMAORI管理人へのお問い合わせページです。記事のご不明点やご依頼がある場合はこちらのページを利用してください"
+                    content="サイト管理者へのお問い合わせページです。記事のご不明点やご依頼がある場合はこちらのページを利用してください"
                 />
             </Head>
             <ContactPageSchema

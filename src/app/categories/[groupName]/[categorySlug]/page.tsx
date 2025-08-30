@@ -10,17 +10,16 @@ import { WebPageSchema } from "components/structuredData";
 import Image from "next/image";
 
 
-interface Props {
+interface PageProps {
     params: { groupName: string, categorySlug: string },
 }
 
 
-export default async function categorySlugPage({ params }: Props) {
-
-    const groupName = decodeURIComponent(params.groupName);
-    const categorySlug = decodeURIComponent(params.categorySlug);
+export default async function categorySlugPage({ params }: PageProps) {
+    const { groupName, categorySlug } = params;
 
     await connect();
+
 
 
     const category = await Category.findOne({ group: groupName, slug: categorySlug })

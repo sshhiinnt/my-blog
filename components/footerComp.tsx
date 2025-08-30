@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="bg-brand text-white">
             <div className=" flex justify-between mx-auto container">
-                <div className="self-center">
+                <div className="self-center hidden md:block">
                     <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>
                     <div className="font-Rockn font-bold">山で遊ばせてもらっております</div>
                 </div>
@@ -27,7 +27,7 @@ const Footer = () => {
                     <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
                 </nav>
             </div>
-            <p className="text-center py-4">©　2025　山で遊んでおります　YAMAORI</p>
+            <p className="text-center py-4">©　2025　YAMAORI　山で遊ばせてもらっております</p>
         </footer>
 
     )

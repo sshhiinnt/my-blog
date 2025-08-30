@@ -18,8 +18,10 @@ interface Props {
 export default async function categorySlugPage({ params }: Props) {
     const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
 
+    console.log(`大カテゴリ${groupNameStr},小カテゴリ${categorySlugStr}`);
     const groupName = decodeURIComponent(groupNameStr);
     const categorySlug = decodeURIComponent(categorySlugStr);
+
 
     await connect();
 

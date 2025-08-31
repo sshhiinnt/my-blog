@@ -4,6 +4,8 @@ import Post from "models/post";
 import ArticleList from "components/articleList";
 import Aside from "components/aside";
 import { ObjectId } from "mongoose";
+import { WebPageSchema } from "components/structuredData";
+
 
 type Post = {
     _id: string;
@@ -28,6 +30,7 @@ type Props = {
 
 
 export default async function ArticlePage({ params }: Props) {
+
     const { page } = await params;
     const currentPage = Number(page) || 1;
     const pageSize = 8;
@@ -55,22 +58,31 @@ export default async function ArticlePage({ params }: Props) {
         },
         createdAt: (post.createdAt as Date).toISOString(),
         updatedAt: (post.updatedAt as Date).toISOString(),
-        climbDate: post.climbDate ? (post.climbDate as Date).toLocaleString() : null,
+        climbDate: post.climbDate ? (post.climbDate as Date).toISOString() : null,
         area: post.area || "",
     }));
 
     const totalPage = Math.ceil(totalPosts / pageSize)
     return (
-        <div className="flex justify-center bg-secondary">
-            <main className="max-w-4xl w-full">
-                <article>
-                    <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} />
-                </article>
-            </main>
-            <aside>
-                <Aside />
-            </aside>
-        </div>
+        <>
+            <WebPageSchema
+                url={`https://yamaori.jp/article/page${page}`}
+                name="YAMAORIブログの記事一覧ページ"
+                description="YAMAORIブログの全カテゴリーの記事一覧ページです"
+                lastReviewed="2025-08-27T11:00:00Z"
+                authorName="都市慎太郎"
+            />
+            <div className="flex justify-center bg-secondary">
+                <main className="max-w-4xl w-full">
+                    <article>
+                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} />
+                    </article>
+                </main>
+                <aside>
+                    <Aside />
+                </aside>
+            </div>
+        </>
     )
 
 }

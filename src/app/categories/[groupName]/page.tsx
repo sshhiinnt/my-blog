@@ -31,7 +31,7 @@ type Props = {
     }>,
 };
 export default async function CategoryPage({ params }: Props) {
-    const { groupName: groupNameStr} = await params;
+    const { groupName: groupNameStr } = await params;
 
     const groupName = decodeURIComponent(groupNameStr);
     const currentPage = 1;
@@ -104,7 +104,7 @@ export async function generateStaticParams() {
     const uniqueGroups = Array.from(new Set(categories.map(cat => cat.group)));
 
     return uniqueGroups.map((groupName) => ({
-        groupName: encodeURIComponent(groupName),
+        groupName: groupName,
     }));
 }
 

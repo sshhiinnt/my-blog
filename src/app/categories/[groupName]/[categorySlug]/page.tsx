@@ -84,6 +84,7 @@ export default async function CategoryPage({ params }: Props) {
     }));
 
 
+
     const totalPage = Math.ceil(totalPosts / pageSize);
 
     return (

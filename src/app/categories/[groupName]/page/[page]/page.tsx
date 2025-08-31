@@ -112,7 +112,7 @@ export async function generateStaticParams() {
 
         for (let page = 2; page <= totalPage; page++) {
             params.push({
-                groupName: encodeURIComponent(groupName),
+                groupName: groupName,
                 page: String(page),
             });
         }

@@ -45,7 +45,7 @@ export default function Policy() {
                     <div>
                         <h3 className="text-xl font-bold m-1">運営者情報</h3>
                         <p>運営者：YAMAORI管理人</p>
-                        <p>お問い合わせ:<a href="http://yamaori.jp/contact" className="text-blue-700 hover:opacity-70">http://localhost:3000/contact</a></p>
+                        <p>お問い合わせ:<a href="https://yamaori.jp/contact" className="text-blue-700 hover:opacity-70">https://yamaori.jp/contact</a></p>
                     </div>
                 </main>
                 <Aside />

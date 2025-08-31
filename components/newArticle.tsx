@@ -58,7 +58,7 @@ const NewArticle = async ({ }: Props) => {
             <h2 className="font-bold text-3xl text-center my-4">新着記事</h2>
             <ul className="flex flex-col items-center">
                 {posts.map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl max-w-lg w-full md:w-[750px] mx-4 my-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl w-full md:w-[750px] mx-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
                                 <div className="w-[400px] h-[225px] mx-auto mt-4 md:m-4 relative">

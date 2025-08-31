@@ -42,10 +42,10 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
         <main className="bg-secondary max-w-4xl w-full">
             <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="flex bg-accentry rounded-3xl max-w-[750px] md:w-[750px] mx-4 my-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl max-w-lg w-full md:w-[750px] mx-4 my-4 px-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <div className="w-[144px] h-[96px] m-4 relative">
+                                <div className="w-[400px] h-[225px] mx-auto mt-4 md:m-4 relative">
                                     <Image src={post.thumbnailUrl}
                                         alt={post.title}
                                         fill

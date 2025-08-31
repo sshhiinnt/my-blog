@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import SnsLinkForFooter from "./snsLinkForFooter";
 
 const Footer = () => {
     return (
@@ -25,6 +26,7 @@ const Footer = () => {
                     <Link href={"/contact"}>-お問い合わせはこちら</Link>
                     <Link href={"/profile"}>-管理者とこのサイトのこと</Link>
                     <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
+                    <SnsLinkForFooter />
                 </nav>
             </div>
             <p className="text-center py-4">©　2025　YAMAORI　山で遊ばせてもらっております</p>

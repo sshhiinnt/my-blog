@@ -5,7 +5,6 @@ import Post from "models/post";
 import { ObjectId } from "mongoose";
 import { WebPageSchema } from "components/structuredData";
 import Category from "models/category";
-import { notFound } from "next/navigation";
 
 
 type Post = {
@@ -28,37 +27,24 @@ type Post = {
 type Props = {
     params: Promise<{
         groupName: string,
-        categorySlug: string,
         basePath: string,
+        page: string,
     }>,
 };
 export default async function CategoryPage({ params }: Props) {
-    const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
-
+    const { groupName: groupNameStr, page } = await params;
     const groupName = decodeURIComponent(groupNameStr);
-    const categorySlug = decodeURIComponent(categorySlugStr);
-    const currentPage = 1;
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
+
 
     await connect();
 
-    const category = (await Category.findOne({ slug: categorySlug }).lean()) as
-        | {
-            name: string;
-            slug: string;
-            group: string;
-        } | null;
-
-        if(!category){
-            return notFound();
-        }
-
-
-    const totalPosts = await Post.countDocuments({ "category.slug": categorySlug });
+    const totalPosts = await Post.countDocuments({ "category.group": groupName });
 
 
     const postsFromDb = await Post.find({
-        "category.slug": categorySlug
+        "category.group": groupName
     })
         .sort({ createdAt: -1 })
         .skip((currentPage - 1) * pageSize)
@@ -89,17 +75,17 @@ export default async function CategoryPage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/categories/${groupName}/${categorySlug}`}
-                name={`YAMAORIブログの${category.name}カテゴリ記事一覧`}
-                description={`YAMAORIブログの${category.name}に属する記事一覧ページです`}
+                url={`https://yamaori.jp/categories/${groupName}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
+                name={`YAMAORIブログの${groupName}カテゴリ記事一覧`}
+                description={`YAMAORIブログの${groupName}に属する記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <h2 className="text-2xl font-bold text-center mt-4">{category.name}</h2>
-                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/categories/${groupName}/${categorySlug}`} />
+                        <h2 className="text-2xl font-bold text-center mt-4">{groupName}</h2>
+                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/categories/${groupName}`} />
                     </article>
                 </main>
                 <aside>
@@ -115,12 +101,23 @@ export default async function CategoryPage({ params }: Props) {
 export async function generateStaticParams() {
     await connect();
     const categories = await Category.find().lean();
+    const uniqueGroups = Array.from(new Set(categories.map(cat => cat.group)));
 
-    return categories.map((cat) => ({
-        groupName: encodeURIComponent(cat.group),
-        categorySlug: encodeURIComponent(cat.slug),
-        basePath: `/categories/${cat.group}/${cat.slug}`,
-    }));
+    const params: { groupName: string, page?: string }[] = [];
+
+    for (const groupName of uniqueGroups) {
+        const totalPosts = await Post.countDocuments({ "category.group": groupName });
+        const pageSize = 8;
+        const totalPage = Math.ceil(totalPosts / pageSize);
+
+        for (let page = 2; page <= totalPage; page++) {
+            params.push({
+                groupName: encodeURIComponent(groupName),
+                page: String(page),
+            });
+        }
+    }
+    return params;
 }
 
 

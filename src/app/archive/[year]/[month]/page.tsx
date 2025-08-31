@@ -27,15 +27,15 @@ type Props = {
     params: Promise<{
         year: string,
         month: string,
-        page?: string,
+        basePath: string,
     }>,
 };
 export default async function ArchivePage({ params }: Props) {
-    const { year: yearStr, month: monthStr, page } = await params;
+    const { year: yearStr, month: monthStr } = await params;
 
     const year = Number(yearStr);
     const month = Number(monthStr);
-    const currentPage = Number(page) || 1;
+    const currentPage = 1;
     const pageSize = 8;
 
     await connect();
@@ -90,7 +90,7 @@ export default async function ArchivePage({ params }: Props) {
                 <main className="max-w-4xl w-full">
                     <article>
                         <h2 className="text-2xl font-bold text-center mt-4">{year}年/{month}月</h2>
-                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} />
+                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/archive/${year}/${month}`} />
                     </article>
                 </main>
                 <aside>

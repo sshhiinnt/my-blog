@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function SnsLink() {
+export default function SnsLinkForFooter() {
     return (
-        <div className="bg-white rounded-3xl p-4">
+        <div className="bg-brand p-4 block md:hidden">
             <div className="flex justify-center gap-12">
                 <Link
                     href="https://x.com/YAMAORI0831"
@@ -13,8 +13,8 @@ export default function SnsLink() {
                     <Image
                         src="/icons/x.svg"
                         alt="x（旧Twitter）"
-                        width={36}
-                        height={36}
+                        width={24}
+                        height={24}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>
@@ -26,8 +26,8 @@ export default function SnsLink() {
                     <Image
                         src="/icons/instagram.svg"
                         alt="instagram"
-                        width={36}
-                        height={36}
+                        width={24}
+                        height={24}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>

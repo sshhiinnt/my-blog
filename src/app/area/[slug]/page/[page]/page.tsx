@@ -29,7 +29,8 @@ type Post = {
 type Props = {
     params: Promise<{
         slug: string,
-        basePath:string,
+        page?: string,
+        basePath: string,
     }>,
 };
 
@@ -48,7 +49,7 @@ const areaMap: Record<string, string> = {
 }
 
 export default async function AreaPage({ params }: Props) {
-    const { slug: slugStr } = await params;
+    const { slug: slugStr, page } = await params;
 
     const slug = slugStr;
     const area = areaMap[slug];
@@ -57,7 +58,7 @@ export default async function AreaPage({ params }: Props) {
         return notFound();
     }
 
-    const currentPage = 1;
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
 
 
@@ -106,9 +107,9 @@ export default async function AreaPage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/area/${slug}`}
+                url={`https://yamaori.jp/area/${slug}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
                 name="YAMAORIブログの活動エリア別記事一覧"
-                description={`${area}エリアでのYAMAORIブログの記事一覧です(全${totalPosts}件)。`}
+                description={`${area}エリアでのYAMAORIブログの記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
@@ -127,3 +128,28 @@ export default async function AreaPage({ params }: Props) {
     )
 
 }
+
+export async function generateStaticParams() {
+    await connect();
+
+    const areas = Object.keys(areaMap);
+    const params: { slug: string, page?: string }[] = []
+
+    for (const slug of areas) {
+        const area = areaMap[slug];
+
+        const totalPosts = await Post.countDocuments({ area });
+        const pageSize = 8;
+        const totalPages = Math.ceil(totalPosts / pageSize);
+
+        for (let page = 2; page <= totalPages; page++) {
+            params.push({
+                slug,
+                page: String(page),
+            });
+        }
+    }
+    return params;
+
+}
+

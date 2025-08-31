@@ -24,14 +24,9 @@ type Post = {
     area: string;
 };
 
-type Props = {
-    params: Promise<{ page: string, basePath: string }>,
-};
 
-
-export default async function ArticlePage({ params }: Props) {
-    const { page } = await params;
-    const currentPage = Number(page) || 1;
+export default async function ArticlePage() {
+    const currentPage = 1;
     const pageSize = 8;
 
     await connect();
@@ -65,7 +60,7 @@ export default async function ArticlePage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/article/page/${page}`}
+                url={`https://yamaori.jp/article`}
                 name="YAMAORIブログの記事一覧ページ"
                 description="YAMAORIブログの全カテゴリーの記事一覧ページです"
                 lastReviewed="2025-08-27T11:00:00Z"
@@ -74,7 +69,7 @@ export default async function ArticlePage({ params }: Props) {
             <div className="flex justify-center bg-secondary">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath="/article" />
+                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/article`} />
                     </article>
                 </main>
                 <aside>
@@ -84,17 +79,4 @@ export default async function ArticlePage({ params }: Props) {
         </>
     )
 
-}
-
-export async function generateStaticParams() {
-    await connect();
-    const totalPosts = await Post.countDocuments();
-    const pageSize = 8;
-    const totalPage = Math.ceil(totalPosts / pageSize);
-
-    const params = [];
-    for (let page = 2; page <= totalPage; page++) {
-        params.push({ page: String(page) });
-    }
-    return params;
 }

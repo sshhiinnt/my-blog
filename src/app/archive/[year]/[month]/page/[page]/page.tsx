@@ -4,8 +4,6 @@ import Aside from "components/aside";
 import Post from "models/post";
 import { ObjectId } from "mongoose";
 import { WebPageSchema } from "components/structuredData";
-import Category from "models/category";
-import { notFound } from "next/navigation";
 
 
 type Post = {
@@ -27,44 +25,38 @@ type Post = {
 
 type Props = {
     params: Promise<{
-        groupName: string,
-        categorySlug: string,
+        year: string,
+        month: string,
+        page?: string,
         basePath: string,
     }>,
 };
-export default async function CategoryPage({ params }: Props) {
-    const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
+export default async function ArchivePage({ params }: Props) {
+    const { year: yearStr, month: monthStr, page } = await params;
 
-    const groupName = decodeURIComponent(groupNameStr);
-    const categorySlug = decodeURIComponent(categorySlugStr);
-    const currentPage = 1;
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const currentPage = Number(page) || 1;
     const pageSize = 8;
 
     await connect();
 
-    const category = (await Category.findOne({ slug: categorySlug }).lean()) as
-        | {
-            name: string;
-            slug: string;
-            group: string;
-        } | null;
+    const startDate = new Date(Date.UTC(year, month - 1, 1));
+    const endDate = new Date(Date.UTC(year, month, 1));
 
-        if(!category){
-            return notFound();
-        }
+    const filter = {
+        climbDate: { $gte: startDate, $lt: endDate }
+    };
 
+    const totalPosts = await Post.countDocuments(filter);
 
-    const totalPosts = await Post.countDocuments({ "category.slug": categorySlug });
-
-
-    const postsFromDb = await Post.find({
-        "category.slug": categorySlug
-    })
-        .sort({ createdAt: -1 })
+    const postsFromDb = await Post.find(filter)
+        .sort({ climbDate: -1 })
         .skip((currentPage - 1) * pageSize)
         .limit(pageSize)
         .lean();
 
+    console.log("postsFromDb sample:", postsFromDb[0]);
 
     const posts: Post[] = postsFromDb.map((p) => ({
         _id: (p._id as ObjectId).toString(),
@@ -89,17 +81,17 @@ export default async function CategoryPage({ params }: Props) {
     return (
         <>
             <WebPageSchema
-                url={`https://yamaori.jp/categories/${groupName}/${categorySlug}`}
-                name={`YAMAORIブログの${category.name}カテゴリ記事一覧`}
-                description={`YAMAORIブログの${category.name}に属する記事一覧ページです`}
+                url={`https://yamaori.jp/archive/${year}/${String(month).padStart(2, "0")}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
+                name="YAMAORIブログのアーカイブページ"
+                description={`${year}年${month}月に投稿されたYAMAORIブログの記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <h2 className="text-2xl font-bold text-center mt-4">{category.name}</h2>
-                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/categories/${groupName}/${categorySlug}`} />
+                        <h2 className="text-2xl font-bold text-center mt-4">{year}年/{month}月</h2>
+                        <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/archive/${year}/${month}`} />
                     </article>
                 </main>
                 <aside>
@@ -111,16 +103,24 @@ export default async function CategoryPage({ params }: Props) {
 
 }
 
-
 export async function generateStaticParams() {
     await connect();
-    const categories = await Category.find().lean();
 
-    return categories.map((cat) => ({
-        groupName: encodeURIComponent(cat.group),
-        categorySlug: encodeURIComponent(cat.slug),
-        basePath: `/categories/${cat.group}/${cat.slug}`,
-    }));
+    const posts = await Post.find({ climbDate: { $ne: null } }).lean();
+
+    const archiveSet = new Set<string>();
+    posts.forEach((p) => {
+        if (p.climbDate) {
+            const date = new Date(p.climbDate);
+            const year = date.getUTCFullYear();
+            const month = date.getUTCMonth() + 1;
+            archiveSet.add(`${year}-${month}`);
+        }
+    });
+
+    const params = Array.from(archiveSet).map((ym) => {
+        const [year, month] = ym.split("-");
+        return { year, month };
+    });
+    return params;
 }
-
-

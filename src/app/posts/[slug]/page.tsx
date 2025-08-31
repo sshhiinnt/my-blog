@@ -65,18 +65,7 @@ export default async function postPage({ params }: Props) {
             />
             <div className="flex md:flex-row justify-center bg-secondary">
                 <div className="max-w-4xl w-full bg-white">
-                    <div className="text-right text-gray-500">
-                        <p>
-                            投稿日：{new Date(post.createdAt).toLocaleString()}{""}
-                        </p>
-                        <p>
-                            更新日：{new Date(post.updatedAt).toLocaleString()}{""}
-                        </p>
-                        <p>
-                            {category && `カテゴリー：${category.name}`}
-                        </p>
-                    </div>
-                    <h1 className="text-3xl font-bold text-center">{post.title}</h1>
+                    <h1 className="text-3xl font-bold text-center mt-4">{post.title}</h1>
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
                         <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]}
                             components={{
@@ -98,7 +87,17 @@ export default async function postPage({ params }: Props) {
                         >{post.content}</ReactMarkdown>
 
                     </article>
-
+                    <div className="text-right text-gray-500 p-4">
+                        <p>
+                            投稿日：{new Date(post.createdAt).toLocaleString()}{""}
+                        </p>
+                        <p>
+                            更新日：{new Date(post.updatedAt).toLocaleString()}{""}
+                        </p>
+                        <p>
+                            {category && `カテゴリー：${category.name}`}
+                        </p>
+                    </div>
 
                 </div>
                 <Aside />

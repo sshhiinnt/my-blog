@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SnsLink from "./snsLink";
 
 
 type Category = {
@@ -114,6 +115,9 @@ const Aside = () => {
                 <p className="font-bold text-2xl text-center mb-1">YAMAORI管理人</p>
                 <p>山歩き、トレイルランニング、クライミングと、とにかく山遊びが大好きです。</p>
                 <p>このサイトでは山遊びの記録を日記的に発信します。</p>
+            </div>
+            <div>
+                <SnsLink />
             </div>
         </aside >
     )

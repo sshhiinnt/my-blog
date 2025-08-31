@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ProfilePageSchema } from "components/structuredData";
 
 export const metadata = {
-    title: "筆者について",
+    title: "プロフィール",
     description: "YAMAORI管理人のプロフィールです"
 };
 

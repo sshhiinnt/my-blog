@@ -10,7 +10,7 @@ export default function Policy() {
     return (
         <>
             <WebPageSchema
-                url="https://yamaori.com/site-policy"
+                url="https://yamaori.jp/site-policy"
                 name="サイトポリシー"
                 description="YAMAORIのサイトポリシー（免責事項・プライバシーポリシー等）"
                 lastReviewed="2025-08-19T09:00:00.000Z"
@@ -31,7 +31,8 @@ export default function Policy() {
                     </div>
                     <div className="my-4">
                         <h3 className="text-xl font-bold m-1">アフィリエイト広告について</h3>
-                        <p>当サイトでは、アフィリエイト広告を利用しております。<br />
+                        <p></p>
+                        <p>当サイトでは、アフィリエイト広告（Amazonアソシエイト含む）を利用しております。<br />
                             記事内のリンクから商品を購入された場合、当サイトに報酬が発生することがあります。<br />
                             ただし、当サイトが紹介している商品・サービスは、できる限り信頼性の高いものを選んでおります。</p>
                     </div>

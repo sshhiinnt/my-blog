@@ -4,6 +4,7 @@ import Aside from "components/aside";
 import { useState } from "react";
 import { ContactPageSchema } from "components/structuredData";
 import Head from "next/head";
+import ReCAPTCHAForm from "components/recaptcha";
 
 
 
@@ -13,6 +14,7 @@ export default function Contact() {
         email: "",
         message: "",
     });
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
 
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -28,7 +30,7 @@ export default function Contact() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({ ...formData, token: recaptchaToken }),
             });
 
             if (res.ok) {
@@ -38,6 +40,7 @@ export default function Contact() {
                     email: "",
                     message: "",
                 });
+                setRecaptchaToken(null);
             } else {
                 setStatus("error");
             }
@@ -97,6 +100,10 @@ export default function Contact() {
                             rows={5}
                             className="p-1 w-full h-40 md:h-60 lg:h-80"
                         />
+
+                        <ReCAPTCHAForm onVerify={setRecaptchaToken} />
+
+
                         <button
                             type="submit"
                             disabled={status === "loading"}

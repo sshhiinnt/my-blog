@@ -7,9 +7,20 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
     try {
-        const { name, email, message } = await req.json();
+        const { name, email, message, token } = await req.json();
 
         // reCAPTCHA検証
+        const secret = process.env.RECAPTCHA_SECRET_KEY!;
+        const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(token)}`,
+        });
+        const recapthaData = await res.json();
+        if (!recapthaData.success) {
+            return NextResponse.json({ error: "reCAPTCHA failed" }, { status: 400 });
+        }
+
 
         await connect();
         await Message.create({ name, email, message, createdAt: new Date() });

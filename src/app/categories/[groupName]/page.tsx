@@ -79,7 +79,7 @@ export default async function CategoryPage({ params }: Props) {
                                     <li>「{category.name}」カテゴリーに記事はまだありません（近日投稿予定）</li>
                                 ) : (
                                     groupedPosts[category.name].map(post => (
-                                        <li key={post._id} className="flex bg-accentry rounded-3xl my-4">
+                                        <li key={post._id} className="flex bg-accentry rounded-3xl my-4 mx-4">
                                             <div>
                                                 {post.thumbnailUrl && (
                                                     <Image
@@ -92,7 +92,7 @@ export default async function CategoryPage({ params }: Props) {
                                                 )}
                                             </div>
                                             <div className="flex-wrap p-4">
-                                                <p className="text-sm text-gray-500">カテゴリー:<Link href={`/categories/${post.category.name}`}>{post.category.name}</Link></p>
+                                                <p className="text-sm text-gray-500">・<Link href={`/categories/${post.category.name}`}>{post.category.name}</Link></p>
                                                 <span className="text-sm text-gray-500">投稿:{new Date(post.createdAt).toLocaleString()}</span>
                                                 <h3 className="text-lg font-bold"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
                                                 <div>

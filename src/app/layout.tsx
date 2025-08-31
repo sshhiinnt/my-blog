@@ -6,6 +6,7 @@ import Footer from "components/footerComp";
 import { Providers } from "./provider";
 
 
+
 const notoSansDisplay = Noto_Sans_Display({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -36,16 +37,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`dark ${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
-      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        <Providers>
-          <Header />
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+    
+      <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+        <body className="dark:text-black">
+          <Providers>
+            <Header />
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </Providers>
+        </body>
+      </html>
   );
 }

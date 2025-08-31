@@ -61,7 +61,7 @@ const NewArticle = async ({ }: Props) => {
                     <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl w-full md:w-[750px] mx-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <div className="w-[400px] h-[225px] mx-auto mt-4 md:m-4 relative">
+                                <div className="w-[360px] h-[202px] mx-auto mt-4 md:m-4 relative">
                                     <Image
                                         src={post.thumbnailUrl}
                                         alt={post.title}

@@ -37,7 +37,7 @@ export default function ArticleList({ posts, currentPage, totalPage }: Props) {
             <h2 className="font-bold text-3xl text-center my-4">記事一覧</h2>
             <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="flex bg-accentry rounded-3xl max-w-[750px] mx-4 my-4">
+                    <li key={post._id} className="flex bg-accentry rounded-3xl max-w-[750px] md:w-[750px] mx-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
                                 <div className="w-[144px] h-[96px] m-4 relative">

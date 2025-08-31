@@ -13,8 +13,8 @@ export default function SnsLink() {
                     <Image
                         src="/icons/x.svg"
                         alt="x（旧Twitter）"
-                        width={36}
-                        height={36}
+                        width={24}
+                        height={24}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>
@@ -26,8 +26,8 @@ export default function SnsLink() {
                     <Image
                         src="/icons/instagram.svg"
                         alt="instagram"
-                        width={36}
-                        height={36}
+                        width={24}
+                        height={24}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>

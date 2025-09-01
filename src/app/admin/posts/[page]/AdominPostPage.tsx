@@ -107,7 +107,11 @@ export default function AdminPostPage({ page }: Props) {
                                 <div className="flex justify-between items-center">
                                     <div className="flex flex-col">
                                         <Link href={`/admin/post-edit/${post.slug}/edit`}>{post.title}</Link>
-                                        <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                                        <div className="flex gap-4">
+                                            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+                                            <span>登った日:{(post.climbDate)?.split("T")[0]}</span>
+                                            <span>カテゴリー：{post.category.name}</span>
+                                        </div>
                                     </div>
                                     <button
                                         onClick={() => handleDelete(post.slug)}

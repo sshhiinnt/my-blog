@@ -2,4 +2,4 @@ User-agent:*
 Disallow:/admin/
 Disallow:/api/
 Allow:/
-Sitemap:https://yamaori.jp/api/sitemap
+Sitemap:https://yamaori.jp/sitemap.xml

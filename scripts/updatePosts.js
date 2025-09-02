@@ -21,10 +21,10 @@ async function loadCSV() {
                 console.log("DEBUG row keys:", Object.keys(row));
                 const name = row["商品名"].trim();
                 products[name] = {
-                    amazon: row["Amazon"].trim(),
-                    rakuten: row["Rakuten"].trim(),
-                    yahoo: row["Yahoo"].trim(),
-                    imageUrl: row["画像URL"].trim(),
+                    amazon: row["Amazon"]?.trim() || null,
+                    rakuten: row["Rakuten"]?.trim() || null,
+                    yahoo: row["Yahoo"]?.trim() || null,
+                    imageUrl: row["画像URL"]?.trim() || null,
                 };
             })
             .on("end", () => {
@@ -45,7 +45,7 @@ async function updateMarkdown() {
     for (const article of articles) {
         const productInPost = [];
 
-        const updateContent = article.content.replace(/TODO:([^\n]+)/g, (match, productName) => {
+        const updateContent = article.content.replace(/TODO:\s*([^\n]+)/g, (match, productName) => {
             const name = productName.trim();
             const product = products[name];
             if (!product) return match;

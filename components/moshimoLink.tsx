@@ -24,21 +24,27 @@ export default function MoshimoLink({ product }: Props) {
                     src={data.imageUrl}
                     alt={product}
                     width={288}
-                    height={0}
+                    height={288}
                     style={{ height: "auto" }}
                     className="object-cover rounded-lg"
                 />
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col mx-auto gap-4">
-                        <a href={data.amazon} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-yellow-400 rounded-lg">
-                            Amazon
-                        </a>
-                        <a href={data.rakuten} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-red-500 text-white rounded-lg">
-                            楽天
-                        </a>
-                        <a href={data.yahoo} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-purple-600 text-white rounded-lg">
-                            Yahoo
-                        </a>
+                        {data.amazon && (
+                            <a href={data.amazon} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-yellow-400 rounded-lg">
+                                Amazon
+                            </a>
+                        )}
+                        {data.rakuten && (
+                            <a href={data.rakuten} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-red-500 text-white rounded-lg">
+                                楽天
+                            </a>
+                        )}
+                        {data.yahoo && (
+                            <a href={data.yahoo} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-purple-600 text-white rounded-lg">
+                                Yahoo
+                            </a>
+                        )}
                         <p className="text-sm mt-4">こちらのリンクからご購入いただけます<br />（アフィリエイトリンク）</p>
                     </div>
                 </div>

@@ -31,6 +31,43 @@ type Props = {
         basePath: string,
     }>,
 };
+
+export async function generateMetadata({ params }: Props) {
+    const { year: yearStr, month: monthStr, page } = await params;
+
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+    const currentPage = Number(page) || 1;
+    const pageSize = 8;
+
+
+    await connect();
+
+    const startDate = new Date(Date.UTC(year, month - 1, 1));
+    const endDate = new Date(Date.UTC(year, month, 1));
+
+    const filter = {
+        climbDate: { $gte: startDate, $lt: endDate }
+    };
+
+    const totalPosts = await Post.countDocuments(filter);
+    const totalPage = Math.ceil(totalPosts / pageSize);
+
+
+
+
+    return {
+        title: `${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧 | YAMAORI`,
+        description: `${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)`,
+        alternates: {
+            canonical: `https://yamaori.jp/archive/${year}/${String(month).padStart(2, "0")}${currentPage > 1 ? `/page/${currentPage}` : ""}`,
+        },
+    };
+}
+
+
+
+
 export default async function ArchivePage({ params }: Props) {
     const { year: yearStr, month: monthStr, page } = await params;
 
@@ -82,7 +119,7 @@ export default async function ArchivePage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/archive/${year}/${String(month).padStart(2, "0")}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
-                name="YAMAORIブログのアーカイブページ"
+                name={`${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧 | YAMAORI`}
                 description={`${year}年${month}月に投稿されたYAMAORIブログの記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"

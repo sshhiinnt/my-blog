@@ -30,6 +30,38 @@ type Props = {
         basePath: string,
     }>,
 };
+
+export async function generateMetadata({ params }: Props) {
+    const { year: yearStr, month: monthStr } = await params;
+
+    const year = Number(yearStr);
+    const month = Number(monthStr);
+
+    await connect();
+
+    const startDate = new Date(Date.UTC(year, month - 1, 1));
+    const endDate = new Date(Date.UTC(year, month, 1));
+
+    const filter = {
+        climbDate: { $gte: startDate, $lt: endDate }
+    };
+
+    const totalPosts = await Post.countDocuments(filter);
+
+
+
+    return {
+        title: `${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧 | YAMAORI`,
+        description: `${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧です(全${totalPosts}件)。`,
+        alternates: {
+            canonical: `https://yamaori.jp/archive/${year}/${String(month).padStart(2, "0")}`,
+        },
+    };
+}
+
+
+
+
 export default async function ArchivePage({ params }: Props) {
     const { year: yearStr, month: monthStr } = await params;
 
@@ -81,15 +113,15 @@ export default async function ArchivePage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/archive/${year}/${String(month).padStart(2, "0")}`}
-                name="YAMAORIブログのアーカイブページ"
-                description={`${year}年${month}月に投稿されたYAMAORIブログの記事一覧です(全${totalPosts}件)。`}
+                name={`${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧 | YAMAORI`}
+                description={`${year}年${month}月に投稿された登山・トレイルランニング・クライミングなどの記事一覧です(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <h2 className="text-2xl font-bold text-center mt-4">{year}年/{month}月</h2>
+                        <h1 className="text-2xl font-bold text-center mt-4">{year}年/{month}月の登山・山行の記事一覧</h1>
                         <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/archive/${year}/${month}`} />
                     </article>
                 </main>

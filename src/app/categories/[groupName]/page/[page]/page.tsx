@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: Props) {
 
 
     return {
-        title: `YAMAORIブログの${groupName}カテゴリ記事一覧`,
-        description: `YAMAORIブログの${groupName}に属する記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`,
+        title: `${groupName}カテゴリの登山・山行・登山用品についての記事一覧 | YAMAORI`,
+        description: `YAMAORIブログの${groupName}に属する、登山・山行・登山用品についての記事一覧 | YAMAORI記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`,
         alternates: {
             canonical: `https://yamaori.jp/categories/${groupName}${currentPage > 1 ? `/page/${currentPage}` : ""}`,
         },
@@ -95,8 +95,8 @@ export default async function CategoryPage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/categories/${groupName}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
-                name={`YAMAORIブログの${groupName}カテゴリ記事一覧`}
-                description={`YAMAORIブログの${groupName}に属する記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`}
+                name={`${groupName}カテゴリの登山・山行・登山用品についての記事一覧 | YAMAORI`}
+                description={`YAMAORIブログの${groupName}に属する、登山・山行・登山用品についての記事一覧 | YAMAORI記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />

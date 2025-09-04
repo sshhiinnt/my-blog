@@ -24,6 +24,16 @@ type Post = {
     area: string;
 };
 
+export async function generateMetadata() {
+    return {
+        title: "登山・山行・登山用品についての記事一覧 | YAMAORI",
+        description: "YAMAORIブログ全カテゴリーの登山・山行・登山用品についての記事一覧ページです",
+        alternates: {
+            canonical: "https://yamaori.jp/article",
+        },
+    };
+}
+
 
 export default async function ArticlePage() {
     const currentPage = 1;
@@ -61,8 +71,8 @@ export default async function ArticlePage() {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/article`}
-                name="YAMAORIブログの記事一覧ページ"
-                description="YAMAORIブログの全カテゴリーの記事一覧ページです"
+                name="登山・山行・登山用品についての記事一覧 | YAMAORI"
+                description="YAMAORIブログ全カテゴリーの登山・山行・登山用品についての記事一覧ページです"
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />

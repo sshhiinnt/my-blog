@@ -48,6 +48,44 @@ const areaMap: Record<string, string> = {
     hokkaido: "北海道",
 }
 
+export async function generateMetadata({ params }: Props) {
+    const { slug: slugStr, page } = await params;
+
+    const slug = slugStr;
+    const area = areaMap[slug];
+
+    if (!area) {
+        return notFound();
+    }
+
+    const currentPage = Number(page) || 1;
+    const pageSize = 8;
+
+
+
+    await connect();
+
+
+    const filter: FilterQuery<Post> = { area };
+
+
+    const totalPosts = await Post.countDocuments(filter);
+
+
+    const totalPage = Math.ceil(totalPosts / pageSize);
+
+
+    return {
+        title: `${area}エリアの活動記事一覧 | YAMAORI`,
+        description: `${area}エリアでの登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`,
+        alternates: {
+            canonical: `https://yamaori.jp/area/${slug}${currentPage > 1 ? `/page/${currentPage}` : ""}`,
+        },
+    };
+}
+
+
+
 export default async function AreaPage({ params }: Props) {
     const { slug: slugStr, page } = await params;
 
@@ -108,8 +146,8 @@ export default async function AreaPage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/area/${slug}${currentPage > 1 ? `/page/${currentPage}` : ""}`}
-                name="YAMAORIブログの活動エリア別記事一覧"
-                description={`${area}エリアでのYAMAORIブログの記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`}
+                name={`${area}エリアの登山・山行・登山用品についての記事一覧 | YAMAORI`}
+                description={`${area}エリアでの登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です。(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />

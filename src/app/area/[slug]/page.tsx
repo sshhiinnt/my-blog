@@ -29,7 +29,7 @@ type Post = {
 type Props = {
     params: Promise<{
         slug: string,
-        basePath:string,
+        basePath: string,
     }>,
 };
 
@@ -46,6 +46,35 @@ const areaMap: Record<string, string> = {
     tohoku: "東北",
     hokkaido: "北海道",
 }
+
+export async function generateMetadata({ params }: Props) {
+    const { slug: slugStr } = await params;
+
+    const slug = slugStr;
+    const area = areaMap[slug];
+
+    if (!area) {
+        return notFound();
+    }
+    await connect();
+
+
+    const filter: FilterQuery<Post> = { area };
+
+
+    const totalPosts = await Post.countDocuments(filter);
+
+
+    return {
+        title: `${area}エリアの登山・山行・登山用品についての記事一覧 | YAMAORI`,
+        description: `${area}エリアでの登山・山行・登山用品についての記事一覧です(全${totalPosts}件)。`,
+        alternates: {
+            canonical: `https://yamaori.jp/area/${slug}`,
+        },
+    };
+}
+
+
 
 export default async function AreaPage({ params }: Props) {
     const { slug: slugStr } = await params;
@@ -107,15 +136,15 @@ export default async function AreaPage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/area/${slug}`}
-                name="YAMAORIブログの活動エリア別記事一覧"
-                description={`${area}エリアでのYAMAORIブログの記事一覧です(全${totalPosts}件)。`}
+                name={`${area}エリアの活動記事一覧 | YAMAORI`}
+                description={`${area}エリアでの登山・トレイルランニング・クライミングなどの記録(全${totalPosts}件)。`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <h2 className="text-2xl font-bold text-center mt-4">{area}の記事</h2>
+                        <h2 className="text-2xl font-bold text-center mt-4">{area}の登山・山行記事</h2>
                         <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/area/${slug}`} />
                     </article>
                 </main>

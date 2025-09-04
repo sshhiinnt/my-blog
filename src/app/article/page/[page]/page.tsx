@@ -29,6 +29,24 @@ type Props = {
 };
 
 
+export async function generateMetadata({ params }: Props) {
+    const { page } = await params;
+    const currentPage = Number(page) || 1;
+    const pageSize = 8;
+
+
+    return {
+        title: "登山・山行・登山用品についての記事一覧 | YAMAORI",
+        description: `YAMAORIブログの登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}ページ目です`,
+        alternates: {
+            canonical: currentPage === 1
+                ? "https://yamaori.jp/article"
+                : `https://yamaori.jp/article/page/${page}`,
+        },
+    };
+}
+
+
 export default async function ArticlePage({ params }: Props) {
     const { page } = await params;
     const currentPage = Number(page) || 1;
@@ -66,8 +84,8 @@ export default async function ArticlePage({ params }: Props) {
         <>
             <WebPageSchema
                 url={`https://yamaori.jp/article/page/${page}`}
-                name="YAMAORIブログの記事一覧ページ"
-                description="YAMAORIブログの全カテゴリーの記事一覧ページです"
+                name="登山・山行・登山用品についての記事一覧 | YAMAORI"
+                description={`YAMAORIブログの登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}ページ目です`}
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />

@@ -29,15 +29,15 @@ export default function MoshimoLink({ product }: Props) {
                     className="object-cover rounded-lg"
                 />
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-col mx-auto gap-4">
+                    <div className="flex flex-col mx-auto gap-4 mt-4">
                         {data.amazon && (
                             <a href={data.amazon} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-yellow-400 rounded-lg">
-                                Amazon
+                                Amazonで見る
                             </a>
                         )}
                         {data.rakuten && (
                             <a href={data.rakuten} target="_blank" className="text-xl font-bold text-center px-3 py-1 bg-red-500 text-white rounded-lg">
-                                楽天
+                                楽天市場で見る
                             </a>
                         )}
                         {data.yahoo && (

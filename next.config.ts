@@ -32,10 +32,19 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: [
-      `${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com`,
-      "img.example",
-    ]
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "m.media-amazon.com",
+        pathname: "/images/**",
+      },
+      {
+        protocol: "https",
+        hostname: `${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com`,
+        pathname: "/**",
+      },
+    ],
+
   },
 };
 

@@ -1,16 +1,25 @@
 'use client'
 
-import rawproducts from "../src/data/moshimoProducts.json";
 import { MoshimoProducts } from "types/moshimo";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const products = rawproducts as unknown as MoshimoProducts;
 
 type Props = {
     product: string;
 };
 
 export default function MoshimoLink({ product }: Props) {
+    const [products, setProducts] = useState<MoshimoProducts | null>(null);
+
+    useEffect(() => {
+        fetch("/data/moshimoProducts.json")
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, []);
+
+    if (!products) return <div>読み込み中…</div>;
+
     const data = products[product];
     if (!data) {
         return <div>商品情報が見つかりません:{product}</div>

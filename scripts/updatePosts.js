@@ -5,8 +5,8 @@ const csv = require("csv-parser");
 const { MongoClient } = require("mongodb");
 
 
-const csvPath = path.join(__dirname, "../src/data/products.csv");
-const joinPath = path.join(__dirname, "../src/data/moshimoProducts.json");
+const csvPath = path.join(__dirname, "/data/products.csv");
+const joinPath = path.join(__dirname, "/data/moshimoProducts.json");
 
 
 const products = {};

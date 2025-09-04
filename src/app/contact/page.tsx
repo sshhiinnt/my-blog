@@ -6,6 +6,16 @@ import { ContactPageSchema } from "components/structuredData";
 import Head from "next/head";
 import ReCAPTCHAForm from "components/recaptcha";
 
+export async function generateMetadata() {
+    return {
+        title: "YAMAORI管理人へのお問い合わせ",
+        description: "YAMAORI管理人へのお問い合わせフォームです",
+        alternates: {
+            canonical: "https://yamori.jp/contact",
+        },
+    };
+}
+
 
 
 export default function Contact() {

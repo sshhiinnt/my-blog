@@ -28,9 +28,28 @@ type Props = {
     params: Promise<{
         groupName: string,
         basePath: string,
-        page: string,
+        page?: string,
     }>,
 };
+
+export async function generateMetadata({ params }: Props) {
+    const { groupName: groupNameStr, page } = await params;
+    const groupName = decodeURIComponent(groupNameStr);
+    const currentPage = Number(page) || 1;
+
+
+    return {
+        title: `YAMAORIブログの${groupName}カテゴリ記事一覧`,
+        description: `YAMAORIブログの${groupName}に属する記事一覧${currentPage > 1 ? `の${currentPage}ページ目` : ""}です`,
+        alternates: {
+            canonical: `https://yamaori.jp/categories/${groupName}${currentPage > 1 ? `/page/${currentPage}` : ""}`,
+        },
+    };
+}
+
+
+
+
 export default async function CategoryPage({ params }: Props) {
     const { groupName: groupNameStr, page } = await params;
     const groupName = decodeURIComponent(groupNameStr);

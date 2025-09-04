@@ -32,6 +32,35 @@ type Props = {
         basePath: string,
     }>,
 };
+
+export async function generateMetadata({ params }: Props) {
+    const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
+    const groupName = decodeURIComponent(groupNameStr);
+    const categorySlug = decodeURIComponent(categorySlugStr);
+    
+    const category = (await Category.findOne({ slug: categorySlug }).lean()) as
+        | {
+            name: string;
+            slug: string;
+            group: string;
+        } | null;
+
+    if (!category) {
+        return notFound();
+    }
+
+
+
+    return {
+        title: `YAMAORIブログの${category.name}カテゴリ記事一覧`,
+        description: `YAMAORIブログの${category.name}に属する記事一覧ページです`,
+        alternates: {
+            canonical: `https://yamaori.jp/categories/${groupName}/${categorySlug}`,
+        },
+    };
+}
+
+
 export default async function CategoryPage({ params }: Props) {
     const { groupName: groupNameStr, categorySlug: categorySlugStr } = await params;
 
@@ -49,9 +78,9 @@ export default async function CategoryPage({ params }: Props) {
             group: string;
         } | null;
 
-        if(!category){
-            return notFound();
-        }
+    if (!category) {
+        return notFound();
+    }
 
 
     const totalPosts = await Post.countDocuments({ "category.slug": categorySlug });

@@ -5,10 +5,16 @@ import Aside from "components/aside";
 import { WebPageSchema } from "components/structuredData";
 
 
-export const metadata = {
-    title: "山で遊ばせてもらっております",
-    description: "このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。"
+export async function generateMetadata() {
+    return {
+        title: "YAMAORI-山で遊ばせてもらっております",
+        description:"このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。",
+        alternates: {
+            canonical: "https://yamaori.jp"
+        },
+    }
 }
+
 
 export default function Home() {
     return (

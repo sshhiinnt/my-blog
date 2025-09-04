@@ -1,10 +1,16 @@
 import Aside from "components/aside";
 import { WebPageSchema } from "components/structuredData";
 
-export const metadata = {
-    title: "サイトポリシー",
-    description: "当サイトYAMAORIのサイトポリシー・プライバシーポリシー・免責事項です"
-};
+
+export async function generateMetadata() {
+    return {
+        title: "YAMAORIのサイトポリシー",
+        description: "当サイトYAMAORIのサイトポリシー・プライバシーポリシー・免責事項です",
+        alternates: {
+            canonical: "https://yamaori.jp/site-policy",
+        },
+    };
+}
 
 export default function Policy() {
     return (

@@ -30,6 +30,23 @@ type Props = {
         basePath: string,
     }>,
 };
+
+export async function generateMetadata({ params }: Props) {
+    const { groupName: groupNameStr } = await params;
+    const groupName = decodeURIComponent(groupNameStr);
+
+    return {
+        title: `YAMAORIブログの${groupName}カテゴリ記事一覧`,
+        description: `YAMAORIブログの${groupName}に属する記事一覧ページです`,
+        alternates: {
+            canonical: `https://yamaori.jp/categories/${groupName}`,
+        },
+    };
+}
+
+
+
+
 export default async function CategoryPage({ params }: Props) {
     const { groupName: groupNameStr } = await params;
 
@@ -68,6 +85,7 @@ export default async function CategoryPage({ params }: Props) {
         climbDate: p.climbDate ? (p.climbDate as Date).toISOString().split("T")[0] : null,
         area: p.area || "",
     }));
+
 
 
     const totalPage = Math.ceil(totalPosts / pageSize);

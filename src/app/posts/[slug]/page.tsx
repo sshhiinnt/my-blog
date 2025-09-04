@@ -37,6 +37,9 @@ export async function generateMetadata({ params }: Props) {
     return {
         title: `${post.title} | YAMAORI`,
         description: post.description || "記事の説明が表示されます。",
+        alternates: {
+            canonical: `https://yamaori.jp/posts/${slug}`,
+        },
     };
 }
 

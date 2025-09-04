@@ -2,10 +2,16 @@ import Aside from "components/aside";
 import Image from "next/image";
 import { ProfilePageSchema } from "components/structuredData";
 
-export const metadata = {
-    title: "プロフィール",
-    description: "YAMAORI管理人のプロフィールです"
-};
+export async function generateMetadata() {
+    return {
+        title: "YAMAORI管理人のプロフィール",
+        description: "YAMAORI管理人のプロフィールです",
+        alternates: {
+            canonical: "https://yamaori.jp/profile",
+        },
+    };
+}
+
 
 export default function Prof() {
     return (

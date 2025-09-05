@@ -1,14 +1,25 @@
 {
     "redirects": [
         {
-            "source": "/(.*)",
+            "source": "/:path*",
             "has": [
                 {
                     "type": "host",
                     "value": "www.yamaori.jp"
                 }
             ],
-            "destination": "https://yamaori.jp/:1",
+            "destination": "https://yamaori.jp/:path*",
+            "permanent": true
+        },
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "scheme",
+                    "value": "http"
+                }
+            ],
+            "destination": "https://yamaori.jp/:path*",
             "permanent": true
         }
     ]

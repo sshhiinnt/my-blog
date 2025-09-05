@@ -32,7 +32,6 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
     const { page } = await params;
     const currentPage = Number(page) || 1;
-    const pageSize = 8;
 
 
     return {

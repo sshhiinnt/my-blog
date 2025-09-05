@@ -59,7 +59,6 @@ export async function generateMetadata({ params }: Props) {
     }
 
     const currentPage = Number(page) || 1;
-    const pageSize = 8;
 
 
 
@@ -72,7 +71,6 @@ export async function generateMetadata({ params }: Props) {
     const totalPosts = await Post.countDocuments(filter);
 
 
-    const totalPage = Math.ceil(totalPosts / pageSize);
 
 
     return {

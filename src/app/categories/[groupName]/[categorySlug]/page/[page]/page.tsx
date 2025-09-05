@@ -39,28 +39,12 @@ export async function generateMetadata({ params }: Props) {
     const groupName = decodeURIComponent(groupNameStr);
     const categorySlug = decodeURIComponent(categorySlugStr);
     const currentPage = Number(page) || 1;
-    const pageSize = 8;
-    const totalPosts = await Post.countDocuments({ "category.slug": categorySlug });
-    const totalPage = Math.ceil(totalPosts / pageSize);
-
-
-
-    const category = (await Category.findOne({ slug: categorySlug }).lean()) as
-        | {
-            name: string;
-            slug: string;
-            group: string;
-        } | null;
-
-    if (!category) {
-        return notFound();
-    }
 
 
 
     return {
-        title: `${category.name}カテゴリ登山・山行・登山用品についての記事一覧 | YAMAORI`,
-        description: `${category.name}に属する登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です`,
+        title: `${categorySlug}カテゴリ登山・山行・登山用品についての記事一覧 | YAMAORI`,
+        description: `${categorySlug}に属する登山・山行・登山用品についての記事一覧${currentPage > 1 ? `の${currentPage}ページ` : ""}目です`,
         alternates: {
             canonical: `https://yamaori.jp/categories/${groupName}/${categorySlug}${currentPage > 1 ? `/page/${currentPage}` : ""}`,
         },

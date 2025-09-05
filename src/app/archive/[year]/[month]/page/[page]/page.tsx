@@ -38,7 +38,6 @@ export async function generateMetadata({ params }: Props) {
     const year = Number(yearStr);
     const month = Number(monthStr);
     const currentPage = Number(page) || 1;
-    const pageSize = 8;
 
 
     await connect();
@@ -51,7 +50,6 @@ export async function generateMetadata({ params }: Props) {
     };
 
     const totalPosts = await Post.countDocuments(filter);
-    const totalPage = Math.ceil(totalPosts / pageSize);
 
 
 

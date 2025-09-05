@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/categories/山登り",
+            "destination": "/categories/登山記録/hiking-log",
+            "statusCode": 301
+        }
+    ]
+}

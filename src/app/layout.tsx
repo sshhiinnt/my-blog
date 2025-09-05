@@ -22,9 +22,9 @@ const RocknRollOne = RocknRoll_One({
 
 
 export const metadata = {
-  title: "山で遊ばせてもらっております",
+  title: "YAMAORI",
   description: "このブログは登山用品の紹介や山歩きをはじめとした、トレイルランニングやクライミング、雪山登山、沢登りの私の山行記録を日記的に記録している登山ブログです。",
-  applicationName: "YAMAORI",
+  applicationName: "山で遊ばせてもらっております",
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",

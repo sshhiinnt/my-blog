@@ -10,17 +10,6 @@
             ],
             "destination": "https://yamaori.jp/:1",
             "permanent": true
-        },
-        {
-            "source": "/(.*)",
-            "has": [
-                {
-                    "type": "host",
-                    "value": "yamaori.jp"
-                }
-            ],
-            "destination": "https://yamaori.jp/:1",
-            "permanent": true
         }
     ]
 }

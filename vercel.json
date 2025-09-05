@@ -13,6 +13,12 @@
         },
         {
             "source": "/:path*",
+            "has": [
+                {
+                    "type": "protocol",
+                    "value": "http"
+                }
+            ],
             "destination": "https://yamaori.jp/:path*",
             "permanent": true
         }

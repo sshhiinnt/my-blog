@@ -1,5 +1,4 @@
 {
-    "$schema": "https://openapi.vercel.sh/vercel.json",
     "redirects": [
         {
             "source": "/:path*",
@@ -13,17 +12,6 @@
             "permanent": true
         },
         {
-            "source": "/",
-            "has": [
-                {
-                    "type": "host",
-                    "value": "www.yamaori.jp"
-                }
-            ],
-            "destination": "https://yamaori.jp/",
-            "permanent": true
-        },
-        {
             "source": "/:path*",
             "has": [
                 {
@@ -32,17 +20,6 @@
                 }
             ],
             "destination": "https://yamaori.jp/:path*",
-            "permanent": true
-        },
-        {
-            "source": "/",
-            "has": [
-                {
-                    "type": "scheme",
-                    "value": "http"
-                }
-            ],
-            "destination": "https://yamaori.jp/",
             "permanent": true
         }
     ]

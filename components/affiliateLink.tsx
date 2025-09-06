@@ -14,10 +14,14 @@ type RawAffiliateLink = {
 
 type AffiliateLink = RawAffiliateLink & {
     fullUrl: string;
+    images: string[]; // 追加：画像URL配列
 };
 
 type MoshimoJSON = {
     b_l?: RawAffiliateLink[];
+    d?: string;        // 画像ベースURL
+    c_p?: string;      // 画像パスプレフィックス
+    p?: string[];      // 画像ファイル名配列
     [key: string]: unknown;
 };
 
@@ -36,6 +40,10 @@ export default function AffiliateLinkParser() {
                 throw new Error("リンク情報がありません");
             }
 
+            const baseUrl = json.d || "";
+            const prefix = json.c_p || "";
+            const images = Array.isArray(json.p) ? json.p.map((p) => `${baseUrl}${prefix}${p}`) : [];
+
             const processedLinks: AffiliateLink[] = json.b_l
                 .filter(
                     (link): link is RawAffiliateLink =>
@@ -53,7 +61,7 @@ export default function AffiliateLinkParser() {
                     url.searchParams.set("p_id", link.p_id.toString());
                     url.searchParams.set("pl_id", link.pl_id.toString());
                     url.searchParams.set("pc_id", link.pc_id.toString());
-                    return { ...link, fullUrl: url.toString() };
+                    return { ...link, fullUrl: url.toString(), images };
                 });
 
             setLinks(processedLinks);
@@ -75,25 +83,22 @@ export default function AffiliateLinkParser() {
                 onChange={(e) => setRawHtml(e.target.value)}
             />
 
-            <button
-                className="px-4 py-2 bg-blue-600 text-white rounded mb-4"
-                onClick={handleParse}
-            >
+            <button className="px-4 py-2 bg-blue-600 text-white rounded mb-4" onClick={handleParse}>
                 パースしてリンク生成
             </button>
 
             {links.length > 0 ? (
                 <ul>
                     {links.map((link) => (
-                        <li key={link.a_id} className="mb-2">
-                            <a
-                                href={link.fullUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 underline"
-                            >
+                        <li key={link.a_id} className="mb-4">
+                            <a href={link.fullUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
                                 {link.fullUrl} ({link.s_n})
                             </a>
+                            <div className="flex gap-2 mt-2">
+                                {link.images.map((img, i) => (
+                                    <img key={i} src={img} alt={link.u_tx} className="h-20 border" />
+                                ))}
+                            </div>
                         </li>
                     ))}
                 </ul>

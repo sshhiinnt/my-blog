@@ -69,7 +69,7 @@ export default async function postPage({ params }: Props) {
             <div className="flex md:flex-row justify-center bg-secondary">
                 <div className="max-w-4xl w-full bg-white">
                     <h1 className="text-3xl font-bold text-center mt-4">{post.title}</h1>
-                    <article className="prose prose-lg dark:prose-invert mx-auto p-4">
+                    <article className="prose prose-lg dark:prose-invert mx-auto">
                         <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]}
                             components={{
                                 span: ({ ...props }: MoshimoSpanProps) => {

@@ -34,7 +34,7 @@ export default function MoshimoLink({ product }: Props) {
                         src={data.imageUrl}
                         alt={product}
                         fill
-                        className="object-cover rounded-lg"
+                        className="object-contain rounded-lg"
                     />
 
                 </div>

@@ -29,14 +29,15 @@ export default function MoshimoLink({ product }: Props) {
         <div className="border rounded-2xl p-4 shadow-md my-6 bg-white not-prose">
             <h3 className="font-bold text-2xl">{product}</h3>
             <div className="flex gap-4">
-                <Image
-                    src={data.imageUrl}
-                    alt={product}
-                    width={288}
-                    height={288}
-                    style={{ height: "auto" }}
-                    className="object-cover rounded-lg max-w-full h-auto"
-                />
+                <div className="relative w-full h-64 md:h-72 lg:h-80">
+                    <Image
+                        src={data.imageUrl}
+                        alt={product}
+                        fill
+                        className="object-cover rounded-lg"
+                    />
+
+                </div>
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col mx-auto gap-4 mt-4">
                         {data.amazon && (

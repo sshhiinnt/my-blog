@@ -10,7 +10,7 @@ export default function SnsLinkForFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <p>ｘ<br />（旧Twitter）-</p>
+                    <p>ｘ-旧Twitter</p>
                     <Image
                         src="/icons/x_w.svg"
                         alt="x（旧Twitter）"

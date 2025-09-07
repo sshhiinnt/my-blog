@@ -2,7 +2,6 @@
   "name": "my-blog",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "CHOKIDAR_USEPOLLING=true CHOKIDAR_INTERVAL=100 next dev",
     "dev : turbopack": "next dev --turbopack",

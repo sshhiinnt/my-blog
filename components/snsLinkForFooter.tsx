@@ -11,7 +11,7 @@ export default function SnsLinkForFooter() {
                     rel="noopener noreferrer"
                 >
                     <Image
-                        src="/icons/x.svg"
+                        src="/icons/x_w.svg"
                         alt="x（旧Twitter）"
                         width={24}
                         height={24}
@@ -24,7 +24,7 @@ export default function SnsLinkForFooter() {
                     rel="noopener noreferrer"
                 >
                     <Image
-                        src="/icons/instagram.svg"
+                        src="/icons/instagram_w.svg"
                         alt="instagram"
                         width={24}
                         height={24}

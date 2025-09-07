@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "components/headerComp";
 import Footer from "components/footerComp";
 import { Providers } from "./provider";
+import CategoryLinkImage from "components/smCategoryLinkForFooter";
 
 
 
@@ -37,17 +38,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-      <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
-        <body className="dark:text-black">
-          <Providers>
-            <Header />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </Providers>
-        </body>
-      </html>
+
+    <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+      <body className="dark:text-black">
+        <Providers>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <CategoryLinkImage />
+          <Footer />
+        </Providers>
+      </body>
+    </html>
   );
 }

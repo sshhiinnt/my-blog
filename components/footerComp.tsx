@@ -8,12 +8,12 @@ const Footer = () => {
     return (
         <footer className="bg-brand text-white">
             <div className=" flex px-4 justify-between md:mx-auto container">
-                <div className="self-center hidden md:block">
+                <div className="self-center">
                     <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>
                     <div className="font-Rockn font-bold">山で遊ばせてもらっております</div>
                 </div>
                 <nav>
-                    <ul className="list-none py-4">
+                    <ul className="list-none py-4 hidden md:block">
                         <p className="font-bold">カテゴリー</p>
                         <li><Link href={`/categories/${encodeURIComponent("登山記録")}`}>-登山記録</Link></li>
                         <li><Link href={`/categories/${encodeURIComponent("トレイルランニング")}`}>-トレイルランニング</Link></li>
@@ -22,7 +22,7 @@ const Footer = () => {
                         <li><Link href={`/categories/${encodeURIComponent("ひとりごと")}`}>-ひとりごと</Link></li>
                     </ul>
                 </nav>
-                <nav className="flex flex-col font-bold py-4">
+                <nav className="flex flex-col items-start font-bold py-4 ">
                     <Link href={"/contact"}>-お問い合わせはこちら</Link>
                     <Link href={"/profile"}>-管理者とこのサイトのこと</Link>
                     <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>

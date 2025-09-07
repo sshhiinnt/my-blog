@@ -35,7 +35,7 @@ export default function MoshimoLink({ product }: Props) {
                     width={288}
                     height={288}
                     style={{ height: "auto" }}
-                    className="object-cover rounded-lg"
+                    className="object-cover rounded-lg max-w-full h-auto"
                 />
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-col mx-auto gap-4 mt-4">

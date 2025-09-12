@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 
 type Category = {
@@ -249,7 +250,7 @@ export default function NewPostPage() {
                         <option value="東北">東北</option>
                         <option value="北海道">北海道</option>
                         <option value="未指定">未指定</option>
-                        
+
                     </select>
                     <p>日付（登った日）</p>
                     <input type="date"
@@ -316,7 +317,7 @@ export default function NewPostPage() {
 
                 {previewMode && (
                     <article className="prose lg:prose-xl dark:prose-invert mx-auto p-4 border">
-                        <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown>
+                        <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
                     </article>
                 )}
 

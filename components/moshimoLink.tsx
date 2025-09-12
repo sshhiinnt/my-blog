@@ -27,9 +27,9 @@ export default function MoshimoLink({ product }: Props) {
 
     return (
         <div className="border rounded-2xl p-4 shadow-md my-6 bg-white not-prose">
-            <h3 className="font-bold text-2xl">{product}</h3>
+            <h3 className="font-bold text-xl">{product}</h3>
             <div className="flex gap-4">
-                <div className="relative w-full h-64 md:h-72 lg:h-80">
+                <div className="relative w-full h-64 md:h-72">
                     <Image
                         src={data.imageUrl}
                         alt={product}

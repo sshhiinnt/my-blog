@@ -10,6 +10,7 @@ import rehypeMoshimo from "@/lib/rehype-moshimo";
 import { ArticleSchema } from "components/structuredData";
 import Image from "next/image";
 import MoshimoLink from "components/moshimoLink";
+import remarkGfm from "remark-gfm";
 
 
 interface Props {
@@ -70,7 +71,7 @@ export default async function postPage({ params }: Props) {
                 <div className="max-w-4xl w-full bg-white">
                     <h1 className="text-3xl font-bold text-center mt-4">{post.title}</h1>
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
-                        <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]}
+                        <ReactMarkdown rehypePlugins={[rehypeRaw, rehypeMoshimo]} remarkPlugins={[remarkGfm]}
                             components={{
                                 span: ({ ...props }: MoshimoSpanProps) => {
                                     const product = props["data-moshimo"];

@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 type Category = {
     _id: string;
@@ -28,7 +29,7 @@ type Props = {
     slug: string;
 };
 
-export default function EditPostPage ({ slug }: Props) {
+export default function EditPostPage({ slug }: Props) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
@@ -197,7 +198,7 @@ export default function EditPostPage ({ slug }: Props) {
 
                 <p>プレビュー</p>
                 <article className="prose lg:prose-xl dark:prose-invert mx-auto p-4 border">
-                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{formData.content}</ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{formData.content}</ReactMarkdown>
                 </article>
 
 

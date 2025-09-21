@@ -40,9 +40,19 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: `${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com`,
+        hostname: "yamaori-media-bucket.s3.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "thumbnail.image.rakuten.co.jp",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "image.rakuten.co.jp",
+        pathname: "/**",
+      }
     ],
 
   },

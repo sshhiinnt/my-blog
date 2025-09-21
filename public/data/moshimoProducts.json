@@ -334,5 +334,11 @@
     "rakuten": "https://search.rakuten.co.jp/search/mall/%E3%83%92%E3%83%AB%E3%81%AF%E6%9C%A8%E3%81%8B%E3%82%89%E8%90%BD%E3%81%A1%E3%81%A6%E3%81%93%E3%81%AA%E3%81%84%E3%80%82%20%E3%81%BC%E3%81%8F%E3%82%89%E3%81%AE%E3%83%A4%E3%83%9E%E3%83%93%E3%83%AB%E7%A0%94%E7%A9%B6%E8%A8%98/?a_id=5155865&p_id=54&pl_id=27059&pc_id=54",
     "yahoo": "https://shopping.yahoo.co.jp/search?first=1&p=%E3%83%92%E3%83%AB%E3%81%AF%E6%9C%A8%E3%81%8B%E3%82%89%E8%90%BD%E3%81%A1%E3%81%A6%E3%81%93%E3%81%AA%E3%81%84%E3%80%82+%E3%81%BC%E3%81%8F%E3%82%89%E3%81%AE%E3%83%A4%E3%83%9E%E3%83%93%E3%83%AB%E7%A0%94%E7%A9%B6%E8%A8%98&a_id=5155867&p_id=1225&pl_id=27061&pc_id=1925",
     "imageUrl": "https://m.media-amazon.com/images/I/51C816JWM8S._SL500_.jpg"
+  },
+  "ヒル下がりのジョニー": {
+    "amazon": "https://www.amazon.co.jp/dp/B0025WK2OU?a_id=5157158&p_id=170&pl_id=27060&pc_id=185",
+    "rakuten": "https://search.rakuten.co.jp/search/mall/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A8%E3%82%B3%E3%83%BB%E3%83%88%E3%83%AC%E3%83%BC%E3%83%89%20%E3%83%92%E3%83%AB%E4%B8%8B%E3%81%8C%E3%82%8A%E3%81%AE%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%BC%20140ml/?a_id=5155865&p_id=54&pl_id=27059&pc_id=54",
+    "yahoo": "https://shopping.yahoo.co.jp/search?first=1&p=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%A8%E3%82%B3%E3%83%BB%E3%83%88%E3%83%AC%E3%83%BC%E3%83%89+%E3%83%92%E3%83%AB%E4%B8%8B%E3%81%8C%E3%82%8A%E3%81%AE%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%BC+140ml&a_id=5155867&p_id=1225&pl_id=27061&pc_id=1925",
+    "imageUrl": "https://m.media-amazon.com/images/I/41Co6kD18EL._SL500_.jpg"
   }
 }

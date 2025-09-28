@@ -6,11 +6,6 @@ import { authOptions } from "@/lib/auth";
 import z from "zod";
 import { generateSlug } from "@/lib/slugify";
 
-export const config = {
-    api: {
-        bodyParser: false,
-    },
-};
 
 const postSchema = z.object({
     title: z.string().min(1),

@@ -25,7 +25,7 @@ const postSchema = z.object({
             height: z.number(),
         })
     ).default([]),
-    climbDate: z.string().optional(),
+    climbDate: z.date().optional(),
     area: z.string().optional(),
 });
 

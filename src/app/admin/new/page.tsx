@@ -185,11 +185,11 @@ export default function NewPostPage() {
             formData.append("thumbnailUrl", thumbnailUrl);
         }
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/newPost`, {
             method: "POST",
             body: formData,
         });
-        console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/post`)
+        console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/newPost`)
 
         console.log(uploadedImages)
 

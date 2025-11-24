@@ -7,6 +7,8 @@
 ![記事一覧ページ](public/screenShots/articleListPage.png)
 - 記事投稿ページ（Markdownエディタ）
 ![記事投稿ページ](public/screenShots/postEditPage.png)
+- 編集・削除用記事一覧ページ
+![編集・削除用記事一覧ページ](public/screenShots/editArticleListPage.png)
 - 記事詳細ページ
 ![記事詳細ページ](public/screenShots/postPage.png)
 - 認証画面

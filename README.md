@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Blog - Next.js Fullstack Blog Platform
+- 様々な種類の登山記録や、登山用品の紹介記事を投稿するブログ。
+## スクリーンショット
+- ホームページ
+![ホームページ](public/screenShots/homePage.png)
+- 記事一覧ページ
+![記事一覧ページ](public/screenShots/articleListPage.png)
+- 記事投稿ページ（Markdownエディタ）
+![記事投稿ページ](public/screenShots/postEditPage.png)
+- 記事詳細ページ
+![記事詳細ページ](public/screenShots/postPage.png)
+- 認証画面
+![認証画面](public/screenShots/loginPage.png)
+## 機能
+- 認証（NextAuth）
+- 画像アップロード（S3 Presigned URL）
+- Markdownエディタ
+- App router
+- ReCAPTCHAによるスパムブロック
+- resentでのメール転送機能
+- カテゴリ検索
+- アーカイブ記事検索
+- 登山エリア別検索
 
-## Getting Started
+## 技術スタック
+- フロントエンド:Next.js,React,TailwindCSS
+- バックエンド:Node.js,MongoDB(mongoose)
+- 認証:NextAuth
+- 記事表示:reactMarkdown
+- セキュリティ:ReCAPTCHA,JWT
+- メール送信:resent
+- 画像アップロード:AWSS3
 
-First, run the development server:
+## セットアップ
+# リポジトリをクローン
+git clone <リポジトリURL>
+cd <プロジェクト名>
 
-```bash
+# 依存関係インストール
+npm install
+
+# 開発サーバー起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 工夫したポイント
+- パフォーマンス最適化
+ - 画像はS3で配信、必要な記事データのみを取得
+ - 静的生成（SSG）とサーバーサイドレンダリング（SSR）の最適な組み合わせ
+- UI/UX デザイン
+ - Tailwind CSSとカスタムコンポーネントでレスポンシブ対応
+ - Markdownエディタでプレビュー表示
+- セキュリティ
+ - ReCAPTCHAによるスパム対策
+ - JWTトークンで認証情報管理
+ - Presigned URLで安全に画像アップロード
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

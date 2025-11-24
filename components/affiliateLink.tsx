@@ -14,14 +14,14 @@ type RawAffiliateLink = {
 
 type AffiliateLink = RawAffiliateLink & {
     fullUrl: string;
-    images: string[]; // 追加：画像URL配列
+    images: string[];
 };
 
 type MoshimoJSON = {
     b_l?: RawAffiliateLink[];
-    d?: string;        // 画像ベースURL
-    c_p?: string;      // 画像パスプレフィックス
-    p?: string[];      // 画像ファイル名配列
+    d?: string;
+    c_p?: string;
+    p?: string[];
     [key: string]: unknown;
 };
 

@@ -28,7 +28,7 @@ export default function Home() {
             />
             <div>
                 <TopImage />
-                <main className="flex justify-center bg-secondaryColor">
+                <main className="flex justify-center bg-secondary">
                     <article className="max-w-4xl w-full">
                         <NewArticle page={1} />
                     </article>

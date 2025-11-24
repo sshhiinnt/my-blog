@@ -10,9 +10,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        brandColor: "#009944",
-        accentryColor: "#ffef8f",
-        secondaryColor: "#f2f2e9",
+        brand: "#009944",
+        accentry: "#ffef8f",
+        secondary: "#f2f2e9",
       },
       fontFamily: {
         noto: ["var(--font--notoSansDisplay)"],

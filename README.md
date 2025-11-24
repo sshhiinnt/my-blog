@@ -32,14 +32,14 @@
 - 画像アップロード:AWSS3
 
 ## セットアップ
-# リポジトリをクローン
-git clone <リポジトリURL>
-cd <プロジェクト名>
+### リポジトリをクローン
+git clone <https://github.com/sshhiinnt/my-blog.git>
+cd <my-blog>
 
-# 依存関係インストール
+### 依存関係インストール
 npm install
 
-# 開発サーバー起動
+### 開発サーバー起動
 npm run dev
 
 

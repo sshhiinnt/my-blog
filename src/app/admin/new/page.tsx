@@ -50,13 +50,13 @@ export default function NewPostPage() {
     const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([]);
     const [area, setArea] = useState("");
     const [climbDate, setClimbDate] = useState<Date | null>(null);
+    const [socialCaption, setSocialCaption] = useState("");
 
 
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`);
-                console.log("fetch from:", `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`);
+                const res = await fetch("/api/categories");
                 const data = await res.json();
                 console.log("fetched data:", data);
                 setCategories(Array.isArray(data) ? data : []);
@@ -181,6 +181,7 @@ export default function NewPostPage() {
         formData.append("images", JSON.stringify(uploadedImages));
         formData.append("climbDate", climbDate ? climbDate.toISOString().split("T")[0] : "");
         formData.append("area", area ?? "");
+        formData.append("socialCaption", socialCaption);
         if (thumbnailUrl) {
             formData.append("thumbnailUrl", thumbnailUrl);
         }
@@ -204,6 +205,7 @@ export default function NewPostPage() {
             setUploadedImages([]);
             setArea("");
             setClimbDate(null);
+            setSocialCaption("")
         } else {
             alert("エラーが発生しました");
         }
@@ -298,33 +300,45 @@ export default function NewPostPage() {
                     </button>
 
                 </div>
+                <div className="flex">
+                    <textarea
+                        placeholder="本文(MarkDown)"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        rows={10}
+                        required
+                        className="w-full container p-4 "
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setPreviewMode(!previewMode)}
+                        className="border-solid"
+                    >
+                        {previewMode ? "編集に戻る" : "MarkDownプレビューを見る"}
+                    </button>
 
-                <textarea
-                    placeholder="本文(MarkDown)"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    rows={10}
-                    required
-                    className="w-full container p-4 "
-                />
-                <button
-                    type="button"
-                    onClick={() => setPreviewMode(!previewMode)}
-                    className="border-solid"
-                >
-                    {previewMode ? "編集に戻る" : "MarkDownプレビューを見る"}
-                </button>
+                    {previewMode && (
+                        <article className="prose lg:prose-xl dark:prose-invert mx-auto p-4 border">
+                            <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+                        </article>
+                    )}
 
-                {previewMode && (
-                    <article className="prose lg:prose-xl dark:prose-invert mx-auto p-4 border">
-                        <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-                    </article>
-                )}
+                </div>
 
                 <button
                     type="submit">投稿
                 </button>
             </form>
+            <div className="mt-6 p-4 border rounded">
+                <p className="font-bold">SNS用キャプション</p>
+
+                <textarea
+                    value={socialCaption}
+                    readOnly
+                    className="w-full p-2 border mt-2"
+                />
+            </div>
+
         </div >
     );
 };

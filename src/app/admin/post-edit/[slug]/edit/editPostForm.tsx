@@ -23,6 +23,7 @@ type Post = {
     category: string;
     climbDate: string | null;
     area: string;
+    socialCaption: string;
 };
 
 type Props = {
@@ -50,6 +51,7 @@ export default function EditPostPage({ slug }: Props) {
         category: "",
         climbDate: null,
         area: "",
+        socialCaption: "",
     });
 
     const [categories, setCategories] = useState<Category[]>([]);
@@ -67,6 +69,8 @@ export default function EditPostPage({ slug }: Props) {
                     category: data.category._id,
                     climbDate: data.climbDate || "",
                     area: data.area || "",
+                    socialCaption: data.socialCaption || "",
+
                 });
             })
             .catch(err => console.error("記事の取得失敗:", err))
@@ -210,6 +214,16 @@ export default function EditPostPage({ slug }: Props) {
                     {isSubmitting ? "更新中……" : "記事を更新"}
                 </button>
             </form>
+
+            <div className="mt-6 p-4 border rounded">
+                <p className="font-bold">SNS用キャプション</p>
+
+                <textarea
+                    value={formData.socialCaption}
+                    readOnly
+                    className="w-full p-2 border mt-2"
+                />
+            </div>
         </div >
     );
 };

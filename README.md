@@ -36,7 +36,7 @@
 ## セットアップ
 ### リポジトリをクローン
 git clone <https://github.com/sshhiinnt/my-blog.git>
-cd <my-blog>
+cd my-blog
 
 ### 依存関係インストール
 npm install

@@ -9,6 +9,7 @@ export interface IPost extends Document {
     description?: string;
     area?: string;
     climbDate?: Date;
+    socialCaption: string;
     images?: Array<{
         url: string;
         width: number;
@@ -20,7 +21,7 @@ export interface IPost extends Document {
         name: string;
         slug: string;
     },
-    moshimoProducts?: string[];
+    moshimoProducts?: [string];
 }
 
 const PostSchema: Schema = new Schema<IPost>(
@@ -47,6 +48,9 @@ const PostSchema: Schema = new Schema<IPost>(
         climbDate: {
             type: Date,
         },
+        socialCaption: {
+            type: String,
+        },
         images: [{
             url: { type: String, required: true },
             width: { type: Number, required: true },
@@ -69,7 +73,7 @@ const PostSchema: Schema = new Schema<IPost>(
             default: Date.now,
         },
         moshimoProducts: {
-            type: String,
+            type: [String],
         },
     },
 

@@ -26,9 +26,72 @@ const postSchema = z.object({
         })
     ).default([]),
     climbDate: z.date().optional(),
+    socialCaption: z.string().optional(),
     area: z.string().optional(),
 });
 
+async function generateCaption(content: string) {
+    try {
+        const res = await fetch(
+            `https://api.groq.com/openai/v1/chat/completions`,
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    model: "llama-3.1-8b-instant",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "あなたはクライミング記事のSNSキャプションを作る編集者です"
+                        },
+                        {
+                            role: "user",
+                            content: `
+                                以下の記事からInstagram用キャプションを作ってください。
+
+                                条件
+                                ・詩的一行
+                                ・英語訳
+                                ・40文字以内
+                                ・説明禁止
+                                ・その下にSEOハッシュタグを日本語と英語6個ずつ
+
+                                形式
+
+                                キャプション
+                                キャプション英語訳
+                                #タグ1 #タグ2 #タグ3 #タグ4 #タグ5 #タグ6
+                                #tag1 #tag2 #tag3 #tag4 #tag5 #tag6
+
+                                記事
+                                ${content.slice(0, 400)}
+                                `
+                        }
+                    ],
+                    temperature: 0.7
+                })
+            });
+        if (!res.ok) {
+            console.error("GROQ error:", await res.text());
+            return "";
+        }
+
+        const data = await res.json();
+
+        console.log("CAPTION:", data?.choices?.[0]?.message?.content);
+
+        return data?.choices?.[0]?.message?.content ?? "";
+
+    } catch (e) {
+        console.error("AI caption error:", e);
+        return "";
+    }
+}
 
 export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
@@ -36,6 +99,8 @@ export async function POST(req: NextRequest) {
     if (!session || session.user.role !== "admin") {
         return NextResponse.json({ error: "認証または管理者権限がありません" }, { status: 401 });
     }
+
+    await connect();
 
     try {
         const formData = await req.formData();
@@ -53,6 +118,8 @@ export async function POST(req: NextRequest) {
         const areaValue = areaStr && areaStr.trim() !== "" ? areaStr : null;
         const rawImages = formData.get("images")?.toString() || "[]";
         const images: Array<{ url: string; width: number; height: number }> = JSON.parse(rawImages);
+        const caption = await generateCaption(content);
+
 
 
         const validated = postSchema.parse({
@@ -69,12 +136,15 @@ export async function POST(req: NextRequest) {
             images,
             climbDate,
             area: areaValue,
+            socialCaption: caption,
         });
 
-        await connect();
 
+        console.log("validated:", validated);
 
         const post = await Post.create(validated);
+
+
 
 
         return NextResponse.json({ success: true, data: post }, { status: 201 });

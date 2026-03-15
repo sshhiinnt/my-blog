@@ -31,7 +31,8 @@ async function main() {
     });
 
     async function generaterCaption(post: Post) {
-        while (true) {
+        let retry = 0;
+        while (retry < 5) {
             const res = await fetch(
                 "https://api.groq.com/openai/v1/chat/completions",
                 {
@@ -49,7 +50,13 @@ async function main() {
                             },
                             {
                                 role: "user",
-                                content: `以下の記事からInstagram用キャプションを作ってください。
+                                content:
+                                    `以下の記事からInstagram用キャプションを作ってください。
+
+                                記事内容
+                                ${post.content.slice(0, 120)}
+
+                                タスク1:Instagram向けの一行詩的キャプションを作成。
     
                                     条件
                                     ・詩的一行
@@ -65,10 +72,20 @@ async function main() {
     
                                     #タグ1 #タグ2 #タグ3 #タグ4 #タグ5 #タグ6
                                     #tag1 #tag2 #tag3 #tag4 #tag5 #tag6
+
+                                    タスク2:SEO説明文を作成
+                                    ・50~120文字
+                                    ・記事内容を自然に説明
+                                    ・重要キーワード（山名、場所、花、季節、登山ルート）を必ず含む
+                                    ・検索ユーザー向けの文章
+
+                                    形式
+
+                                    タスク1の生成文章
+
+                                    タスク2のSEO説明文
+
                                     
-                                    記事
-                                    
-                                    ${post.content.slice(0, 150)}
                                     `
                             }
                         ],
@@ -80,24 +97,32 @@ async function main() {
                 return data?.choices?.[0]?.message?.content ?? "";
             }
 
-            const text = await res.text();
-            console.log("API error:", text);
+            if (!res.ok) {
+                const text = await res.text();
+                console.log("API error:", text);
+                const match = text.match(/try again in\s*([0-9.]+)s/i);
 
-            if (text.includes("rate_limit")) {
-                console.log("wating 6s...")
-                await new Promise(r => setTimeout(r, 6000))
-                continue
+                if (match) {
+                    const wait = Math.ceil(parseFloat(match[1]) * 1000);
+                    console.log(`waiting ${wait} ms...`);
+                    await new Promise(r => setTimeout(r, wait));
+                    continue;
+                }
+                continue;
             }
+
             console.log("unknown error retrying...")
-            await new Promise(r => setTimeout(r, 3000))
+            await new Promise(r => setTimeout(r, 15000))
+            retry++;
         }
+        return "";
     }
     for (const post of posts) {
         const caption = await generaterCaption(post);
         post.socialCaption = caption;
         await post.save();
         console.log("saved:", post.slug);
-        await new Promise(r => setTimeout(r, 1000))
+        await new Promise(r => setTimeout(r, 10000))
     }
 }
 

@@ -89,6 +89,7 @@ export default async function ArticlePage({ params }: Props) {
                 authorName="都市慎太郎"
             />
             <div className="flex justify-center bg-secondary">
+                
                 <main className="max-w-4xl w-full">
                     <article>
                         <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath="/article" />

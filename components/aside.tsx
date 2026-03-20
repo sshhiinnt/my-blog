@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SnsLink from "./snsLink";
+import EquipmentArtLink from "./equpmentArtlink";
 
 
 type Category = {
@@ -77,6 +78,9 @@ const Aside = () => {
 
     return (
         <aside className="hidden md:block bg-secondary w-72 p-4 ml-16">
+            <div>
+                <EquipmentArtLink />
+            </div>
             <div className="bg-accentry mt-4 rounded-3xl">
                 <h3 className="font-noto text-2xl text-center font-bold pt-4">Category</h3>
                 {loading ? (

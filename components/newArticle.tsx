@@ -58,26 +58,23 @@ const NewArticle = async ({ }: Props) => {
             <h2 className="font-bold text-3xl text-center my-4">新着記事</h2>
             <ul className="flex flex-col items-center">
                 {posts.map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl w-full md:w-[750px] mx-4 my-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry md:w-[750px] mx-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <div className="w-[360px] h-[202px] mx-auto mt-4 md:m-4 relative">
-                                    <Image
-                                        src={post.thumbnailUrl}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover rounded "
-                                    />
-                                </div>
+                                <Link href={`/posts/${post.slug}`}>
+                                    <div className="w-[360px] h-[202px] mx-auto mt-4 md:m-4 relative">
+                                        <Image
+                                            src={post.thumbnailUrl}
+                                            alt={post.title}
+                                            fill
+                                            className="object-cover rounded "
+                                        />
+                                    </div></Link>
                             )}
                         </div>
                         <div className="flex-wrap p-4">
                             <div className="flex-wrap gap-4">
                                 <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.group}/${post.category.slug}`}>{post.category.name}</Link></p>
-                                <div className="flex">
-                                    <p className="text-sm text-gray-500 mr-4 hidden md:block">投稿日:{new Date(post.createdAt).toLocaleString()}</p>
-                                    <p className="text-sm text-gray-500 hidden md:block">更新日:{new Date(post.updatedAt).toLocaleString()}</p>
-                                </div>
                             </div>
                             <p className="font-bold">日付:{post.climbDate ? new Date(post.climbDate).toISOString().split("T")[0] : "未設定"}</p>
                             <h3 className="md:text-2xl text-xl font-bold hover:opacity-70 "><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>

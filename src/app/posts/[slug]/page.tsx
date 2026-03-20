@@ -11,6 +11,7 @@ import { ArticleSchema } from "components/structuredData";
 import Image from "next/image";
 import MoshimoLink from "components/moshimoLink";
 import remarkGfm from "remark-gfm";
+import Link from "next/link";
 
 
 interface Props {
@@ -46,6 +47,8 @@ export async function generateMetadata({ params }: Props) {
 
 
 
+
+
 export default async function postPage({ params }: Props) {
     const { slug: slugStr } = await params;
     const slug = decodeURIComponent(slugStr);
@@ -57,6 +60,12 @@ export default async function postPage({ params }: Props) {
 
     const category = await Category.findOne({ slug: post.category.slug })
 
+    const relatedPosts = await Post.find({
+        area: post.area
+    })
+        .sort({ createdAt: -1 })
+        .limit(5);
+
     return (
         <>
             <ArticleSchema
@@ -67,7 +76,7 @@ export default async function postPage({ params }: Props) {
                 datePublished={new Date(post.createdAt).toISOString()}
                 dateModified={new Date(post.updatedAt || post.createdAt).toISOString()}
             />
-            <div className="flex md:flex-row justify-center bg-secondary">
+            <div className="flex md:flex-row justify-center bg-secondary pb-4">
                 <div className="max-w-4xl w-full bg-white">
                     <h1 className="text-3xl font-bold text-center mt-4">{post.title}</h1>
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
@@ -103,9 +112,32 @@ export default async function postPage({ params }: Props) {
                         </p>
                     </div>
 
+
+
                 </div>
                 <Aside />
             </div >
+
+            <nav className="flex flex-col md:flex-row gap-4 py-4 px-4 bg-accentry">
+                <h2 className="font-bold text-2xl">関連記事</h2>
+                <ul className="flex flex-col md:flex-row gap-4 mb-4 mx-4">
+                    {relatedPosts.map(post => (
+                        <li key={post.area} className="w-full md:w-64">
+                            <Link href={`/posts/${post.slug}`}>
+                                <h3 className="font-bold text-base mt-4 mb-1">{post.title}</h3>
+                                <Image src={post.thumbnailUrl}
+                                    alt={post.title}
+                                    height={320}
+                                    width={720}
+                                    className="w-full h-40 object-cover rounded-lg"
+                                />
+                            </Link>
+                        </li>
+
+                    ))}
+
+                </ul>
+            </nav>
         </>
     )
 }

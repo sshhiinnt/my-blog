@@ -1,6 +1,6 @@
 'use client'
 
-
+import Link from "next/link";
 import Image from "next/image";
 
 const TopImage = () => {
@@ -18,6 +18,17 @@ const TopImage = () => {
                 <p>このブログでは私の日々の山遊びの記録と、</p>
                 <p>登山やトレイルランニング、クライミング、沢登りの情報や登山用品の紹介を掲載しています。</p>
             </div>
+            <nav className="block md:hidden mb-4 mx-1">
+                <Link href={`/categories/${encodeURIComponent("道具・装備")}`}>
+                    <Image
+                        src={"/images/equipmentLink.png"}
+                        alt="登山用品の選び方記事サムネイル画像"
+                        height={360}
+                        width={720}
+                        className="w-full h-40 object-cover hover:scale-95 transition-transform mt-16 rounded-3xl"
+                    />
+                </Link>
+            </nav>
         </div>
 
     )

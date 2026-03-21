@@ -6,7 +6,7 @@ const TopImage = () => {
     return (
         <div className="relative">
             <Image
-                src={"/images/topimage.JPG"}
+                src={"/images/topImage.JPG"}
                 alt="サイトイメージ画像"
                 width={4000}
                 height={2232}

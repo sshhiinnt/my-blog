@@ -3,7 +3,6 @@
 import Link from "next/link";
 import HeaderAreaDropDown from "./selectArea";
 import HeaderArchiveDropDown from "./selectArchive";
-import Image from "next/image";
 
 
 

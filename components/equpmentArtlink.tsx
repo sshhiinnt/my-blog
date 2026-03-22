@@ -20,7 +20,7 @@ export default function EquipmentArtLink() {
             </Link>
             <ul>
                 <li className="hover:scale-95 transition-transform">
-                    <Link href={"posts/how-to-choose-mountaineering-boots"}
+                    <Link href={"https://yamaori.jp/posts/how-to-choose-mountaineering-boots"}
                         className="relative"
                     >
                         <Image
@@ -36,7 +36,7 @@ export default function EquipmentArtLink() {
                     </Link>
                 </li>
                 <li className="hover:scale-95 transition-transform">
-                    <Link href={"posts/how-to-choose-rainwear"} className="relative">
+                    <Link href={"https://yamaori.jp/posts/how-to-choose-rainwear"} className="relative">
                         <Image
                             src={"/images/rainwear.jpg"}
                             alt="レインウェアの選び方記事のサムネイル画像"
@@ -50,21 +50,7 @@ export default function EquipmentArtLink() {
                     </Link>
                 </li>
                 <li className="hover:scale-95 transition-transform mb-16">
-                    <Link href={"posts/how-to-choose-a-backpack-for-mountain-climbing"} className="relative">
-                        <Image
-                            src={"/images/zac.jpg"}
-                            alt="登山用ザック（リュック）の選び方記事のサムネイル画像"
-                            height={360}
-                            width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="italic font-Rockn text- text-accentry text-4xl">登山用ザックの選び方</p>
-                        </div>
-                    </Link>
-                </li>
-                <li className="hover:scale-95 transition-transform mb-16">
-                    <Link href={"posts/how-to-choose-a-backpack-for-mountain-climbing"} className="relative">
+                    <Link href={"https://yamaori.jp/posts/how-to-choose-a-backpack-for-mountain-climbing"} className="relative">
                         <Image
                             src={"/images/zac.jpg"}
                             alt="登山用ザック（リュック）の選び方記事のサムネイル画像"

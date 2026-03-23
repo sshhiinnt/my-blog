@@ -3,6 +3,7 @@
 ## スクリーンショット
 - ホームページ
 ![ホームページ](public/screenShots/homePage.png)
+![ホームページ](public/screenShots/homePage2.png)
 - 記事一覧ページ
 ![記事一覧ページ](public/screenShots/articleListPage.png)
 - 記事投稿ページ（Markdownエディタ）

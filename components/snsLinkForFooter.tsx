@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SnsLinkForFooter() {
     return (
-        <div className="bg-brand p-4 block md:hidden">
+        <div className="bg-bg p-4 block md:hidden">
             <div className="flex justify-center gap-12">
                 <Link
                     href="https://x.com/YAMAORI0831"

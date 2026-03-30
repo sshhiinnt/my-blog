@@ -55,7 +55,7 @@ const NewArticle = async ({ }: Props) => {
     }
     return (
         <main className="bg-surface max-w-4xl w-full">
-            <h2 className="font-bold text-3xl text-accent text-center my-4">"新着記事"</h2>
+            <h2 className="font-bold text-3xl text-accent text-center my-4">ー　新着記事　ー</h2>
             <ul className="flex flex-col items-center">
                 {posts.map((post) => (
                     <li key={post._id} className="flex flex-col md:flex-row bg-white md:w-[750px] w-full px-4 my-4">
@@ -87,7 +87,7 @@ const NewArticle = async ({ }: Props) => {
                     </li>
 
                 ))}
-                <Link href={`/article/page/1`} className="bg-accent text-text text-xl font-bold py-1 px-4 border rounded-3xl mb-4">"もっと見る"</Link>
+                <Link href={`/article/page/1`} className="bg-accent text-text text-xl font-bold py-1 px-4 border rounded-3xl mb-4">ー　もっと見る　ー</Link>
             </ul>
         </main >
     )

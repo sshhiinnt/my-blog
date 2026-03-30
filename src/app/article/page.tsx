@@ -76,7 +76,7 @@ export default async function ArticlePage() {
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
-            <div className="flex justify-center bg-secondary">
+            <div className="flex justify-center bg-surface">
                 <main className="max-w-4xl w-full">
                     <article>
                         <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/article`} />

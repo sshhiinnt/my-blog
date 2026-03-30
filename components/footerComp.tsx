@@ -6,7 +6,7 @@ import SnsLinkForFooter from "./snsLinkForFooter";
 
 const Footer = () => {
     return (
-        <footer className="bg-brand text-white">
+        <footer className="bg-bg text-white">
             <div className=" flex px-4 justify-between md:mx-auto container">
                 <div className="self-center hidden md:block">
                     <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>

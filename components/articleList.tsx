@@ -39,22 +39,24 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
     }
 
     return (
-        <main className="bg-secondary max-w-4xl w-full">
+        <main className="bg-surface max-w-4xl w-full">
             <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry rounded-3xl w-full md:w-[750px] mx-4 my-4 px-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-white md:max-w-[750px] w-full mx-auto px-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
-                                <div className="w-[360px] h-[202px] mx-auto mt-4 md:m-4 relative">
-                                    <Image src={post.thumbnailUrl}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover rounded"
-                                    />
+                                <div className="w-full md:w-[360px] aspect-video mx-auto mt-4 md:m-4 relative">
+                                    <Link href={`/posts/${post.slug}`}>
+                                        <Image src={post.thumbnailUrl}
+                                            alt={post.title}
+                                            fill
+                                            className="object-cover rounded"
+                                        />
+                                    </Link>
                                 </div>
                             )}
                         </div>
-                        <div className="flex-wrap p-4">
+                        <div className="flex-1 p-4">
                             <div className="flex-wrap gap-4">
                                 <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.group}/${post.category.slug}`}>{post.category.name}</Link></p>
                             </div>
@@ -78,13 +80,13 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
                 <button
                     disabled={currentPage === 1}
                     onClick={() => GoToPage(currentPage - 1)}
-                    className="bg-accentry text-xl font-bold py-1 px-4 border rounded-3xl"
+                    className="bg-accent text-xl font-bold py-1 px-4 border rounded-3xl"
                 >前へ</button>
-                <span>{currentPage}/{totalPage}ページ</span>
+                <span className="text-text">{currentPage}/{totalPage}ページ</span>
                 <button
                     disabled={currentPage === totalPage}
                     onClick={() => GoToPage(currentPage + 1)}
-                    className="bg-accentry text-xl font-bold py-1 px-4 border rounded-3xl"
+                    className="bg-accent text-xl font-bold py-1 px-4 border rounded-3xl"
                 >次へ</button>
             </div>
 

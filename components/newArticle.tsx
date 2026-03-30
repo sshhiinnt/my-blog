@@ -54,15 +54,15 @@ const NewArticle = async ({ }: Props) => {
         )
     }
     return (
-        <main className="bg-secondary max-w-4xl w-full">
-            <h2 className="font-bold text-3xl text-center my-4">新着記事</h2>
+        <main className="bg-surface max-w-4xl w-full">
+            <h2 className="font-bold text-3xl text-accent text-center my-4">"新着記事"</h2>
             <ul className="flex flex-col items-center">
                 {posts.map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-accentry md:w-[750px] mx-4 my-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-white md:w-[750px] w-full px-4 my-4">
                         <div>
                             {post.thumbnailUrl && (
                                 <Link href={`/posts/${post.slug}`}>
-                                    <div className="w-[360px] h-[202px] mx-auto mt-4 md:m-4 relative">
+                                    <div className="w-full md:w-[360px] aspect-video mx-auto mt-4 md:m-4 relative">
                                         <Image
                                             src={post.thumbnailUrl}
                                             alt={post.title}
@@ -87,7 +87,7 @@ const NewArticle = async ({ }: Props) => {
                     </li>
 
                 ))}
-                <Link href={`/article/page/1`} className="bg-accentry text-xl font-bold py-1 px-4 border rounded-3xl mb-4">記事一覧ページへ</Link>
+                <Link href={`/article/page/1`} className="bg-accent text-text text-xl font-bold py-1 px-4 border rounded-3xl mb-4">"もっと見る"</Link>
             </ul>
         </main >
     )

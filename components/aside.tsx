@@ -82,7 +82,7 @@ const Aside = () => {
                 <EquipmentArtLink />
             </div>
             <div className="bg-accent mt-4 rounded-3xl border-">
-                <h3 className="font-noto text-2xl text-center font-bold pt-4">"Category"</h3>
+                <h3 className="font-noto text-2xl text-center font-bold pt-4">Category</h3>
                 {loading ? (
                     <p>読み込み中……</p>
                 ) : (

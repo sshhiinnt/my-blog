@@ -3,6 +3,7 @@ import TopImage from "components/topImage";
 import NewArticle from "components/newArticle";
 import Aside from "components/aside";
 import { WebPageSchema } from "components/structuredData";
+import EquipmentArtLink from "components/equpmentArtlink";
 
 
 export async function generateMetadata() {
@@ -28,6 +29,9 @@ export default function Home() {
             />
             <div>
                 <TopImage />
+                <div className="md:hidden">
+                    <EquipmentArtLink />
+                </div>
                 <main className="flex justify-center bg-surface">
                     <article className="max-w-4xl w-full">
                         <NewArticle page={1} />

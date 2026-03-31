@@ -55,7 +55,7 @@ const NewArticle = async ({ }: Props) => {
     }
     return (
         <main className="bg-surface max-w-4xl w-full">
-            <h2 className="font-bold text-3xl text-accent text-center my-4">ー　新着記事　ー</h2>
+            <h2 className="font-bold text-3xl text-accent text-center my-16">ー　新着記事　ー</h2>
             <ul className="flex flex-col md:grid grid-cols-2 gap-16 mx-16">
                 {posts.map((post) => (
                     <li key={post._id} className="flex flex-col bg-white w-full p-4">

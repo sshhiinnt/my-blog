@@ -5,6 +5,7 @@ import Header from "components/headerComp";
 import Footer from "components/footerComp";
 import { Providers } from "./provider";
 import CategoryLinkImage from "components/smCategoryLinkForFooter";
+import Script from "next/script";
 
 
 
@@ -40,6 +41,19 @@ export default function RootLayout({
   return (
 
     <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
+      <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-YZH9KCX97E"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YZH9KCX97E');
+          `}
+        </Script>
+      </head>
       <body className="dark:text-black">
         <Providers>
           <Header />

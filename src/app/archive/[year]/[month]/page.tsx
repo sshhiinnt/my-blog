@@ -118,10 +118,10 @@ export default async function ArchivePage({ params }: Props) {
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
-            <div className="flex justify-center bg-secondary">
+            <div className="flex justify-center bg-surface">
                 <main className="max-w-4xl w-full">
                     <article>
-                        <h1 className="text-2xl font-bold text-center mt-4">{year}年/{month}月の登山・山行の記事一覧</h1>
+                        <h1 className="text-text text-2xl font-bold text-center my-16">{year}年/{month}月の登山・山行の記事一覧</h1>
                         <ArticleList posts={posts} currentPage={currentPage} totalPage={totalPage} basePath={`/archive/${year}/${month}`} />
                     </article>
                 </main>

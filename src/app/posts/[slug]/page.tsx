@@ -76,7 +76,7 @@ export default async function postPage({ params }: Props) {
                 datePublished={new Date(post.createdAt).toISOString()}
                 dateModified={new Date(post.updatedAt || post.createdAt).toISOString()}
             />
-            <div className="flex md:flex-row justify-center bg-secondary pb-4">
+            <div className="flex md:flex-row justify-center bg-surface pb-4">
                 <div className="max-w-4xl w-full bg-white">
                     <h1 className="text-3xl font-bold text-center mt-4">{post.title}</h1>
                     <article className="prose prose-lg dark:prose-invert mx-auto p-4">
@@ -118,9 +118,9 @@ export default async function postPage({ params }: Props) {
                 <Aside />
             </div >
 
-            <nav className="flex flex-col md:flex-row gap-4 py-4 px-4 bg-accentry">
-                <h2 className="font-bold text-2xl">関連記事</h2>
-                <ul className="flex flex-col md:flex-row gap-4 mb-4 mx-4">
+            <nav className="bg-accent">
+                <h2 className="font-bold text-2xl text-center py-4">↓関連記事↓</h2>
+                <ul className="flex flex-col md:flex-row gap-4 py-4 px-4">
                     {relatedPosts.map(post => (
                         <li key={post.area} className="w-full md:w-64">
                             <Link href={`/posts/${post.slug}`}>

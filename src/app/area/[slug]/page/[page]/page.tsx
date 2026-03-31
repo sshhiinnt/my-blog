@@ -149,7 +149,7 @@ export default async function AreaPage({ params }: Props) {
                 lastReviewed="2025-08-27T11:00:00Z"
                 authorName="都市慎太郎"
             />
-            <div className="flex justify-center bg-secondary">
+            <div className="flex justify-center bg-surface">
                 <main className="max-w-4xl w-full">
                     <article>
                         <h2 className="text-2xl font-bold text-center mt-4">{area}の記事</h2>

@@ -42,7 +42,7 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
         <main className="bg-surface max-w-4xl w-full">
             <ul className="flex flex-col items-center">
                 {(posts ?? []).map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-white md:max-w-[750px] w-full mx-auto px-4 my-4">
+                    <li key={post._id} className="flex flex-col md:flex-row bg-white md:max-w-[750px] w-full mx-auto px-4 mb-16">
                         <div>
                             {post.thumbnailUrl && (
                                 <div className="w-full md:w-[360px] aspect-video mx-auto mt-4 md:m-4 relative">
@@ -76,7 +76,7 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
 
                 ))}
             </ul>
-            <div className="flex justify-center gap-4 mb-4">
+            <div className="flex justify-center gap-16">
                 <button
                     disabled={currentPage === 1}
                     onClick={() => GoToPage(currentPage - 1)}

@@ -56,13 +56,13 @@ const NewArticle = async ({ }: Props) => {
     return (
         <main className="bg-surface max-w-4xl w-full">
             <h2 className="font-bold text-3xl text-accent text-center my-4">ー　新着記事　ー</h2>
-            <ul className="flex flex-col items-center">
+            <ul className="flex flex-col md:grid grid-cols-2 gap-16 mx-16">
                 {posts.map((post) => (
-                    <li key={post._id} className="flex flex-col md:flex-row bg-white md:w-[750px] w-full px-4 my-4">
+                    <li key={post._id} className="flex flex-col bg-white w-full p-4">
                         <div>
                             {post.thumbnailUrl && (
                                 <Link href={`/posts/${post.slug}`}>
-                                    <div className="w-full md:w-[360px] aspect-video mx-auto mt-4 md:m-4 relative">
+                                    <div className="w-full aspect-video mx-auto mt-4 relative">
                                         <Image
                                             src={post.thumbnailUrl}
                                             alt={post.title}
@@ -72,13 +72,13 @@ const NewArticle = async ({ }: Props) => {
                                     </div></Link>
                             )}
                         </div>
-                        <div className="flex-wrap p-4">
-                            <div className="flex-wrap gap-4">
-                                <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.group}/${post.category.slug}`}>{post.category.name}</Link></p>
+                        <div className="pt-4 p-1">
+                            <h3 className="text-xl font-bold hover:opacity-70 "><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+                            <div className="gap-4">
+                                <p className="text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.group}/${post.category.slug}`}>・{post.category.name}</Link></p>
                             </div>
-                            <p className="font-bold">日付:{post.climbDate ? new Date(post.climbDate).toISOString().split("T")[0] : "未設定"}</p>
-                            <h3 className="md:text-2xl text-xl font-bold hover:opacity-70 "><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
-                            <div>
+                            <p className="text-sm">{post.climbDate ? new Date(post.climbDate).toISOString().split("T")[0] : "未設定"}</p>
+                            <div className="text-sm">
                                 <ReactMarkdown>
                                     {post.content.slice(0, 50) + "......"}
                                 </ReactMarkdown>
@@ -87,8 +87,10 @@ const NewArticle = async ({ }: Props) => {
                     </li>
 
                 ))}
-                <Link href={`/article/page/1`} className="bg-accent text-text text-xl font-bold py-1 px-4 border rounded-3xl mb-4">ー　もっと見る　ー</Link>
             </ul>
+            <div className="flex m-16 justify-center">
+                <Link href={`/article/page/1`} className="bg-accent text-text text-xl font-bold py-1 px-4 border rounded-3xl mb-4 items-center">ー　もっと見る　ー</Link>
+            </div>
         </main >
     )
 }

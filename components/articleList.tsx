@@ -57,11 +57,11 @@ export default function ArticleList({ posts, currentPage, totalPage, basePath }:
                             )}
                         </div>
                         <div className="flex-1 p-4">
-                            <div className="flex-wrap gap-4">
+                            <div>
                                 <p className="text-sm text-gray-500 hover:opacity-70"><Link href={`/categories/${post.category.group}/${post.category.slug}`}>{post.category.name}</Link></p>
                             </div>
                             <p className="font-bold">{post.climbDate ? new Date(post.climbDate).toISOString().split("T")[0] : "未設定"}</p>
-                            <h3 className="text-2xl font-bold hover:opacity-70"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
+                            <h3 className="font-bold hover:opacity-70"><Link href={`/posts/${post.slug}`}>{post.title}</Link></h3>
                             <div>
                                 <ReactMarkdown>
                                     {post.content.slice(0, 50) + "......"}

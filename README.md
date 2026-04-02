@@ -4,6 +4,15 @@
 - ホームページ
 ![ホームページ](public/screenShots/homePage.png)
 ![ホームページ](public/screenShots/homePage2.png)
+![ホームページ](public/screenShots/homePage3.png)
+- モバイルホームページ
+![ホームページ](public/screenShots/mbHomePage.png)
+![ホームページ](public/screenShots/mbHomePage2.png)
+![ホームページ](public/screenShots/mbHomePage3.png)
+![ホームページ](public/screenShots/mbHomePage4.png)
+![ホームページ](public/screenShots/mbHomePage5.png)
+![ホームページ](public/screenShots/mbHomePage6.png)
+![ホームページ](public/screenShots/mbHomePage7.png)
 - 記事一覧ページ
 ![記事一覧ページ](public/screenShots/articleListPage.png)
 - 記事投稿ページ（Markdownエディタ）

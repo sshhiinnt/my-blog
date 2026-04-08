@@ -10,12 +10,12 @@ import HeaderArchiveDropDown from "./selectArchive";
 const Header = () => {
     return (
         <>
-            <header className="bg-accent text-white relative h-20 flex items-center justify-center md:justify-start">
-                <h1 className="text-4xl font-Rockn md:ml-16">
+            <header className="bg-accent text-white relative h-20 flex items-center md:justify-start">
+                <h1 className="text-4xl font-Rockn ml-16">
                     <Link href="/">YAMAORI</Link>
                 </h1>
                 <nav>
-                    <div className="flex gap-8 md:hidden">
+                    <div className="flex gap-8 absolute right-8 top-8 md:hidden">
                         <Link
                             href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
                             target="_blank"
@@ -26,7 +26,7 @@ const Header = () => {
                                 alt="youtubeへのリンク"
                                 width={32}
                                 height={32}
-                                className="absolute right-8 top-8 hover:scale-110 transition-transform"
+                                className=" hover:scale-110 transition-transform"
                             />
                         </Link>
                         <Link
@@ -39,7 +39,7 @@ const Header = () => {
                                 alt="instagramへのリンク"
                                 width={32}
                                 height={32}
-                                className="absolute left-8 top-8 hover:scale-110 transition-transform"
+                                className="hover:scale-110 transition-transform"
                             />
                         </Link>
                     </div>

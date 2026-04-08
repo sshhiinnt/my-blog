@@ -6,13 +6,13 @@ export default function SnsLinkForFooter() {
         <div className="bg-bg p-4 block md:hidden">
             <div className="flex justify-center gap-12">
                 <Link
-                    href="https://x.com/YAMAORI0831"
+                    href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <p>ｘへ</p>
+                    <p>YOUTUBE</p>
                     <Image
-                        src="/icons/x_w.svg"
+                        src="/icons/youtube_w.svg"
                         alt="x（旧Twitter）"
                         width={24}
                         height={24}
@@ -24,7 +24,7 @@ export default function SnsLinkForFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <p>Instagramへ</p>
+                    <p>Instagram</p>
                     <Image
                         src="/icons/instagram_w.svg"
                         alt="instagram"

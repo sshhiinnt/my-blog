@@ -6,12 +6,12 @@ export default function SnsLink() {
         <div className="bg-white rounded-3xl p-4">
             <div className="flex justify-center gap-12">
                 <Link
-                    href="https://x.com/YAMAORI0831"
+                    href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     <Image
-                        src="/icons/x.svg"
+                        src="/icons/youtube.svg"
                         alt="x（旧Twitter）"
                         width={36}
                         height={36}

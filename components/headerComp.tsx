@@ -17,19 +17,6 @@ const Header = () => {
                 <nav>
                     <div className="flex gap-8 absolute right-8 top-1/2 -translate-y-1/2 md:hidden">
                         <Link
-                            href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <Image
-                                src="/icons/youtube_w.svg"
-                                alt="youtubeへのリンク"
-                                width={48}
-                                height={48}
-                                className="bg-white/10 backdrop-blur-md p-1 rounded-full border border-white/20 shadow-md hover:scale-110 transition-transform"
-                            />
-                        </Link>
-                        <Link
                             href="https://www.instagram.com/mt.yamaori/"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -40,6 +27,19 @@ const Header = () => {
                                 width={46}
                                 height={46}
                                 className="bg-white/10 backdrop-blur-md rounded-full border border-white/20 shadow-md hover:scale-110 transition-transform"
+                            />
+                        </Link>
+                        <Link
+                            href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Image
+                                src="/icons/youtube_w.svg"
+                                alt="youtubeへのリンク"
+                                width={54}
+                                height={54}
+                                className="bg-white/10 backdrop-blur-md p-1 rounded-full border border-white/20 shadow-md hover:scale-110 transition-transform"
                             />
                         </Link>
                     </div>

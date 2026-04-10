@@ -34,7 +34,7 @@ export default function EquipmentArtLink() {
                             className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">登山靴の選び方</p>
+                            <p className="font-bold text-text text-3xl hidden md:block">登山靴</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">登山靴</p>
@@ -49,7 +49,7 @@ export default function EquipmentArtLink() {
                             className="animate-tapHint mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">レインウェアの選び方</p>
+                            <p className="font-bold text-text text-3xl hidden md:block">レインウェア</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">レインウェア</p>
@@ -64,7 +64,7 @@ export default function EquipmentArtLink() {
                             className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">登山ザックの選び方</p>
+                            <p className="font-bold text-text text-3xl hidden md:block">登山ザック</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">ザック</p>

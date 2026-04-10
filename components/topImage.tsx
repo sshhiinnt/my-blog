@@ -16,7 +16,7 @@ const TopImage = () => {
             <div className="absolute top-4 left-8 md:top-24 md:left-1/2 md:-translate-x-1/2 text-white font-noto">
                 <div>
                     <h2 className="animate-fadeScaleIn text-center text-8xl md:text-9xl sm:py-6 md:py-8 font-Rockn">山へ</h2>
-                    <p className="pt-16 md:pt-24 md:text-center">このブログでは私の日々の山遊びの記録と、</p>
+                    <p className="pt-12 md:pt-24 md:text-center">このブログでは私の日々の山遊びの記録と、</p>
                     <p className="md:text-center">登山やトレイルランニング、クライミング、沢登りの記録や登山用品の紹介をしています。</p>
                 </div>
                 <div className="hidden md:flex gap-36 mt-24 justify-center">

@@ -9,6 +9,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       colors: {
         bg: "#1a1a1a",
         surface: "#2a2a2a",

@@ -18,7 +18,7 @@ export default function EquipmentArtLink() {
                             alt="登山用品の選び方記事サムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                     </Link>
                 </li>
@@ -31,7 +31,7 @@ export default function EquipmentArtLink() {
                             alt="登山靴の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
                             <p className="font-bold text-text text-3xl hidden md:block">登山靴の選び方</p>
@@ -46,7 +46,7 @@ export default function EquipmentArtLink() {
                             alt="レインウェアの選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="mt-16 rounded-3xl"
+                            className="animate-tapHint mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
                             <p className="font-bold text-text text-3xl hidden md:block">レインウェアの選び方</p>
@@ -61,7 +61,7 @@ export default function EquipmentArtLink() {
                             alt="登山用ザック（リュック）の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                         <div className="absolute inset-0 flex items-center justify-center">
                             <p className="font-bold text-text text-3xl hidden md:block">登山ザックの選び方</p>

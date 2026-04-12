@@ -2,28 +2,42 @@
 - 様々な種類の登山記録や、登山用品の紹介記事を投稿するブログ。
 ## スクリーンショット
 - ホームページ
-![ホームページ](public/screenShots/homePage.png)
-![ホームページ](public/screenShots/homePage2.png)
-![ホームページ](public/screenShots/homePage3.png)
+![ホームページ](public/screenShots/top1.png)
+![ホームページ](public/screenShots/top2.png)
+![ホームページ](public/screenShots/top3.png)
+![ホームページ](public/screenShots/top4.png)
+![ホームページ](public/screenShots/top5.png)
+![ホームページ](public/screenShots/top6.png)
+![ホームページ](public/screenShots/top7.png)
+![ホームページ](public/screenShots/top8.png)
+![ホームページ](public/screenShots/top9.png)
 - モバイルホームページ
-![ホームページ](public/screenShots/mbHomePage.png)
-![ホームページ](public/screenShots/mbHomePage2.png)
-![ホームページ](public/screenShots/mbHomePage3.png)
-![ホームページ](public/screenShots/mbHomePage4.png)
-![ホームページ](public/screenShots/mbHomePage5.png)
-![ホームページ](public/screenShots/mbHomePage6.png)
-![ホームページ](public/screenShots/mbHomePage7.png)
+![ホームページ](public/screenShots/res1.png)
+![ホームページ](public/screenShots/res2.png)
+![ホームページ](public/screenShots/res3.png)
+![ホームページ](public/screenShots/res4.png)
+![ホームページ](public/screenShots/res5.png)
 - 記事一覧ページ
-![記事一覧ページ](public/screenShots/articleListPage.png)
+![記事一覧ページ](public/screenShots/art1.png)
+![記事一覧ページ](public/screenShots/art2.png)
+![記事一覧ページ](public/screenShots/art3.png)
 - 記事投稿ページ（Markdownエディタ）
-![記事投稿ページ](public/screenShots/postEditPage.png)
-- 編集・削除用記事一覧ページ
-![編集・削除用記事一覧ページ](public/screenShots/editArticleListPage.png)
-![編集・削除用記事一覧ページ](public/screenShots/postEditPage2.png)
+![記事投稿ページ](public/screenShots/new.png)
+- 編集・削除用ページ
+![編集・削除用記事一覧ページ](public/screenShots/editart1.png)
+![編集ページ](public/screenShots/artedit.png)
 - 記事詳細ページ
-![記事詳細ページ](public/screenShots/postPage.png)
+![記事詳細ページ](public/screenShots/post1.png)
+![記事詳細ページ](public/screenShots/post2.png)
+![記事詳細ページ](public/screenShots/post3.png)
+- プロフィールページ
+![プロフィールページ](public/screenShots/prof1.png)
+- 問合せページ
+![問合せページ](public/screenShots/con1.png)
+- サイトポリシーページ
+![サイトポリシーページ](public/screenShots/pol1.png)
 - 認証画面
-![認証画面](public/screenShots/loginPage.png)
+![認証画面](public/screenShots/login.png)
 ## 機能
 - 認証（NextAuth）
 - 画像アップロード（S3 Presigned URL）

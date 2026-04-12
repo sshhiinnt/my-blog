@@ -7,8 +7,6 @@
 ![ホームページ](public/screenShots/top3.png)
 ![ホームページ](public/screenShots/top4.png)
 ![ホームページ](public/screenShots/top5.png)
-![ホームページ](public/screenShots/top6.png)
-![ホームページ](public/screenShots/top7.png)
 ![ホームページ](public/screenShots/top8.png)
 ![ホームページ](public/screenShots/top9.png)
 - モバイルホームページ

@@ -17,7 +17,7 @@ const TopImage = () => {
                 <img src="/images/titleLogo.svg" alt="YAMAORI" className="h-12 md:h-36 w-auto" />
                 <h2 className="sr-only">YAMAORI</h2>
             </div>
-            <h3 className="absolute bottom-4 left-4 md:bottom-16 md:left-24 font-noto font-semibold text-md md:text-2xl tracking-wider">日常に、YAMAORIという選択肢。</h3>
+            <h3 className="absolute bottom-4 left-4 md:bottom-16 md:left-24 font-noto font-semibold text-sm md:text-2xl tracking-wider">日常に、YAMAORIという選択肢。</h3>
         </div>
 
     )

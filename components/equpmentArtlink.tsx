@@ -10,7 +10,7 @@ export default function EquipmentArtLink() {
         <div className="bg-surface">
             <h2 className="text-center text-accent text-xl font-bold pt-32">初心者必見！！</h2>
             <h2 className="text-center text-accent text-xl font-bold pt-4">↓登山三種の神器の選び方↓</h2>
-            <ul className="flex gap-4 px-4">
+            <ul className="flex flex-col gap-4 px-4">
                 <li className="">
                     <Link href={`/categories/${encodeURIComponent("道具・装備")}`}>
                         <Image

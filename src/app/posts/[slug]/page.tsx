@@ -118,19 +118,19 @@ export default async function postPage({ params }: Props) {
                 <Aside />
             </div >
 
-            <nav className="bg-accent">
-                <h2 className="font-bold text-2xl text-center py-4">↓関連記事↓</h2>
+            <nav className="bg-surface w-full">
+                <h2 className="text-text font-bold text-2xl text-center py-4">↓関連記事↓</h2>
                 <ul className="flex flex-col md:flex-row gap-4 py-4 px-4">
                     {relatedPosts.map(post => (
                         <li key={post.area} className="w-full md:w-64">
                             <Link href={`/posts/${post.slug}`}>
-                                <h3 className="font-bold text-base mt-4 mb-1">{post.title}</h3>
                                 <Image src={post.thumbnailUrl}
                                     alt={post.title}
                                     height={320}
                                     width={720}
                                     className="w-full h-40 object-cover rounded-lg"
                                 />
+                                <h3 className="font-bold text-base mt-4 mb-1 text-text">{post.title}</h3>
                             </Link>
                         </li>
 

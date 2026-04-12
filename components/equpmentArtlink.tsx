@@ -8,17 +8,17 @@ import Image from "next/image"
 export default function EquipmentArtLink() {
     return (
         <div className="bg-surface">
-            <h2 className="block md:hidden text-center text-accent text-xl font-bold pt-4">初心者必見！！</h2>
-            <h2 className="block md:hidden text-center text-accent text-xl font-bold pt-4">↓登山三種の神器の選び方↓</h2>
-            <ul className="flex overflow-x-auto gap-4 px-4 md:block">
-                <li className="hidden md:block">
+            <h2 className="text-center text-accent text-xl font-bold pt-32">初心者必見！！</h2>
+            <h2 className="text-center text-accent text-xl font-bold pt-4">↓登山三種の神器の選び方↓</h2>
+            <ul className="flex gap-4 px-4">
+                <li className="">
                     <Link href={`/categories/${encodeURIComponent("道具・装備")}`}>
                         <Image
                             src={"/images/equipmentLink.png"}
                             alt="登山用品の選び方記事サムネイル画像"
                             height={360}
                             width={720}
-                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
                     </Link>
                 </li>
@@ -31,10 +31,10 @@ export default function EquipmentArtLink() {
                             alt="登山靴の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">登山靴</p>
+                        <div className="absolute bottom-16 left-8">
+                            <p className="font-noto font-semibold text-text text-2xl hidden md:block">登山靴</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">登山靴</p>
@@ -46,10 +46,10 @@ export default function EquipmentArtLink() {
                             alt="レインウェアの選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="animate-tapHint mt-16 rounded-3xl"
+                            className="mt-16 rounded-3xl"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">レインウェア</p>
+                        <div className="absolute bottom-16 left-8">
+                            <p className="font-noto font-semibold text-text text-2xl hidden md:block">レインウェア</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">レインウェア</p>
@@ -61,10 +61,10 @@ export default function EquipmentArtLink() {
                             alt="登山用ザック（リュック）の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="animate-tapHint hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <p className="font-bold text-text text-3xl hidden md:block">登山ザック</p>
+                        <div className="absolute bottom-16 left-8">
+                            <p className="font-noto font-semibold text-text text-2xl hidden md:block">登山ザック</p>
                         </div>
                     </Link>
                     <p className="text-text font-bold text-lg text-center md:hidden">ザック</p>

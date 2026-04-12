@@ -23,8 +23,8 @@ export default function Prof() {
                 lastReviewed="2025-08-26T15:00:00.000Z"
                 authorName="都市慎太郎"
             />
-            <div className="flex justify-center bg-secondary">
-                <main className="bg-accentry max-w-4xl w-full rounded-3xl my-4">
+            <div className="flex justify-center bg-surface">
+                <main className="bg-accent max-w-4xl w-full rounded-3xl my-4">
                     <h2 className="font-bold text-3xl text-center py-4">Profile</h2>
                     <div className=" flex flex-col items-center">
                         <Image
@@ -34,10 +34,13 @@ export default function Prof() {
                             className="size-96 rounded-3xl" />
                         
                         <div className="pt-4 text-center">
-                            <p className="text-lg font-bold">元登山用品店店員</p>
-                            <p className="text-lg">四季を通して、山歩きやトレイルランニング、クライミング、沢登り等を楽しんでいます。</p>
-                            <p className="text-lg">このブログでは、私の登山記録や店員時代の知識を元に山に関する様々な最新情報を発信します。</p>
-                            <h2 className="my-4 text-center text-3xl font-bold italic underline">このサイトでは記事を募集しています</h2>
+                            <h3 className="text-lg font-bold pb-8">元登山用品店店員</h3>
+                            <h3 className="text-3xl pb-4">短い人生の中で正気に戻った時機にはもう山遊びしかしてなかった。</h3>
+                            <h3 className="text-2xl pb-8">なぜ山に入るのか、楽しい事だけじゃないよ。けれども、気づいたらもう次の計画を立てている。</h3>
+                            <h3 className="text-6xl pb-8 text-start pl-16">素敵な出会い<span className="text-3xl pl-16">たくさん有った。</span></h3>
+                            <h3 className="text-3xl pb-16 text-end">良し悪し問わず……。「人との出会い」という意味だけではなく……。</h3>
+                            <p className="text-sm">このブログでは、私の登山記録や店員時代の知識を元に山に関する様々な最新情報を発信します。</p>
+                            <h3 className="my-8 text-center text-3xl font-bold italic underline pt-32">このサイトでは記事を募集しています</h3>
                             <p className="text-start p-4">山に関する内容であれば詳細は問いません。 情熱あふれるクライマー、おしゃれハイカー、山行記録をぜひお寄せください。<br />
                                 ガイドさんならツアーの紹介や集客の場に活用していただいても良いです。<br />
                                 トレイルランナーの皆さんは大会レポでも大歓迎！<br />

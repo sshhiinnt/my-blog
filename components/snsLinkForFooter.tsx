@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function SnsLinkForFooter() {
     return (
-        <div className="bg-bg p-4 block md:hidden">
+        <div className="bg-bg pt-8">
             <div className="flex justify-center gap-12">
                 <Link
                     href="https://www.youtube.com/@%E5%B1%B1%E3%81%A7%E9%81%8A%E3%81%B0%E3%81%9B%E3%81%A6%E3%82%82%E3%82%89%E3%81%A3%E3%81%A6%E3%81%8A%E3%82%8A%E3%81%BE%E3%81%99"
@@ -14,8 +14,8 @@ export default function SnsLinkForFooter() {
                     <Image
                         src="/icons/youtube_w.svg"
                         alt="x（旧Twitter）"
-                        width={24}
-                        height={24}
+                        width={56}
+                        height={56}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>
@@ -28,8 +28,8 @@ export default function SnsLinkForFooter() {
                     <Image
                         src="/icons/instagram_w.svg"
                         alt="instagram"
-                        width={24}
-                        height={24}
+                        width={48}
+                        height={48}
                         className="hover:scale-110 transition-transform"
                     />
                 </Link>

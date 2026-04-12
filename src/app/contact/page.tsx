@@ -27,12 +27,12 @@ export default function Contact() {
                 authorName="都市慎太郎"
                 contactEmail="rftfaq@gmail.com"
             />
-            <div className="flex justify-center bg-secondary p-4">
-                <main className="max-w-4xl w-full bg-accentry rounded-3xl p-1">
-                    <h1 className="font-bold">お問い合わせ</h1>
+            <div className="flex justify-center bg-surface p-4">
+                <main className="max-w-4xl w-full bg-white rounded-3xl p-1">
+                    <h1 className="font-bold pt-8 pl-8">お問い合わせ</h1>
                     <ContactForm />
-                    <p> 返信にお日にちをいただく場合がございますが、</p>
-                    <p> 何卒、ご容赦くださいませ。</p>
+                    <p className="pt-8 pl-8"> 返信にお日にちをいただく場合がございますが、</p>
+                    <p className="pt-8 pl-8"> 何卒、ご容赦くださいませ。</p>
                 </main>
                 <Aside />
             </div>

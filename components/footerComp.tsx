@@ -6,27 +6,18 @@ import SnsLinkForFooter from "./snsLinkForFooter";
 
 const Footer = () => {
     return (
-        <footer className="bg-bg text-white">
-            <div className=" flex px-4 justify-between md:mx-auto container">
-                <div className="self-center hidden md:block">
-                    <div className="font-bold text-3xl text-center font-Rockn">YAMAORI</div>
-                    <div className="font-Rockn font-bold">山で遊ばせてもらっております</div>
+        <footer className="bg-bg text-white w-full">
+            <div className="grid grid-cols-3 gap-16 mx-16 justify-items-center">
+                <div className="">
+                    <img src="/images/logo.svg" alt="YAMAORIロゴ" className="pt-8 h-32 w-auto" />
                 </div>
                 <nav>
-                    <ul className="list-none py-4 hidden md:block">
-                        <p className="font-bold">カテゴリー</p>
-                        <li><Link href={`/categories/${encodeURIComponent("登山記録")}`}>-登山記録</Link></li>
-                        <li><Link href={`/categories/${encodeURIComponent("トレイルランニング")}`}>-トレイルランニング</Link></li>
-                        <li><Link href={`/categories/${encodeURIComponent("クライミング")}`}>-クライミング</Link></li>
-                        <li><Link href={`/categories/${encodeURIComponent("道具・装備")}`}>-道具・装備</Link></li>
-                        <li><Link href={`/categories/${encodeURIComponent("ひとりごと")}`}>-ひとりごと</Link></li>
-                    </ul>
+                    <SnsLinkForFooter />
                 </nav>
-                <nav className="flex flex-col font-bold py-4 ">
+                <nav className="flex flex-col font-bold py-4 hover:opacity-70">
                     <Link href={"/contact"}>-お問い合わせはこちら</Link>
                     <Link href={"/profile"}>-管理者とこのサイトのこと</Link>
                     <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
-                    <SnsLinkForFooter />
                 </nav>
             </div>
             <p className="text-center py-4">©　2025　YAMAORI　山で遊ばせてもらっております</p>

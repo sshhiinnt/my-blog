@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "components/headerComp";
 import Footer from "components/footerComp";
 import { Providers } from "./provider";
-import CategoryLinkImage from "components/smCategoryLinkForFooter";
+import CategoryLinkImage from "components/categoryLinkImage";
 import Script from "next/script";
 
 

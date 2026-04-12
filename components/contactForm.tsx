@@ -49,8 +49,8 @@ export default function ContactForm() {
 
 
     return (
-        <>
-            <form onSubmit={handleSubmit} className="">
+        <div>
+            <form onSubmit={handleSubmit} className="p-8">
                 <h2 className=""> 氏名 </h2>
                 <input
                     type="text"
@@ -59,7 +59,7 @@ export default function ContactForm() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="" />
+                    className="border rounded-lg" />
                 <h2 className="" > メールアドレス </h2>
                 <input
                     type="email"
@@ -68,7 +68,7 @@ export default function ContactForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="" />
+                    className="border rounded-lg" />
                 <h2 className="" > お問い合わせ内容 </h2>
                 <textarea
                     name="message"
@@ -77,19 +77,19 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="p-1 w-full h-40 md:h-60 lg:h-80"
+                    className="p-1 w-full h-40 md:h-60 lg:h-80 border rounded-lg"
                 />
                 <ReCAPTCHAForm onVerify={setRecaptchaToken} />
                 <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="bg-secondary rounded-3xl font-bold text-xl px-2 border border-black"
+                    className="bg-accent rounded-3xl font-bold text-xl p-3 border border-white/20"
                 >
                     {status === "loading" ? "送信中……" : "送信"}
                 </button>
                 {status === 'success' && <p className="font-bold">送信が完了しました！</p>}
                 {status === 'error' && <p className="font-bold">送信中にエラーが発生しました。</p>}
             </form>
-        </>
+        </div>
     )
 }

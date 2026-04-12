@@ -7,7 +7,7 @@ import SnsLinkForFooter from "./snsLinkForFooter";
 const Footer = () => {
     return (
         <footer className="bg-bg text-white w-full">
-            <div className="grid grid-cols-3 gap-16 mx-16 justify-items-center">
+            <div className="flex flex-col md:grid grid-cols-3 gap-16 mx-16 md:justify-items-center">
                 <div className="">
                     <img src="/images/logo.svg" alt="YAMAORIロゴ" className="pt-8 h-32 w-auto" />
                 </div>

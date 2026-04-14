@@ -31,7 +31,7 @@ export default function Home() {
             />
             <div>
                 <TopImage />
-                <nav className="flex bg-accent text-text font-noto font-semibold gap-16 py-4 md:justify-items-center md:pr-8 lg:pr-16 w-full">
+                <nav className="flex bg-accent text-text font-noto font-semibold gap-16 p-2 md:pl-24 w-full">
                     <Link href={`/categories/${encodeURIComponent("道具・装備")}`} className="hover:opacity-70"><span className="hidden md:block">▲登山用品・道具について</span><span className="block md:hidden">▲登山用品</span></Link>
                     <HeaderArchiveDropDown />
                     <HeaderAreaDropDown />

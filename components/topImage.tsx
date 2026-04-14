@@ -18,8 +18,8 @@ const TopImage = () => {
                 <h1 className="sr-only">YAMAORI</h1>
             </div>
             <h3 className="absolute bottom-4 left-4 md:bottom-16 md:left-24 font-noto font-semibold text-xs md:text-2xl tracking-wider">日常に、YAMAORIという選択肢。</h3>
-            <h3 className="hidden md:block absolute right-40 top-4 font-serif text-6xl text-text tracking-widest leading-normal [writing-mode:vertical-rl]">生きるには、<br />山や自然との<br />関りから得られる<br />心にくべる薪が<br />必要なんです。</h3>
-            <h3 className="block md:hidden absolute right-16 top-8 font-serif text-sm text-text tracking-widest leading-relaxed [writing-mode:vertical-rl]">生きるには、<br />山や自然との<br />関りから得られる<br />心にくべる薪が<br />必要なんです。</h3>
+            <h3 className="hidden md:block absolute right-40 top-4 font-serif text-6xl text-text tracking-widest leading-normal [writing-mode:vertical-rl]">生きるには、<br /><span className="text-8xl font-bold">山</span>や<span className="text-8xl font-bold">自然</span>との<br />関りから得られる<br /><span className="text-8xl font-bold">心</span>にくべる<span className="text-8xl font-bold">薪</span>が<br />必要なんです。</h3>
+            <h3 className="block md:hidden absolute right-16 top-8 font-serif text-sm text-text tracking-widest leading-relaxed [writing-mode:vertical-rl]">生きるには、<br /><span className="text-lg font-bold">山</span>や<span className="text-lg font-bold">自然</span>との<br />関りから得られる<br /><span className="text-lg font-bold">心</span>にくべる<span className="text-lg font-bold">薪</span>が<br />必要なんです。</h3>
         </div>
 
     )

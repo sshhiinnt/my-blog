@@ -31,7 +31,7 @@ export default function Prof() {
                             src="/images/plof.JPG"
                             width={2108} height={2107}
                             alt="YAMAORI筆者のプロフィール写真"
-                            className="size-96 rounded-3xl" />
+                            className="size-96 rounded-3xl p-4 md:p-0" />
 
                         <div className="pt-4 text-center">
                             <h3 className="text-lg font-bold pb-8">元登山用品店店員</h3>

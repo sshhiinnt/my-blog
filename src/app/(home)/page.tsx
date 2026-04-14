@@ -3,6 +3,9 @@ import TopImage from "components/topImage";
 import NewArticle from "components/newArticle";
 import { WebPageSchema } from "components/structuredData";
 import EquipmentArtLink from "components/equpmentArtlink";
+import Link from "next/link";
+import HeaderArchiveDropDown from "components/selectArchive";
+import HeaderAreaDropDown from "components/selectArea";
 
 
 export async function generateMetadata() {
@@ -28,6 +31,11 @@ export default function Home() {
             />
             <div>
                 <TopImage />
+                <nav className="flex bg-accent text-text font-noto font-semibold gap-16 py-4 md:justify-items-center md:pr-8 lg:pr-16 w-full">
+                    <Link href={`/categories/${encodeURIComponent("道具・装備")}`} className="hover:opacity-70"><span className="hidden md:block">▲登山用品・道具について</span><span className="block md:hidden">▲登山用品</span></Link>
+                    <HeaderArchiveDropDown />
+                    <HeaderAreaDropDown />
+                </nav>
                 <main className="flex justify-center bg-surface">
                     <article className="max-w-4xl w-full">
                         <NewArticle page={1} />

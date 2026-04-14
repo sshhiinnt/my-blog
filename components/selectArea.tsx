@@ -59,7 +59,7 @@ export default function HeaderAreaDropDown() {
             <select
                 value={selectedArea}
                 onChange={handleChange}
-                className="bg-bg hover:cursor-pointer">
+                className="bg-accent hover:cursor-pointer hover:opacity-70">
                 <option value="">▲エリアを選択</option>
                 {areas.map(a => (
                     a.slug !== "noarea" && (

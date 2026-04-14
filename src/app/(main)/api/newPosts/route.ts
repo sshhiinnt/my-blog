@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/lib/mongodb";
-import Post from "../../../../models/post";
+import Post from "../../../../../models/post";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import z from "zod";

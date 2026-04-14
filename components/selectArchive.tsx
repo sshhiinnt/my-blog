@@ -46,7 +46,7 @@ export default function HeaderArchiveDropDown() {
             <select
                 value={selectedArchive}
                 onChange={handleChange}
-                className="bg-bg hover:cursor-pointer">
+                className="bg-accent hover:cursor-pointer hover:opacity-70">
                 <option value="">▲年月で記事を検索</option>
                 {archives.map((a) => (
                     <option key={`${a.year}-${a.month}`} value={`${a.year}-${a.month}`}>{a.label}</option>

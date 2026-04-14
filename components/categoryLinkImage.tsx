@@ -67,8 +67,6 @@ export default function CategoryLinkImage() {
                         </div>
                     </Link>
                 </div>
-
-
             </nav >
         </div>
     )

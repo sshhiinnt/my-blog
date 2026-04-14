@@ -1,7 +1,6 @@
 import { Noto_Sans_Display } from "next/font/google"
 import { RocknRoll_One } from "next/font/google"
 import "./globals.css";
-import Header from "components/headerComp";
 import Footer from "components/footerComp";
 import { Providers } from "./provider";
 import CategoryLinkImage from "components/categoryLinkImage";

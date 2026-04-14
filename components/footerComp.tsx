@@ -11,13 +11,13 @@ const Footer = () => {
                 <div className="">
                     <img src="/images/logo.svg" alt="YAMAORIロゴ" className="pt-8 h-32 w-auto" />
                 </div>
-                <nav>
+                <nav className="justify-items-end">
                     <SnsLinkForFooter />
                 </nav>
-                <nav className="flex flex-col font-bold py-4 hover:opacity-70">
-                    <Link href={"/contact"}>-お問い合わせはこちら</Link>
-                    <Link href={"/profile"}>-管理者とこのサイトのこと</Link>
-                    <Link href={"/site-policy"}>-サイトポリシー・免責事項</Link>
+                <nav className="flex flex-col font-bold hover:opacity-70">
+                    <Link href={"/contact"} className="py-4">-お問い合わせはこちら</Link>
+                    <Link href={"/profile"} className="py-4">-管理者とこのサイトのこと</Link>
+                    <Link href={"/site-policy"} className="py-4">-サイトポリシー・免責事項</Link>
                 </nav>
             </div>
             <p className="text-center py-4">©　2025　YAMAORI　山で遊ばせてもらっております</p>

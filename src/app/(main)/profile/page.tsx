@@ -37,7 +37,7 @@ export default function Prof() {
                             <h3 className="text-lg font-bold pb-8">元登山用品店店員</h3>
                             <div className="hidden md:block">
                                 <h3 className="text-3xl pb-4">短い人生の中で正気に戻った時機にはもう山遊びしかしてなかった。</h3>
-                                <h3 className="text-2xl pb-8">なぜ山に入るのか、楽しい事だけじゃないよ。けれども、気づいたらもう次の計画を立てている。</h3>
+                                <h3 className="text-2xl pb-8">「なぜ山に入るのか、楽しい事だけじゃない。」けれども、気づいたらもう次の計画を立てている。</h3>
                                 <h3 className="text-6xl pb-8 text-start pl-16">素敵な出会い<span className="text-3xl pl-16">も、たくさん有った。</span></h3>
                                 <h3 className="text-3xl pb-16 text-end">良し悪し問わず……。「人との出会い」という意味だけではなく……。</h3>
                             </div>
@@ -45,7 +45,7 @@ export default function Prof() {
                                 <h3 className="text-3xl pb-4 tracking-wide leading-relaxed font-serif [writing-mode:vertical-rl]">
                                     <span className="inline-block">山遊びしかしてなかった。</span>
                                     <span className="inline-block">なぜ山に入るのか、</span>
-                                    <span className="inline-block">「楽しい事だけじゃないよ」</span>
+                                    <span className="inline-block">「楽しい事だけじゃない」</span>
                                     <span className="inline-block">けれども、気づいたら</span>
                                     <span className="inline-block">もう次の山の計画を立てている。</span>
                                     <span className="inline-block">素敵な出会いもたくさん有った。</span>

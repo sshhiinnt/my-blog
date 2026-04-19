@@ -58,7 +58,7 @@ const NewArticle = async ({ }: Props) => {
             <h4 className="font-noto font-semibold text-xl text-text text-center my-16">新着記事</h4>
             <ul className="flex flex-col md:grid grid-cols-3 gap-16 mx-4">
                 {posts.map((post) => (
-                    <li key={post._id} className="flex flex-col bg-white w-full p-4">
+                    <li key={post._id} className="flex flex-col bg-white w-full p-4 rounded-md">
                         <div>
                             {post.thumbnailUrl && (
                                 <Link href={`/posts/${post.slug}`}>

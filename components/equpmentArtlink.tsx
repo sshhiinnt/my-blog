@@ -18,7 +18,7 @@ export default function EquipmentArtLink() {
                             alt="登山用品の選び方記事サムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-md"
                         />
                     </Link>
                 </li>
@@ -31,7 +31,7 @@ export default function EquipmentArtLink() {
                             alt="登山靴の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-md"
                         />
                         <div className="absolute bottom-16 left-8">
                             <p className="font-noto font-semibold text-text text-2xl hidden md:block">登山靴</p>
@@ -46,7 +46,7 @@ export default function EquipmentArtLink() {
                             alt="レインウェアの選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="mt-16 rounded-3xl"
+                            className="mt-16 rounded-md"
                         />
                         <div className="absolute bottom-16 left-8">
                             <p className="font-noto font-semibold text-text text-2xl hidden md:block">レインウェア</p>
@@ -61,7 +61,7 @@ export default function EquipmentArtLink() {
                             alt="登山用ザック（リュック）の選び方記事のサムネイル画像"
                             height={360}
                             width={720}
-                            className="hover:scale-95 transition-transform mt-16 rounded-3xl"
+                            className="hover:scale-95 transition-transform mt-16 rounded-md"
                         />
                         <div className="absolute bottom-16 left-8">
                             <p className="font-noto font-semibold text-text text-2xl hidden md:block">登山ザック</p>

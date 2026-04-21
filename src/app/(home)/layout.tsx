@@ -41,6 +41,7 @@ export default function RootLayout({
 
     <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
       <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-YZH9KCX97E"
           strategy="afterInteractive"
         />

@@ -41,7 +41,6 @@ export default function RootLayout({
 
     <html lang="ja" className={`${notoSansDisplay.variable} ${RocknRollOne.variable}`}>
       <head>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-YZH9KCX97E"
           strategy="afterInteractive"
         />
@@ -51,8 +50,9 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-YZH9KCX97E');
-          `}
+            `}
         </Script>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3008954899847844"
           crossOrigin="anonymous" />
         <meta name="google-adsense-account" content="ca-pub-3008954899847844"></meta>

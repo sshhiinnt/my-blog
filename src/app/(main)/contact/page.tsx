@@ -31,8 +31,9 @@ export default function Contact() {
                 <main className="max-w-4xl w-full bg-white rounded-3xl p-1">
                     <h1 className="font-bold pt-8 pl-8">お問い合わせ</h1>
                     <ContactForm />
-                    <p className="pt-8 pl-8"> 返信にお日にちをいただく場合がございますが、</p>
-                    <p className="pt-8 pl-8"> 何卒、ご容赦くださいませ。</p>
+                    <p className="py-8 pl-8"> 返信にお日にちをいただく場合がございますが、</p>
+                    <p className="py-8 pl-8"> 何卒、ご容赦くださいませ。</p>
+                    <p className="py-8 pl-8"> お急ぎの方は、InstagramのDMでご連絡ください。</p>
                 </main>
                 <Aside />
             </div>

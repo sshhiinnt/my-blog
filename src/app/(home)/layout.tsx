@@ -50,12 +50,10 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-YZH9KCX97E');
-            `}
+          `}
         </Script>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3008954899847844"
+        <Script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3008954899847844"
+          strategy="afterInteractive"
           crossOrigin="anonymous" />
         <meta name="google-adsense-account" content="ca-pub-3008954899847844"></meta>
       </head>

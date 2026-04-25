@@ -37,19 +37,19 @@
 ## アーキテクチャ
 - YAMAORIはNext.jsを用いたフルスタック構成で実装しています。
 - 全体構成　
- - Client(Next.js)→API Router(Next.js)→MongoDB
+    - Client(Next.js)→API Router(Next.js)→MongoDB
 - 画像アップロード
- - Client→Presigned URL→S3
+    - Client→Presigned URL→S3
 ### フロントエンド
 - Next.js App Routerを使用し、ページ単位でサーバーコンポーネントとクライアントコンポーネントを適切に分離しています。
 - UIはTailwind CSSで構築し、コンポーネント単位で再利用しやすくしています。
 ### API設計
 - Next.jsのAPI Routesをバックエンドとして利用
 - エンドポイントの例
- - api/categories :DBからカテゴリーを取得
- - api/s3upload:S3直接アップロード用の署名付きURLを発行(ユーザー権限認証あり)
- - api/contact:reCAPTCHA検証後、問い合わせ内容を保存し、管理者へメール送信
- - api/posts/[slug]:記事の取得・更新・削除(CRUD)
+    - api/categories :DBからカテゴリーを取得
+    - api/s3upload:S3直接アップロード用の署名付きURLを発行(ユーザー権限認証あり)
+    - api/contact:reCAPTCHA検証後、問い合わせ内容を保存し、管理者へメール送信
+    - api/posts/[slug]:記事の取得・更新・削除(CRUD)
  ### 画像アップロードフロー
 - サーバ負荷軽減とセキュリティを考慮し、S3への直接アップロード
 - サーバーレス環境（Vercel）の制約を考慮し、ファイルをAPI経由させずS3へ直接アップロードする構成を採用

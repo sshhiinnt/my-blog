@@ -1,8 +1,8 @@
 # YAMAORI
-- YAMAORIは、様々な種類の登山記録や、登山用品の紹介記事を投稿するブログ。SEOやレンダリングパフォーマンスを意識し、公開・実運用前提で開発しています。
+- YAMAORIは、様々な種類の登山記録や、登山用品の紹介記事を投稿するブログです。SEOやレンダリングパフォーマンスを意識し、公開・実運用前提で開発しています。Next.js / MongoDB / S3 / NextAuth認証 フルスタック構成。
 - URL:https://yamaori.jp
 
-### スクリーンショット
+### トップページ
 ![ホームページ](public/screenShots/topPage.png)
 ![ホームページ](public/screenShots/topPage2.png)
 
@@ -18,7 +18,7 @@
 - 認証:NextAuth
 - 記事表示:reactMarkdown
 - セキュリティ:ReCAPTCHA,JWT
-- メール送信:resent
+- メール送信:Resend
 - キャプション自動生成:GroqAPI
 
 ### スクリーンショット
@@ -45,10 +45,10 @@
 ### API設計
 - Next.jsのAPI Routesをバックエンドとして利用
 - エンドポイントの例
- - api/categories (DBからカテゴリーを取得)
- - api/s3upload (認証ユーザーに対してS3直接アップロード用の署名付きURLを発行する)
- - api/contact (reCAPTCHAによるスパム対策を行い、お問い合わせ内容の保存とメールを管理者へ送信する)
- - api/posts/[slug] (記事の取得・更新・削除を行う)
+ - api/categories :DBからカテゴリーを取得
+ - api/s3upload:S3直接アップロード用の署名付きURLを発行(ユーザー権限認証あり)
+ - api/contact:reCAPTCHA検証後、問い合わせ内容を保存し、管理者へメール送信
+ - api/posts/[slug]:記事の取得・更新・削除(CRUD)
  ### 画像アップロードフロー
 - サーバ負荷軽減とセキュリティを考慮し、S3への直接アップロード
 - サーバーレス環境（Vercel）の制約を考慮し、ファイルをAPI経由させずS3へ直接アップロードする構成を採用

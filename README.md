@@ -1,6 +1,11 @@
 # YAMAORI
 - YAMAORIは、様々な種類の登山記録や、登山用品の紹介記事を投稿するブログ。SEOやレンダリングパフォーマンスを意識し、公開・実運用前提で開発しています。
 - URL:https://yamaori.jp
+
+### スクリーンショット
+![ホームページ](public/screenShots/topPage.png)
+![ホームページ](public/screenShots/topPage2.png)
+
 # 開発の背景
 - 登山に関する情報は、地図アプリに付随する記録として公開されているものばかりで、純粋な読み物として提供されているコンテンツが極めて少ないと感じていたので、「記録」ではなく、読みやすく整理されたコンテンツとして、情報を届けるブログを開発しました。
 
@@ -15,6 +20,18 @@
 - セキュリティ:ReCAPTCHA,JWT
 - メール送信:resent
 - キャプション自動生成:GroqAPI
+
+### スクリーンショット
+- 記事投稿画面
+![記事投稿画面](public/screenShots/newPost.png)
+- 記事管理画面
+![記事管理画面](public/screenShots/artList.png)
+- 記事編集画面
+![記事編集画面](public/screenShots/editPost.png)
+- ログイン画面
+![ログイン画面](public/screenShots/login.png)
+
+
 
 ## アーキテクチャ
 - YAMAORIはNext.jsを用いたフルスタック構成で実装しています。
@@ -128,40 +145,3 @@ npm install
 npm run dev
 
 
-
-## スクリーンショット
-- ホームページ
-![ホームページ](public/screenShots/top1.png)
-![ホームページ](public/screenShots/top2.png)
-![ホームページ](public/screenShots/top3.png)
-![ホームページ](public/screenShots/top4.png)
-![ホームページ](public/screenShots/top5.png)
-![ホームページ](public/screenShots/top8.png)
-![ホームページ](public/screenShots/top9.png)
-- モバイルホームページ
-![ホームページ](public/screenShots/res1.png)
-![ホームページ](public/screenShots/res2.png)
-![ホームページ](public/screenShots/res3.png)
-![ホームページ](public/screenShots/res4.png)
-![ホームページ](public/screenShots/res5.png)
-- 記事一覧ページ
-![記事一覧ページ](public/screenShots/art1.png)
-![記事一覧ページ](public/screenShots/art2.png)
-![記事一覧ページ](public/screenShots/art3.png)
-- 記事投稿ページ（Markdownエディタ）
-![記事投稿ページ](public/screenShots/new.png)
-- 編集・削除用ページ
-![編集・削除用記事一覧ページ](public/screenShots/editart1.png)
-![編集ページ](public/screenShots/artedit.png)
-- 記事詳細ページ
-![記事詳細ページ](public/screenShots/post1.png)
-![記事詳細ページ](public/screenShots/post2.png)
-![記事詳細ページ](public/screenShots/post3.png)
-- プロフィールページ
-![プロフィールページ](public/screenShots/prof1.png)
-- 問合せページ
-![問合せページ](public/screenShots/con1.png)
-- サイトポリシーページ
-![サイトポリシーページ](public/screenShots/pol1.png)
-- 認証画面
-![認証画面](public/screenShots/login.png)

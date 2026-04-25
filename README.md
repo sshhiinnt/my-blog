@@ -1,5 +1,6 @@
 # YAMAORI
-- YAMAORIは、様々な種類の登山記録や、登山用品の紹介記事を投稿するブログです。SEOやレンダリングパフォーマンスを意識し、公開・実運用前提で開発しています。Next.js / MongoDB / S3 / NextAuth認証 フルスタック構成。
+- YAMAORIは、様々な種類の登山記録や、登山用品の紹介記事を投稿するブログです。SEOやレンダリングパフォーマンスを意識し、公開・実運用前提で開発しています。
+- Next.js / MongoDB / S3 / NextAuth認証のフルスタック構成。
 - URL:https://yamaori.jp
 
 ### トップページ
@@ -36,7 +37,7 @@
 ## アーキテクチャ
 - YAMAORIはNext.jsを用いたフルスタック構成で実装しています。
 - 全体構成　
-　- Client(Next.js)→API Router(Next.js)→MongoDB
+ - Client(Next.js)→API Router(Next.js)→MongoDB
 - 画像アップロード
  - Client→Presigned URL→S3
 ### フロントエンド
@@ -54,38 +55,38 @@
 - サーバーレス環境（Vercel）の制約を考慮し、ファイルをAPI経由させずS3へ直接アップロードする構成を採用
 - アップロードフロー
  1. Client → API（/api/s3upload）
-   -  画像情報（filename / filetype）を送信し、署名付きURLを取得
+    - 画像情報（filename / filetype）を送信し、署名付きURLを取得
  2. API → Client 
-   - Presigned POST（url + fields）を返却
+    - Presigned POST（url + fields）を返却
  3. Client → S3 
-   - 取得したurlとfieldsを用いて、FormData形式で直接アップロード
+    - 取得したurlとfieldsを用いて、FormData形式で直接アップロード
  4. S3 → Client
-   - アップロード成功（HTTP 204）
+    - アップロード成功（HTTP 204）
  5. Client → DB
-   - 生成された画像URLを記事データとして保存
+    - 生成された画像URLを記事データとして保存
 - 詳細
  1. Client → API（/api/s3upload）
-   -  GET /api/s3upload?filename&filetype
+    - GET /api/s3upload?filename&filetype
  2. API → Client 
-   - 認証チェック(NextAuth/role)
-   - Presigned POST返却（AWS SDK）
+    - 認証チェック(NextAuth/role)
+    - Presigned POST返却（AWS SDK）
  3. Client → S3 
-   - 取得したurlとfieldsを用いて、FormData形式で直接アップロード
+    - 取得したurlとfieldsを用いて、FormData形式で直接アップロード
  4. S3 → Client
-   - アップロード成功（HTTP 204）
+    - アップロード成功（HTTP 204）
  5. Client → DB
-   - 画像URLを取得、整形し、Markdownへ挿入。
+    - 画像URLを取得、整形し、Markdownへ挿入。
 - 実装にあたって
- - 認証制御
-  - /api/s3upload にて管理者のみURL発行可能（NextAuth）
- - クライアントから直接アップロード
-  - サーバーを経由せず、クライアントからS3へ直接送信
-  - 大容量ファイルでもスケーラブルに対応
- - Presigned POST
-  - アップロード条件（ACLなど）を制御可能
- - UX
-  - アップロード後、自動でMarkdown形式に変換し本文へ挿入
-  - 画像サイズも取得し、表示制御に利用できる設計
+    - 認証制御
+        - /api/s3upload にて管理者のみURL発行可能（NextAuth）
+    - クライアントから直接アップロード
+        - サーバーを経由せず、クライアントからS3へ直接送信
+        - 大容量ファイルでもスケーラブルに対応
+    - Presigned POST
+        - アップロード条件（ACLなど）を制御可能
+    - UX
+        - アップロード後、自動でMarkdown形式に変換し本文へ挿入
+        - 画像サイズも取得し、表示制御に利用できる設計
 
  ### DB
  - MongoDB(Mongoose)
@@ -115,19 +116,19 @@
 
 ## 工夫したポイント
 - SEO
- - 動的メタデータ生成
- - 構造化データ(JSON-LD)
- - sitemap/robots.txt整備
+    - 動的メタデータ生成
+    - 構造化データ(JSON-LD)
+    - sitemap/robots.txt整備
 - パフォーマンス最適化
- - 画像はS3で配信、必要な記事データのみを取得
- - 静的生成（SSG）とサーバーサイドレンダリング（SSR）の最適な組み合わせ
+    - 画像はS3で配信、必要な記事データのみを取得
+    - 静的生成（SSG）とサーバーサイドレンダリング（SSR）の最適な組み合わせ
 - UI/UX デザイン
- - Tailwind CSSとカスタムコンポーネントでレスポンシブ対応
- - Markdownエディタでプレビュー表示
+    - Tailwind CSSとカスタムコンポーネントでレスポンシブ対応
+    - Markdownエディタでプレビュー表示
 - セキュリティ
- - ReCAPTCHAによるスパム対策
- - JWTトークンで認証情報管理
- - Presigned URLで安全に画像アップロード
+    - ReCAPTCHAによるスパム対策
+    - JWTトークンで認証情報管理
+    - Presigned URLで安全に画像アップロード
 
  ## 今後の展望
  - 検索機能の強化

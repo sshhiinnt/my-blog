@@ -43,7 +43,8 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
     }
 
-    const key = filename;
+    const ext = filename.split(".").pop();
+    const key = `articles/${Date.now()}-${crypto.randomUUID()}.${ext}`;
 
 
     try {
@@ -66,7 +67,7 @@ export async function GET(req: NextRequest) {
 
 
         console.log("Generated signed URI successfully.");
-        return NextResponse.json({ url, fields });
+        return NextResponse.json({ url, fields , key });
     } catch (error) {
         console.error("Error generation signed URI:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

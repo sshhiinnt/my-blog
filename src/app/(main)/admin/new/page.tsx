@@ -101,7 +101,7 @@ export default function NewPostPage() {
                     console.log("Uploading file:", file.name, "type:", file.type);
 
 
-                    const { url, fields } = await res.json();
+                    const { url, fields , key } = await res.json();
 
                     const formData = new FormData();
                     Object.keys(fields).forEach(key => {
@@ -118,7 +118,7 @@ export default function NewPostPage() {
                     console.log([...formData.entries()]);
 
                     if (uploadRes.ok) {
-                        const publicUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${encodeURIComponent(file.name)}`
+                        const publicUrl = `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${key}`
 
                         const imgDimentions = await new Promise<{ width: number, height: number }>((resImg, rejImg) => {
                             const img = new Image();

@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import z from "zod";
 import { generateSlug } from "@/lib/slugify";
+import { revalidatePath } from "next/cache";
 
 
 const postSchema = z.object({
@@ -161,6 +162,9 @@ export async function POST(req: NextRequest) {
 
         const post = await Post.create(validated);
 
+        revalidatePath("/");
+        revalidatePath("/posts");
+        revalidatePath(`/posts/${post.slug}`);
 
 
 

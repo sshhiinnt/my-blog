@@ -8,7 +8,10 @@ export async function GET() {
     await connect();
 
     const posts = await Post.find({}, { slug: 1, updatedAt: 1 }).lean();
-    const categories = await Category.find({}, { slug: 1 }).lean();
+    const categories = await Category.find({}, { slug: 1, group: 1 }).lean();
+    const groups = [
+        ...new Set(categories.map(cat => cat.group))
+    ];
 
     const baseUrl = "https://yamaori.jp";
 
@@ -23,7 +26,15 @@ export async function GET() {
 
     const categoryUrl = categories.map(cat => `
         <url>
-            <loc>${baseUrl}/categories/${encodeURIComponent(cat.slug)}</loc>
+            <loc>${baseUrl}/categories/${encodeURIComponent(cat.group)}/${encodeURIComponent(cat.slug)}</loc>
+            <changefreq>weekly</changefreq>
+            <priority>0.7</priority>
+        </url>
+    `).join("");
+
+    const groupUrl = groups.map(group => `
+        <url>
+            <loc>${baseUrl}/categories/${encodeURIComponent(group)}</loc>
             <changefreq>weekly</changefreq>
             <priority>0.7</priority>
         </url>
@@ -39,6 +50,7 @@ export async function GET() {
         </url>
         ${postUrls}
         ${categoryUrl}
+        ${groupUrl}
     </urlset>`;
 
     return new NextResponse(xml, {

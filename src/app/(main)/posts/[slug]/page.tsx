@@ -94,7 +94,16 @@ export default async function postPage({ params }: Props) {
                                     const url = src?.startsWith("/uploads") ? `https://${process.env.AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${src.replace(/^\/uploads\//, "")}` : src;
                                     const imgMeta = post.images?.find(img =>
                                         typeof src === "string" && src.includes(img.url.split("/").pop() || ""));
-                                    return (<Image src={url} alt={alt || ""} width={imgMeta?.width || 800} height={imgMeta?.height || 600} />);
+                                    return (
+                                        <figure className="my-6">
+                                            <Image src={url} alt={alt || ""} width={imgMeta?.width || 800} height={imgMeta?.height || 600} />
+                                            {alt &&(
+                                                <figcaption className="text-center text-sm text-gray-500 mt-2">
+                                                    {alt}
+                                                </figcaption>
+                                            )}
+                                        </figure>
+                                    );
                                 },
                             }}
                         >{post.content}</ReactMarkdown>
